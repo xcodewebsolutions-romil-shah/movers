@@ -1,15 +1,16 @@
-﻿@using MoverAndStore.WebApp.MvcExtensions
+﻿@inject MoverAndStore.WebApp.Models.IClaimHelper ClaimHelper
+@using MoverAndStore.WebApp.MvcExtensions
 <!DOCTYPE html>
 <html lang="en">
 
 
-    <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <title>@ViewData["Title"] - MoverAndStore.WebApp</title>
+    <title>@ViewData["Title"] - MoverAndStore.WebApp</title>
 
     <!-- Favicon icon -->
     <link rel="icon" href="~/images/m.jpg" type="image/x-icon">
@@ -37,19 +38,19 @@
         }
 
         a {
-                color: #901F17;
+            color: #901F17;
         }
 
         .btn-primary {
             color: #fff;
-                background-color: #901F17;
-                border-color: #901F17;
+            background-color: #901F17;
+            border-color: #901F17;
         }
 
         .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
             color: #fff;
             background-color: #901F17;
-                border-color: #901F17;
+            border-color: #901F17;
         }
 
         .border-top {
@@ -147,6 +148,17 @@
                             <span class="pcoded-mtext">Dashboard</span>
                         </a>
                     </li>
+                    @if (@ClaimHelper.Role == "Admin")
+                    {
+                        <li data-username="users" class="nav-item @Html.ActiveMenu("Users")">
+                            <a href="@Url.Action("Index", "Users")" class="nav-link">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-users"></i>
+                                </span>
+                                <span class="pcoded-mtext">Users</span>
+                            </a>
+                        </li>
+                    }
                     <!--<li data-username="users" class="nav-item @Html.ActiveMenu("Users")">
                         <a href="/Users" class="nav-link">
                             <span class="pcoded-micon">
@@ -171,23 +183,49 @@
         <div class="m-header">
             <a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
             <a href="/Home">
-                    <img src="/images/move.jpg" style="width: 60%;margin-left: 3.5rem !important;width: 50%;" class="float-left ml-4">
+                <img src="/images/move.jpg" style="width: 60%;margin-left: 3.5rem !important;width: 50%;" class="float-left ml-4">
             </a>
         </div>
         <a class="mobile-menu" id="mobile-header" href="#!">
             <i class="feather icon-more-horizontal"></i>
         </a>
         @* <div class="collapse navbar-collapse" style="background:white;">
+        <ul class="navbar-nav ml-auto">
+        <li class="pr-0">
+        <div class="drp-user mr-4">
+        <a href="~/Account/Logout">
+        <i class="icon feather icon-log-out"></i>
+        </a>
+        </div>
+        </li>
+        </ul>
+        </div> *@
+        <div class="collapse navbar-collapse" style="background: white;">
             <ul class="navbar-nav ml-auto">
-                <li class="pr-0">
-                    <div class="drp-user mr-4">
-                        <a href="~/Account/Logout">
-                            <i class="icon feather icon-log-out"></i>
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon feather icon-settings"></i>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                @* <img src="~/images/avatar-@(ClaimHelper.Gender == "M" ? 2 : 5).jpg" class="img-radius" alt="User-Profile-Image"> *@
+                                <span> Welcome, Name</span>
+                                <a href="~/Account/Logout" class="dud-logout Logout" title="Logout">
+                                    <i class="feather icon-log-out"></i>
+                                </a>
+                            </div>
+                            @if (@ClaimHelper.Role == "user")
+                            {
+                                <ul class="pro-body">
+                                    <li style="line-height: 2.2;"><a href="#!" class="dropdown-item" data-toggle="modal" data-target="#changePasswordModal"><i class="fas fa-key"></i> Change Password</a></li>
+                                </ul>
+                            }
+                        </div>
                     </div>
                 </li>
             </ul>
-        </div> *@
+        </div>
     </header>
     <div class="global-loader-overlay d-none">
         <div class="global-loader"></div>
@@ -201,6 +239,54 @@
             </div>
         </div>
     </div>
+
+
+
+    <!--Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="userProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" style="min-width: 25%; max-width: 28%;" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userProfileModalLabel">Change Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="cursor: pointer;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="frm-reset-password">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Old Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="oldPassword" name="oldPassword" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">New Password <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="newPassword" name="newPassword" onkeyup="ValidateChangePasswordForm();" autocomplete="off" maxlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Confirm Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="confirmPassword" onkeyup="ValidateChangePasswordForm();" name="confirmPassword" autocomplete="off" ,maxlength="8">
+                        </div>
+                    </form>
+                    <div class="alert" role="alert" id="alert-password-save"></div>
+                </div>
+                <div class="modal-footer position-relative">
+                    <div class="progress-bg" style="display:none">
+                        <div class="progress-track">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm btn-rounded" data-dismiss="modal" style="cursor: pointer;">
+                        <span class="fas fa-undo"></span> Close
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm btn-rounded" id="btn-reset-password" style="cursor: pointer;">
+                        <span class="fas fa-save"></span> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
 
@@ -220,4 +306,165 @@
     <script src="~/js/common.js"></script>
     <script src="~/plugins/fullcalendar/js/lib/moment.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
+
+    <script type="text/javascript">
+
+        $('#changePasswordModal').on('hidden.bs.modal', function () {
+            $("#alert-password-save").addClass("d-none");
+            $('.frm-reset-password')[0].reset();
+            $('.frm-reset-password').validate().resetForm();
+            $('.form-group').removeClass('has-error');
+        });
+
+        function ValidateChangePasswordForm() {
+            $('[data-toggle="popover"]').popover();
+            jQuery.validator.addMethod("exactLength", function (value, element, length) {
+                return value.length === length;
+            });
+
+            jQuery.validator.addMethod("passwordPattern", function (value, element) {
+                var hasUppercase = /[A-Z]/.test(value);
+                var hasLowercase = /[a-z]/.test(value);
+                var hasDigit = /\d/.test(value);
+                var hasSpecialCharacter = /[@@#$*]/.test(value);
+
+                if (!hasUppercase) {
+                    $.validator.messages.passwordPattern = "Password must contain at least one uppercase letter.";
+                    return false;
+                }
+
+                if (!hasLowercase) {
+                    $.validator.messages.passwordPattern = "Password must contain at least one lowercase letter.";
+                    return false;
+                }
+
+                if (!hasDigit) {
+                    $.validator.messages.passwordPattern = "Password must contain at least one numeric digit.";
+                    return false;
+                }
+
+                if (!hasSpecialCharacter) {
+                    $.validator.messages.passwordPattern = "Password must contain at least one special character.";
+                    return false;
+                }
+
+                return true;
+            }, "Invalid password format");
+
+            resetPasswordValidate();
+            $("#reset-password-alert").hide();
+        }
+
+        function resetPasswordValidate() {
+            $('.frm-reset-password').validate({
+                ignore: '.ignore, .select2-input',
+                focusInvalid: false,
+                rules: {
+                    'oldPassword': {
+                        required: true
+                    },
+                    'newPassword': {
+                        required: true,
+                        passwordPattern: true
+                    },
+                    'confirmPassword': {
+                        required: true,
+                        equalTo: "#newPassword"
+                    },
+                },
+                messages: {
+                    'oldPassword': {
+                        required: "This field is required."
+                    },
+                    'newPassword': {
+                        required: "This field is required."
+                    },
+                    'confirmPassword': {
+                        required: 'This field is required.',
+                        equalTo: 'Password not matching'
+                    },
+                },
+                errorPlacement: function errorPlacement(error, element) {
+                    var $parent = $(element).parents('.form-group');
+                    if ($parent.find('.jquery-validation-error').length) {
+                        return;
+                    }
+                    $parent.append(
+                        error.addClass('jquery-validation-error small form-text invalid-feedback')
+                    );
+                },
+                highlight: function (element) {
+                    var $el = $(element);
+                    var $parent = $el.parents('.form-group');
+                    $el.addClass('is-invalid');
+                    if ($el.hasClass('select2-hidden-accessible') || $el.attr('data-role') === 'tagsinput') {
+                        $el.parent().addClass('is-invalid');
+                    }
+                },
+                unhighlight: function (element) {
+                    $(element).parents('.form-group').find('.is-invalid').removeClass('is-invalid');
+                }
+            });
+        }
+
+        $('#btn-reset-password').on('click', function () {
+            resetPasswordValidate();
+            $("#alert-password-save").hide();
+            var status = $(".frm-reset-password").valid();
+
+            if (status == false) {
+                return status;
+            }
+            var oldPassword = $("#oldPassword").val();
+            var newPassword = $("#newPassword").val();
+
+            makeButtonProgress('#btn-reset-password', 'Please wait...');
+
+            $("#reset-password-alert").hide();
+            $(".popover").hide();
+            $(".progress-bg").show();
+            $.ajax({
+                url: "/Account/ChangePassword",
+                cache: false,
+                type: "POST",
+                data: {
+                    oldPassword: oldPassword,
+                    newPassword: newPassword
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    $(".progress-bg").hide();
+                    makeButtonOriginal('#btn-reset-password', ' Save', 'fas fa-save');
+                    if (response.message == 'success') {
+                        $("#alert-password-save").removeClass('alert-danger');
+                        notifySuccess('#alert-password-save', 'alert-success', 'Password change successfully.');
+
+                        setTimeout(function () {
+                            $("#changePasswordModal").modal('hide');
+                            $("#alert-password-save").hide();
+                        }, 1500);
+
+                        $(".frm-reset-password")[0].reset();
+                    }
+                    else {
+                        $("#reset-password-alert").removeClass('alert-success');
+                        $("#alert-password-save").removeClass('d-none');
+                        makeButtonOriginal('#btn-reset-password', ' Save', 'fas fa-save');
+                        notifyError('#alert-password-save', 'alert-danger', response.message);
+                    }
+                },
+                error: function (err) {
+                    $(".progress-bg").hide();
+                    makeButtonOriginal('#btn-reset-password', ' Save', 'fas fa-save');
+                    $("#reset-password-alert").removeClass('alert-success');
+                    notifyError('#alert-password-save', 'alert-danger', err.responseText);
+                }
+            });
+        });
+
+    </script>
+
 </body>
+</html>

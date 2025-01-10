@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Users\Index.cshtml" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
