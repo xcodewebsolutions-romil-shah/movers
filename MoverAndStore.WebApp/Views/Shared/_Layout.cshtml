@@ -1,0 +1,223 @@
+﻿@using MoverAndStore.WebApp.MvcExtensions
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>@ViewData["Title"] - MoverAndStore.WebApp</title>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/images/m.jpg" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="~/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="~/plugins/animation/css/animate.min.css">
+    <!-- notification css -->
+    <link rel="stylesheet" href="~/plugins/notification/css/notification.min.css">
+    <link rel="stylesheet" href="~/plugins/data-tables/css/datatables.min.css">
+    <link rel="stylesheet" href="~/plugins/data-tables/css/fixedColumns.bootstrap5.min.css">
+    <link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+
+    <!-- vendor css -->
+    <link href="~/lib/handsontable/handsontable.full.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css?v=@(DateTime.Now.ToString("dd-MM-yyyy"))">
+
+    @await RenderSectionAsync("CSS", required: false)
+
+    <style>
+        a.navbar-brand {
+            white-space: normal;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        a {
+                color: #901F17;
+        }
+
+        .btn-primary {
+            color: #fff;
+                background-color: #901F17;
+                border-color: #901F17;
+        }
+
+        .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            color: #fff;
+            background-color: #901F17;
+                border-color: #901F17;
+        }
+
+        .border-top {
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .box-shadow {
+            box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+        }
+
+        button.accept-policy {
+            font-size: 1rem;
+            line-height: inherit;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            white-space: nowrap;
+            line-height: 60px;
+        }
+
+        .dropdown-item {
+            padding: 0.25rem 1rem !important;
+        }
+
+        div.dataTables_filter input[type=search],
+        div.dataTables_length select {
+            height: auto !important;
+            padding: 5px !important;
+        }
+
+        .dataTable > thead > tr > th[class*="sort"]:before,
+        .dataTable > thead > tr > th[class*="sort"]:after {
+            content: "" !important;
+        }
+
+        .global-loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(128, 128, 128, 0.5);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .global-loader {
+            display: inline-block;
+            position: fixed;
+            width: 15%;
+            height: 15%;
+            z-index: 10000;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z'/%3E%3Crect width='2' height='7' x='11' y='6' fill='white' rx='1'%3E%3CanimateTransform attributeName='transform' dur='9s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/rect%3E%3Crect width='2' height='9' x='11' y='11' fill='white' rx='1'%3E%3CanimateTransform attributeName='transform' dur='0.75s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/rect%3E%3C/svg%3E");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custome-error {
+            font-size: 80%;
+        }
+
+        .invalid-feedback {
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="pcoded-navbar navbar-collapsed">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo" style="background: #ffffff !important;height: 70px !important;">
+                <a href="/Home">
+                    <img src="/images/move.jpg" style="width: 60%;" class="float-left ml-4">
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item @Html.ActiveMenu("Home")">
+                        <a href="/Home/Index" class="nav-link">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-home"></i>
+                            </span>
+                            <span class="pcoded-mtext">Dashboard</span>
+                        </a>
+                    </li>
+                    <!--<li data-username="users" class="nav-item @Html.ActiveMenu("Users")">
+                        <a href="/Users" class="nav-link">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-users"></i>
+                            </span>
+                            <span class="pcoded-mtext">Users</span>
+                        </a>
+                    </li>
+                    <li data-username="roles" class="nav-item @Html.ActiveMenu("Roles")">
+                        <a href="/Roles" class="nav-link">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file"></i>
+                            </span>
+                            <span class="pcoded-mtext">Roles</span>
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
+            <a href="/Home">
+                    <img src="/images/move.jpg" style="width: 60%;margin-left: 3.5rem !important;width: 50%;" class="float-left ml-4">
+            </a>
+        </div>
+        <a class="mobile-menu" id="mobile-header" href="#!">
+            <i class="feather icon-more-horizontal"></i>
+        </a>
+        @* <div class="collapse navbar-collapse" style="background:white;">
+            <ul class="navbar-nav ml-auto">
+                <li class="pr-0">
+                    <div class="drp-user mr-4">
+                        <a href="~/Account/Logout">
+                            <i class="icon feather icon-log-out"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div> *@
+    </header>
+    <div class="global-loader-overlay d-none">
+        <div class="global-loader"></div>
+    </div>
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+
+    <script src="~/js/vendor-all.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/pcoded.min.js"></script>
+
+    <script src="~/lib/handsontable/handsontable.full.min.js"></script>
+    <script src="~/lib/handsontable/handsontable.min.js"></script>
+
+    @* <script src="~/lib/handsontable/jquery-3.6.0.min.js"></script> *@
+    <script src="~/plugins/data-tables/js/datatables.min.js"></script>
+    <script src="~/plugins/data-tables/js/dataTables.fixedColumns.min.js"></script>
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/js/sweetalert2@11.js"></script>
+    <script src="~/js/common.js"></script>
+    <script src="~/plugins/fullcalendar/js/lib/moment.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>

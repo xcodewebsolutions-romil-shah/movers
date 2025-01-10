@@ -1,0 +1,369 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>Move&Store - @ViewData["Title"]</title>
+    <link rel="icon" href="images/move.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="~/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css" />
+    <link rel="stylesheet" href="~/css/style.css?v=@(DateTime.Now.ToString("dd-MM-yyyy"))">
+    <style type="text/css">
+        .alert {
+            padding: 10px 20px !important;
+        }
+
+        .iconTopMarg {
+            margin-top: 170px !important;
+        }
+
+        .icon-alert-circle {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 13px;
+            z-index: 99999;
+            font-size: 18px;
+        }
+
+        .fa-times {
+            cursor: pointer;
+            position: absolute;
+            right: 32px;
+            top: 13px;
+            z-index: 99999;
+            font-size: 17px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            top: 5px !important;
+            left: 5px;
+        }
+
+        .form-control.is-invalid, .was-validated .form-control:invalid {
+            background-image: none !important;
+        }
+
+        .auth-wrapper .auth-content.subscribe {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        label.error {
+            text-align: left !important
+        }
+
+        .auth-wrapper {
+            height: 100%;
+            padding: 5px 50px 5px 50px;
+        }
+
+        .side-content {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            padding: 75px;
+            background: linear-gradient(45deg, #db7d76 25%, #80120a 75%);
+        }
+
+        @@media screen and (max-width: 700px) {
+            .side-content {
+                visibility: collapse;
+                clear: both;
+                float: left;
+                display: none;
+            }
+
+            .main-content {
+                border-top-left-radius: 15px !important;
+                border-bottom-left-radius: 15px !important;
+                border-top-right-radius: 15px !important;
+                border-bottom-right-radius: 15px !important;
+            }
+
+            .auth-wrapper {
+                padding: 50px 20px 50px 20px;
+            }
+
+            #btn-reset-link {
+                float: none !important;
+            }
+        }
+
+        .rounded-left {
+            border-top-left-radius: 15px !important;
+            border-bottom-left-radius: 15px !important;
+        }
+
+        .rounded-right {
+            border-top-right-radius: 15px !important;
+            border-bottom-right-radius: 15px !important;
+        }
+
+        @@media screen and (min-width: 701px) and (max-width: 767px) {
+            .auth-wrapper {
+                padding: 50px 50px 50px 50px;
+            }
+
+            .side-content {
+                border-bottom-left-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-top-left-radius: 15px !important;
+                border-top-right-radius: 15px !important;
+            }
+
+            .main-content {
+                padding: 75px;
+                border-top-left-radius: 0px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-left-radius: 15px !important;
+                border-bottom-right-radius: 15px !important;
+            }
+        }
+
+        .auth-image {
+            width: 200px !important;
+            margin: 20px;
+        }
+
+        .checkbox.checkbox-fill input[type=checkbox]:checked + .cr:before {
+            color: #2694F3;
+        }
+
+        .latter-space {
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary:disabled {
+            cursor: no-drop !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-wrapper" id="divLoginWrapper">
+        <div class="auth-content subscribe p-0">
+            <div class="row m-0">
+                <div class="col-sm-12 col-md-6 col-lg-8 align-items-start justify-content-center rounded-left shadow-1 side-content">
+                    <h2 class="mb-2 text-white latter-space" style="font-size:28px">🚀Welcome to Move & Store</h2>
+                    <p class="text-white latter-space" style="font-size:14px">
+                        Please login to continue
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 bg-white d-flex justify-content-center align-items-center rounded-right shadow-1 main-content">
+                    <form method="post" action="/Account/Login" id="frmLogin" onsubmit="rememberCredentials(event)">
+                        <div class="row text-center m-3">
+                            <div class="col-12">
+                                <img src="/images/m.jpg" class="auth-image" />
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Username" id="UserName" name="UserName" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group mb-4">
+                                    <input type="password" class="form-control" placeholder="Password" id="Password" name="Password" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="pb-1">
+                                    <div class="form-group float-left">
+                                        <div class="checkbox checkbox-fill d-inline">
+                                            <input type="checkbox" name="chkRememberMe" id="chkRememberMe" checked="">
+                                            <label for="chkRememberMe" class="cr"> Remember Me</label>
+                                        </div>
+                                    </div>
+                                    <label class="text-muted cursor-pointer float-right" id="btn-reset-link">Reset password?</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-danger mb-4" id="btnLogin" value="Login" style="width:100%;background-color:#901F17" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-wrapper" id="divForgotPwdWrapper">
+        <div class="auth-content subscribe p-0">
+            <div class="row m-0">
+                <div class="col-sm-12 col-md-6 col-lg-8 align-items-start justify-content-center rounded-left shadow-1 side-content">
+                    <h2 class="mb-2 text-white latter-space" style="font-size:28px">🔐Forgot your password?</h2>
+                    <p class="text-white latter-space" style="font-size:13px">
+                        Don't worry! Let's get you back in and regain access to your account quickly and easily.
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 bg-white d-flex justify-content-center align-items-center rounded-right shadow-1 main-content">
+                    <div class="row m-3">
+                        <div class="col-12 text-center">
+                            <img src="/images/m.jpg" class="auth-image" />
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="email" autocomplete="off" placeholder="Email address">
+                            </div>
+                            <div class="custome-error text-danger" id="error-useremail">Email address is required</div>
+                            <div class="alert alert-danger text-danger mb-0" id="reset-password-link-alert"></div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button class="btn btn-danger mb-3" id="btn-send-reset-link" style="width:100%;">Send Link</button>
+                            <button class="btn btn-outline-danger" id="login-back" style="width:100%;">Back to Login</button>
+                        </div>
+                    </div>
+                    <div class="d-none successMsg m-3">
+                        <div class="row no-gutters d-flex justify-content-center align-items-center" style="height:200px">
+                            <div class="col-md-12 text-center">
+                                <i class="fas fa-check-circle fa-6x mb-5" style="color: #1DE9B6;"></i>
+                                <h4 class="pt-2 success-icon"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/vendor-all.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/pcoded.js"></script>
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/js/sweetalert2@11.js"></script>
+    <script src="~/js/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#divForgotPwdWrapper").hide();
+            $("#error-useremail").hide();
+            $("#reset-password-link-alert").hide();
+
+            $('#frmLogin').validate({
+                focusInvalid: true,
+                rules: {
+                    'UserName': { required: true },
+                    'Password': { required: true }
+                },
+                messages: {
+                    'UserName': 'Username is required',
+                    'Password': 'Password is required'
+                },
+                errorPlacement: function errorPlacement(error, element) {
+                    error.insertAfter(element).addClass('invalid-feedback');
+                },
+                highlight: function (element) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+
+            $('#frmLogin').submit((e) => {
+                if (!$('#frmLogin').valid()) {
+                    //e.preventDefault();
+                    return;
+                }
+                $("#btnLogin").prop("disabled", true);
+                $('#btnLogin').val("Please wait...");
+                debugger;
+            });
+        });
+
+        var _event = null;
+        $(function () {
+            var msg = "@(TempData["errorMsg"] as string)";
+            var username = "@(TempData["userName"] as string)";
+            if (msg !== "") {
+                showErrorDialog("Error", msg);
+                $("#UserName").val(username);
+            }
+
+            function rememberCredentials(e) {
+                if ($('#chkrememberme').is(':checked')) {
+                    setTimeout(function () {
+                        //e.preventDefault();
+                        let credentialForm = document.getElementById('frmlogin');
+                        let credential = new PasswordCredential(credentialForm);
+                        navigator.credentials.store(credential);
+                    }, 500);
+                }
+            }
+        });
+
+        $("#btn-reset-link").on("click", function () {
+            $("#UserName").val('');
+            $("#Password").val('');
+            $("#email").val('');
+            $("#reset-password-link-alert").hide();
+            $("#email").removeClass('is-invalid');
+            $("#error-useremail").hide();
+            $("#divLoginWrapper").hide();
+            $("#divForgotPwdWrapper").show();
+        });
+
+        $("#login-back").on("click", function () {
+            $("#UserName").val('');
+            $("#Password").val('');
+            $("#email").val('');
+            $("#divLoginWrapper").show();
+            $("#divForgotPwdWrapper").hide();
+            $("#error-useremail").hide();
+        });
+
+        $('#btn-send-reset-link').on('click', function () {
+            if(!$('#frmLogin').valid())
+                return false;
+
+            var username = $("#email").val();
+
+            if (!username) {
+                $("#email").addClass('is-invalid');
+                $("#error-useremail").show();
+                return false;
+            }
+            else{
+                $("#email").removeClass('is-invalid');
+                $("#error-useremail").hide();
+            }
+
+            // makeButtonProgress('#btn-send-reset-link', 'Please wait...');
+            // $("#reset-password-link-alert").hide();
+
+            // $.ajax({
+            //     url: "/Account/SendResetPasswordLink",
+            //     cache: false,
+            //     type: "POST",
+            //     data: { 'Useremail': username },
+            //     dataType: "JSON",
+            //     success: function (response) {
+            //         makeButtonOriginal('#btn-send-reset-link', ' Send Link', '');
+            //         denugger;
+            //         if (response.isSuccess) {
+            //             $(".success-icon").text(response.message);
+            //             $(".successMsg").removeClass('d-none');
+            //             setTimeout(function () { window.location.href = "/Account/Login"; }, 5000);
+            //         }
+            //         else {
+            //             $("#reset-password-link-alert").removeClass('alert-success');
+            //             notifyError('#reset-password-link-alert', 'alert-danger', response.message);
+            //         }
+            //     },
+            //     error: function (err) {
+            //         makeButtonOriginal('#btn-send-reset-link', ' Send Link', '');
+            //     }
+            // });
+        });
+    </script>
+</body>
+</html>
