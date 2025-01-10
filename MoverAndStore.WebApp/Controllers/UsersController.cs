@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MoverAndStore.WebApp.Models;
 using Newtonsoft.Json;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Text.Json;
 
 namespace MoverAndStore.WebApp.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly HttpClient _httpClient;
@@ -18,7 +20,6 @@ namespace MoverAndStore.WebApp.Controllers
         {
             _httpClient = httpClient;
             _emailHelper = emailHelper;
-
         }
 
         public IActionResult Index()
@@ -61,6 +62,27 @@ namespace MoverAndStore.WebApp.Controllers
                 return BadRequest("All fields are required.");
             }
 
+            var response = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+            if (!response.IsSuccessStatusCode)
+            {
+                return Json(new { success = false, message = "API call failed to fetch users." });
+            }
+
+            var jsonData = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<UserDtoApiResponse>(jsonData);
+            if (result == null || result.Data == null)
+            {
+                return Json(new { success = false, message = "No users data found." });
+            }
+
+            // Check if the username or email already exists
+            var userExists = result.Data.Any(u => u.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase) || u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            if (userExists)
+            {
+                return Json(new { success = false, message = "Username or email already exists." });
+            }
+
+            // Create the new user
             var user = new
             {
                 userName = userName,
@@ -74,8 +96,8 @@ namespace MoverAndStore.WebApp.Controllers
 
             try
             {
-                var response = await _httpClient.PostAsync("https://hook.eu2.make.com/0grr76mcpx43stfwfj8lgv6ytoq8h42h", content);
-                if (response.IsSuccessStatusCode)
+                var createResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/0grr76mcpx43stfwfj8lgv6ytoq8h42h", content);
+                if (createResponse.IsSuccessStatusCode)
                 {
                     string emailTemplate = @"
                 <!DOCTYPE html>
@@ -138,7 +160,7 @@ namespace MoverAndStore.WebApp.Controllers
                             <p><strong>Username:</strong> {EmailAddress}</p>
                             <p><strong>Password:</strong> {GeneratedPassword}</p>
                             <p>To get started, please log in to your account using the link below.</p>
-                            <a href='https://gurromtimetracker.azurewebsites.net/'>Log In to Your Account</a>
+                            <a href='https://smartgroup-mover.azurewebsites.net/'>Log In to Your Account</a>
                             <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
                         </div>
                         <div class='footer' style='color: slateblue;'>
@@ -206,12 +228,6 @@ namespace MoverAndStore.WebApp.Controllers
                 return Json(new { success = false, message = "Error occurred: " + ex.Message });
             }
         }
-
-
-
-
-
-
 
     }
 }
