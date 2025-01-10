@@ -3015,14 +3015,14 @@ p.text-muted {
     }
 
     .pcoded-navbar.navbar-collapsed {
-        width: 80px;
+        /*width: 80px;*/
         height: 100%;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
     }
 
         .pcoded-navbar.navbar-collapsed .header-logo {
-            width: 80px;
+            /*width: 80px;*/
         }
 
             .pcoded-navbar.navbar-collapsed .header-logo img {
@@ -3127,12 +3127,12 @@ p.text-muted {
         }
 
         .pcoded-navbar.navbar-collapsed ~ .pcoded-header {
-            width: calc(100% - 80px);
+            /*width: calc(100% - 80px);*/
         }
 
         .pcoded-navbar.navbar-collapsed ~ .pcoded-header,
         .pcoded-navbar.navbar-collapsed ~ .pcoded-main-container {
-            margin-left: 80px;
+            /*margin-left: 80px;*/
         }
 
         .pcoded-navbar.navbar-collapsed .pcoded-badge {
@@ -3264,7 +3264,7 @@ p.text-muted {
     .pcoded-navbar.mob-open ~ .pcoded-header,
     .pcoded-navbar.mob-open ~ .pcoded-main-container, .pcoded-navbar.navbar-collapsed:hover ~ .pcoded-header,
     .pcoded-navbar.navbar-collapsed:hover ~ .pcoded-main-container {
-        margin-left: 80px;
+        /*margin-left: 80px;*/
     }
 
         .pcoded-navbar.mob-open ~ .pcoded-header:before,

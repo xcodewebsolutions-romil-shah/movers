@@ -15,11 +15,9 @@
             visibility: hidden;
         }
 
-        input[type=text] {
+        .hide {
             border: none;
-            border-bottom: 1px solid #575957;
         }
-
 
         .toggle {
             cursor: pointer;
@@ -60,19 +58,47 @@
         .number-input {
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
+
+            .number-input input[type="number"] {
+                width: 80px;
+                text-align: center;
+                padding: 4px;
+                font-size: 14px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
 
             .number-input button {
                 width: 30px;
                 height: 30px;
-                text-align: center;
                 font-size: 20px;
+                background-color: #901F17;
+                color: #fff;
+                border: none;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
-            .number-input input {
-                width: 60px;
-                text-align: center;
-            }
+                .number-input button:hover {
+                    background-color: #a62f2a; /* Darken color on hover */
+                }
+
+                .number-input button:focus {
+                    outline: none;
+                }
+
+        .responsive-textarea {
+            width: 100%;
+            min-height: 150px;
+            resize: vertical;
+            border: 3px solid #000000;
+        }
+
     </style>
 </head>
 <body style="background-color:#F4F7FA">
@@ -87,36 +113,34 @@
                 </div>
             </div>
         </div>
-
-        <!-- Other Cards in Pairs of Two -->
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-            <!-- Card 1 -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-header" style="background-color:#901F17;">
-                        <h5 class="text-light">Basic Information</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Left Form Column -->
-                            <div class="col-md-6">
-                                <form id="dataForm">
+        <form id="dataForm">
+            <!-- Other Cards in Pairs of Two -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+                <!-- Card 1 -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header" style="background-color:#901F17;">
+                            <h5 class="text-light">Basic Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Left Form Column -->
+                                <div class="col-md-6">
+                                    <input type="hidden" name="pv_requested_enum" value="@Model.Basic_Information.AddressGroup.pv_requested_enum">
+                                    <input type="hidden" name="title" value="@Model.Basic_Information.Title">
                                     <div class="mb-1">
                                         <label class="form-label" for="title">
-                                            <strong>Title</strong>
-                                            <br />
+                                            <strong>Title</strong><br />
                                             @Model.Basic_Information.Title
-
                                         </label>
-                                        @* <div >
-                                        @Model.Basic_Information.Title
-                                        </div> *@
+                                        
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
                                             <strong>Summary</strong><br />
                                             Test @Model.Basic_Information.Summary
                                         </label>
+                                        <input type="hidden" name="summary" value="@Model.Basic_Information.Summary">
                                         @*  <div>
                                         @Model.Basic_Information.Summary
                                         </div> *@
@@ -126,6 +150,7 @@
                                             <strong>Reference</strong><br />
                                             @Model.Basic_Information.Reference
                                         </label>
+                                        <input type="hidden" name="reference" value="@Model.Basic_Information.Reference">
                                         @*  <div>
                                         @Model.Basic_Information.Reference
                                         </div> *@
@@ -136,6 +161,7 @@
                                             @Model.Basic_Information.Lead.Contact_Person
 
                                         </label>
+                                        <input type="hidden" name="contact_person" value="@Model.Basic_Information.Lead.Contact_Person">
                                         @*  <div>
                                         @Model.Basic_Information.Lead.Contact_Person
                                         </div> *@
@@ -147,6 +173,7 @@
                                             @Model.Basic_Information.AddressGroup.address_a
 
                                         </label>
+                                        <input type="hidden" name="address_a" value="@Model.Basic_Information.AddressGroup.address_a">
                                         @*  <div>
                                         @Model.Basic_Information.AddressGroup.address_a
                                         </div> *@
@@ -158,6 +185,7 @@
                                             @Model.Basic_Information.AddressGroup.address_b
 
                                         </label>
+                                        <input type="hidden" name="address_b" value="@Model.Basic_Information.AddressGroup.address_b">
                                         @* <div>
                                         @Model.Basic_Information.AddressGroup.address_b
                                         </div> *@
@@ -169,6 +197,7 @@
                                             @Model.Basic_Information.AddressGroup.address_c
 
                                         </label>
+                                        <input type="hidden" name="address_c" value="@Model.Basic_Information.AddressGroup.address_c">
                                         @*  <div>
                                         @Model.Basic_Information.AddressGroup.address_c
                                         </div> *@
@@ -183,7 +212,7 @@
                                         @* <div>
                                         @Model.Basic_Information.AddressGroup.pv_extra_info
                                         </div> *@
-
+                                        <input type="hidden" name="pv_extra_info" value="@Model.Basic_Information.AddressGroup.pv_extra_info">
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="title">
@@ -196,18 +225,17 @@
                                         </div> *@
 
                                     </div>
-                                </form>
-                            </div>
+                                </div>
 
-                            <!-- Right Form Column -->
-                            <div class="col-md-6">
-                                <form id="dataForm">
+                                <!-- Right Form Column -->
+                                <div class="col-md-6">
                                     <div class="mb-1">
                                         <label class="form-label" for="title">
                                             <strong>Status</strong><br />
                                             @Model.Basic_Information.Status
 
                                         </label>
+                                        <input type="hidden" name="status" value="@Model.Basic_Information.Status">
                                         @*  <div>
                                         @Model.Basic_Information.Status
                                         </div> *@
@@ -218,59 +246,61 @@
                                             Insuarance @Model.Basic_Information.Company
 
                                         </label>
+                                        <input type="hidden" name="company" value="@Model.Basic_Information.Company">
+
                                         @* <div>
                                         Insuarance @Model.Basic_Information.Company
                                         </div> *@
                                     </div>
-
                                     <div class="mb-1">
                                         <label class="form-label" for="title">
                                             <strong>Customer</strong><br />
                                             @Model.Basic_Information.Lead.Customer
 
                                         </label>
-                                        @*   <div>
-                                        @Model.Basic_Information.Lead.Customer
-                                        </div> *@
+                                        <input type="hidden" name="customer" value="@Model.Basic_Information.Lead.Customer">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="from-label"><strong>PV 1</strong></label>
-                                        <input class="toggle" type="checkbox" id="IsActive" name="IsActive" value="true" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
+                                        <input class="toggle" type="checkbox" id="pv_1_bool" name="pv_1_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
                                         <label class="toggle" for="IsActive">PV 1</label>
+                                        @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
                                     </div>
                                     <div class="form-group">
                                         <label class="from-label"><strong>PV 2</strong></label>
-                                        <input class="toggle" type="checkbox" id="IsActive" name="IsActive" value="true" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
+                                        <input class="toggle" type="checkbox" id="pv_2_bool" name="pv_2_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
                                         <label class="toggle" for="IsActive">PV 2</label>
+                                        @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
                                     </div>
                                     <div class="form-group">
-                                        <label class="from-label"><strong>PV 1</strong></label>
-                                        <input class="toggle" type="checkbox" id="IsActive" name="IsActive" value="true" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
-                                        <label class="toggle" for="IsActive">PV 2</label>
+                                        <label class="from-label"><strong>PV 3</strong></label>
+                                        <input class="toggle" type="checkbox" id="pv_3_bool" name="pv_3_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
+                                        <label class="toggle" for="IsActive">PV 3</label>
+                                        @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
+                <div class="col">
 
-                <div class="card">
-                    <div class="card-header" style="background-color:#901F17;">
-                        <h5 class="text-light">Moving Dates</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Left Form Column -->
-                            <div class="col-md-6">
-                                <form id="dataForm">
+                    <div class="card">
+                        <div class="card-header" style="background-color:#901F17;">
+                            <h5 class="text-light">Moving Dates</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Left Form Column -->
+                                <div class="col-md-6">
+                                    @*   <form id="dataForm"> *@
                                     <div class="mb-1">
                                         <label class="form-label" for="title">
                                             <strong>From Date</strong><br />
-                                            -
+                                            @Model.Moving_Date.moving_from_date
                                         </label>
+                                        <input type="hidden" name="Moving_From_Date" value="@Model.Moving_Date.moving_from_date">
                                         @* <div>
                                         -  @Model.Moving_Date.moving_from_date
                                         </div> *@
@@ -280,6 +310,7 @@
                                             <strong>To Date</strong><br />
                                             @Model.Moving_Date.moving_to_date
                                         </label>
+                                        <input type="hidden" name="Moving_To_Date" value="@Model.Moving_Date.moving_to_date">
                                         @*  <div>
                                         @Model.Moving_Date.moving_to_date
                                         </div> *@
@@ -289,11 +320,7 @@
                                             <strong>Client Arrival Time</strong><br />
                                             @Model.Moving_Date.client_arrival_time_update
                                         </label>
-                                        @*  <div>
-                                        @Model.Moving_Date.client_arrival_time_update
-
-
-                                        </div> *@
+                                        <input type="hidden" name="Client_Arrival_Time_update" value="@Model.Moving_Date.client_arrival_time_update">
 
                                         <br /> <br />
                                         <br />
@@ -310,30 +337,32 @@
                                         <br />
                                         <br />
                                         <br />
-                                        <br />
                                     </div>
-
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
+                <div class="col" style="margin-top:1px">
+                    <div class="card">
 
-                    <div class="card-header" style="background-color:#901F17;">
-                        <h5 class="text-light">Additional Info</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form id="dataForm">
+                        <div class="card-header" style="background-color:#901F17;">
+                            <h5 class="text-light">Additional Info</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <input type="hidden" name="Lift_Type_Enum" value="@Model.Additional_Info.Lift_Type_Enum">
+
+
+
+                                    @* <form id="dataForm"> *@
                                     <div class="mb-1">
                                         <label class="form-label" for="title">
                                             <strong>Extra Info Lift</strong><br />
                                             @Model.Additional_Info.Extra_Info_Lift
-
+                                            <input type="hidden" name="Extra_Info_Lift" value="@Model.Additional_Info.Extra_Info_Lift">
                                         </label>
                                         @*  <div>
                                         @Model.Additional_Info.Extra_Info_Lift
@@ -343,66 +372,64 @@
                                         <label class="form-label" for="summary">
                                             <strong>Lift Location</strong><br />
                                             @Model.Additional_Info.Lift_Location_Enum
+                                            <input type="hidden" name="Lift_Location_Enum" value="@Model.Additional_Info.Lift_Location_Enum">
                                         </label>
                                         @*   <div>
                                         @Model.Additional_Info.Lift_Location_Enum
                                         </div> *@
                                     </div>
                                     <div class="mb-1">
-                                        <label class="form-label" for="reference">
-                                            <strong>Lift type</strong><br />
-                                            <select name="enum" id="enum" style="font-size: 16px;height: 35px; width: 100%;  ">
-                                                <option value="enum">@Model.Additional_Info.Lift_Type_Enum</option>
-                                                <option value="test">test</option>
-                                                <option value="test">Test</option>
-                                                <option value="audi">122</option>
-                                            </select>
-                                        </label>
-                                        @*  <div class="mb-3">
-                                        <select name="enum" id="enum" style="font-size: 16px;height: 35px; width: 100%;  ">
-                                        <option value="enum">@Model.Additional_Info.Lift_Type_Enum</option>
-                                        <option value="test">test</option>
-                                        <option value="test">Test</option>
-                                        <option value="audi">122</option>
+                                        <label class="form-label" for="exampleFormControlSelect1">Lift Type Enum</label>
+                                        <select class="form-select" id="exampleFormControlSelect1" name="@Model.Additional_Info.Lift_Type_Enum">
+                                            <option value="Test">@Model.Additional_Info.Lift_Type_Enum</option>
+                                            <option value="Test">Test2</option>
+                                            <option value="Test">Test3</option>
+                                            <option value="Test">Test4</option>
+                                            <option value="Test">Test</option>
                                         </select>
-
-                                        </div> *@
                                     </div>
-                                    <div class="mb-1">
-                                        <label class="form-label" for="summary">
-                                            <strong>Number Of Movers</strong><br />
-                                            @Model.Additional_Info.Lift_Location_Enum
-
-                                        </label>
-                                        @* <div>
-                                        @Model.Additional_Info.Lift_Location_Enum
-                                        </div> *@
+                                    
+                                    <div class="mb-3">
+                                    <label class="form-label" for="exampleFormControlSelect1">Voertuig</label>
+                                    <select class="form-select" id="exampleFormControlSelect1" name="@Model.Additional_Info.Voertuig_Enum">
+                                        <option value="Test">@Model.Additional_Info.Voertuig_Enum</option>
+                                            <option value="Test">Test2</option>
+                                            <option value="Test">Test3</option>
+                                            <option value="Test">Test4</option>
+                                            <option value="Test">Test</option>
+                                        </select>
                                     </div>
-
-                                    <div class="mb-1">
+                                    <div class="mb-3">
                                         <label class="form-label" for="summary">
                                             <strong>Number Of Movers</strong><br />
                                             @Model.Additional_Info.Number_Of_Movers
+                                            <input type="hidden" name="Number_Of_Movers" value="@Model.Additional_Info.Number_Of_Movers">
                                         </label>
                                         @*  <div>
 
                                         @Model.Additional_Info.Number_Of_Movers
                                         </div> *@
                                     </div>
-                                    <div class="mb-1">
+                                    <div class="mb-3">
                                         <label class="form-label" for="summary">
                                             <strong>Number Of Movers Update</strong><br />
-                                            <div class="number-input"> <button type="button" onclick="decrement()">-</button> <input type="number" id="num" value="0" /> <button type="button" onclick="increment()">+</button> </div>
+                                            <div class="number-input">
+                                                <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
+                                                <input type="number" class="num" name="Number_Of_Movers_Update" value="@Model.Additional_Info.Number_Of_Movers_Update" />
+                                                <button type="button" class="btn-increment" onclick="increment(this)">+</button>
+                                            </div>
                                         </label>
                                         @*  <div>
                                         <div class="number-input"> <button type="button" onclick="decrement()">-</button> <input type="number" id="num" value="0" /> <button type="button" onclick="increment()">+</button> </div>
                                         </div> *@
                                     </div>
-                                    <div class="mb-1">
+                                    <div class="mb-3">
                                         <label class="form-label" for="timeEstimate">
                                             <strong>Items To Dismentale</strong><br />
                                             @Model.Additional_Info.Items_To_Dismantle
+
                                         </label>
+                                        <input type="hidden" name="Items_To_Dismantle" value="@Model.Additional_Info.Items_To_Dismantle">
                                         @* <div>
                                         @Model.Additional_Info.Items_To_Dismantle
                                         </div> *@
@@ -410,24 +437,24 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
                                             <strong>Items To Dismentale Update</strong><br />
-                                            <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.Additional_Info.Items_To_Dismantle_Update">
+                                            <input type="text" id="itemsToDismentleUpdate" class="form-control" name="itemsToDismentleUpdate" value="@Model.Additional_Info.Items_To_Dismantle_Update">
                                         </label>
                                         @*  <div>
                                         <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.Additional_Info.Items_To_Dismantle_Update">
                                         </div> *@
                                     </div>
-                                </form>
-                            </div>
-                            <div class="col-md-6">
-                                <form id="dataForm">
+                                    @*  </form> *@
+                                </div>
+                                <div class="col-md-6">
+                                    @*  <form id="dataForm"> *@
                                     <div class="form-group">
                                         <label class="from-label"><strong>Dismentaling</strong></label>
-                                        <input class="toggle" type="checkbox" id="IsActive" name="IsActive" value="true" @(Model.Additional_Info.Dismantling_Bool ? "checked" : "") />
+                                        <input class="toggle" type="checkbox" id="Dismantling_Bool" name="Dismantling_Boo" value="true" @(Model.Additional_Info.Dismantling_Bool ? "checked" : "") />
                                         <label class="toggle" for="IsActive">Dismentaling</label>
                                     </div>
                                     <div class="form-group">
                                         <label class="from-label"><strong>Dismentaling Update</strong></label>
-                                        <input class="toggle" type="checkbox" id="IsActive" name="IsActive" value="true" @(Model.Additional_Info.Dismantling_Bool_Update ? "checked" : "") />
+                                        <input class="toggle" type="checkbox" id="Dismantling_Bool_Update" name="Dismantling_Bool_Update" value="true" @(Model.Additional_Info.Dismantling_Bool_Update ? "checked" : "") />
                                         <label class="toggle" for="IsActive">Dismentaling Update</label>
                                     </div>
                                     <div class="mb-1">
@@ -435,6 +462,8 @@
                                             <strong>Time Estimate</strong><br />
                                             @Model.Additional_Info.Time_Estimate
                                         </label>
+                                        <input type="hidden" name="Time_Estimate" value="@Model.Additional_Info.Time_Estimate">
+
                                         @*  <div>
                                         @Model.Additional_Info.Time_Estimate
                                         </div> *@
@@ -443,18 +472,20 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
                                             <strong>Time Estimate Update</strong><br />
-                                            <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value=" @Model.Additional_Info.Time_Estimate_Update">
+                                            <input type="text" id="timeEstimateUpdate" class="form-control" name="timeEstimateUpdate" value=" @Model.Additional_Info.Time_Estimate_Update">
                                         </label>
                                         @*   <div>
-                                        <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value=" @Model.Additional_Info.Time_Estimate_Update">
+                                        <input type="text" id="timeEstimateUpdate" class="form-control" name="timeEstimateUpdate" value=" @Model.Additional_Info.Time_Estimate_Update">
                                         </div> *@
                                     </div>
 
                                     <div class="mb-1">
-                                        <label class="form-label" for="timeEstimate">
+                                        <label class="form-label" for="Additional_General_Info">
                                             <strong>Additional General Info</strong><br />
                                             @Model.Additional_Info.Additional_General_Info
                                         </label>
+                                        <input type="hidden" name="Additional_General_Info" value="@Model.Additional_Info.Additional_General_Info">
+                                        <input type="hidden" name="Additional_General_Info" value="@Model.Additional_Info.Additional_General_Info">
                                         @*  <div>
                                         @Model.Additional_Info.Additional_General_Info
                                         </div> *@
@@ -462,40 +493,39 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
                                             <strong>Additional General Info Update</strong><br />
-                                            <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.Additional_Info.Additional_General_Info_update">
+                                            <input type="text" id="additionalGeneralInfo" class="form-control" name="additionalGeneralInfo" value="@Model.Additional_Info.Additional_General_Info_update">
                                         </label>
                                         @*  <div>
-                                        <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.Additional_Info.Additional_General_Info_update">
+                                        <input type="text" id="additionalGeneralInfo" class="form-control" name="additionalGeneralInfo" value="@Model.Additional_Info.Additional_General_Info_update">
                                         </div> *@
-
                                     </div>
                                     <br />
                                     <br />
                                     <br />
                                     <br />
                                     <br />
-                                </form>
+                                    @*  </form> *@
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="col">
-                <div class="card">
-                    <div class="card-header" style="background-color:#901F17;">
-                        <h5 class="text-light">Stockage</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form id="dataForm">
+                <div class="col" style="margin-top:1px">
+                    <div class="card">
+                        <div class="card-header" style="background-color:#901F17;">
+                            <h5 class="text-light">Stockage</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @* <form id="dataForm"> *@
                                     <div class="mb-1">
                                         <label class="form-label" for="timeEstimate">
                                             <strong>Date In</strong><br />
                                             @Model.stockage.Date_In
                                         </label>
+                                        <input type="hidden" name="Date_In" value="@Model.stockage.Date_In">
+                                      
                                         @* <div>
                                         @Model.stockage.Date_In
                                         </div> *@
@@ -503,11 +533,11 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
                                             <strong>Date In Update</strong><br />
-                                            <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Date_In_Update">
+                                            <input type="text" id="dateInUpdate" class="form-control" name="dateInUpdate" value="@Model.stockage.Date_In_Update">
 
                                         </label>
                                         @*  <div>
-                                        <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Date_In_Update">
+                                        <input type="text" id="dateInUpdate" class="form-control" name="dateInUpdate" value="@Model.stockage.Date_In_Update">
                                         </div> *@
                                     </div>
                                     <div class="mb-1">
@@ -515,6 +545,7 @@
                                             <strong>Date Out</strong><br />
                                             @Model.stockage.Date_Out
                                         </label>
+                                        <input type="hidden" name="Date_Out" value="@Model.stockage.Date_Out">
                                         @*   <div>
                                         @Model.stockage.Date_Out
                                         </div> *@
@@ -522,10 +553,10 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
                                             <strong>Date Out Update</strong><br />
-                                            <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Date_Out_Update">
+                                            <input type="text" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
                                         </label>
                                         @* <div>
-                                        <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Date_Out_Update">
+                                        <input type="text" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
                                         </div> *@
                                     </div>
                                     <div class="mb-1">
@@ -533,6 +564,7 @@
                                             <strong>Cubic_Meters</strong><br />
                                             @Model.stockage.Cubic_Meters
                                         </label>
+                                        <input type="hidden" name="Cubic_Meters" value="@Model.stockage.Cubic_Meters">
                                         @*  <div>
                                         @Model.stockage.Cubic_Meters
                                         </div> *@
@@ -540,7 +572,11 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
                                             <strong>Cubic_Meters_Update</strong><br />
-                                            <div class="number-input m-1 p-1"> <button type="button" onclick="decrement()">-</button> <input type="number" id="num" value="0" /> <button type="button" onclick="increment()">+</button> </div>
+                                            <div class="number-input">
+                                                <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
+                                                <input type="number" class="form-control" name="Cubic_Meters_Update" value="@Model.stockage.Storage_Update" />
+                                                <button type="button" class="btn-increment" onclick="increment(this)">+</button>
+                                            </div>
                                         </label>
                                         @*  <div>
                                         <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Cubic_Meters_Update">
@@ -549,31 +585,45 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="exactlocation">
                                             <strong>Options Enum</strong><br />
-                                            @Model.stockage.Options_Enum
                                         </label>
+
+                                           
+                                                <select class="form-select" id="exampleFormControlSelect1" name="@Model.stockage.Options_Enum">
+                                                    <option value="Test">@Model.stockage.Options_Enum</option>
+                                                    <option value="Test">Test2</option>
+                                                    <option value="Test">Test3</option>
+                                                    <option value="Test">Test4</option>
+                                                    <option value="Test">Test</option>
+                                                </select>
+                                            </div>
+                                       
+
+
                                         @* <div>
                                         @Model.stockage.Options_Enum
                                         </div> *@
-                                    </div>
+                                  
                                     <div class="mb-1">
-                                        <label class="form-label" for="exactlocation">
-                                            <strong>Contract</strong><br />
-                                            @Model.stockage.Contract
 
-                                        </label>
+                                        <label class="from-label"><strong>Contract</strong></label>
+                                        <input class="toggle" type="checkbox" id="contract" name="pv_1_bool" value="true" @(Model.stockage.Contract ? "checked" : "") />
+                                        <label class="toggle" for="IsActive">Contract</label>
+                                        <input type="hidden" name="Contract" value="@Model.stockage.Contract">
                                         @*  <div>
                                         @Model.stockage.Contract
                                         </div> *@
                                     </div>
-                                </form>
-                            </div>
-                            <div class="col-md-6">
-                                <form id="dataForm">
+                                   
+                                    @*  </form> *@
+                                </div>
+                                <div class="col-md-6">
+                                    @* <form id="dataForm"> *@
                                     <div class="mb-1">
                                         <label class="form-label" for="Storage">
                                             <strong>Storage</strong><br />
                                             @Model.stockage.Storage
                                         </label>
+                                        <input type="hidden" name="Storage" value="@Model.stockage.Storage">
                                         @*   <div>
                                         @Model.stockage.Storage
                                         </div> *@
@@ -581,7 +631,7 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="Storage">
                                             <strong>Storage Update</strong><br />
-                                            <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Storage_Update">
+                                            <input type="text" class="form-control" name="Storage_Update" value="@Model.stockage.Storage_Update" />
                                         </label>
                                         @*   <div>
                                         <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Storage_Update">
@@ -593,6 +643,7 @@
                                             <strong>Zone</strong><br />
                                             @Model.stockage.Zone
                                         </label>
+                                        <input type="hidden" name="Zone" value="@Model.stockage.Zone">
                                         @* <div>
                                         @Model.stockage.Zone
                                         </div> *@
@@ -600,7 +651,7 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="Storage">
                                             <strong>Zone Update</strong><br />
-                                            <input type="text" id="Zone" class="form-control" name="Zone" value="@Model.stockage.Zone_Update">
+                                            <input type="text" id="Zone" class="form-control" name="Zone_Update" value="@Model.stockage.Zone_Update">
                                         </label>
                                         @* <div>
                                         <input type="text" id="Zone" class="form-control" name="Zone" value="@Model.stockage.Zone_Update">
@@ -612,6 +663,7 @@
                                             <strong>Exact Location</strong><br />
                                             @Model.stockage.Exact_Location
                                         </label>
+                                        <input type="hidden" name="Zone" value="@Model.stockage.Exact_Location">
                                         @*  <div>
                                         @Model.stockage.Exact_Location
                                         </div> *@
@@ -630,6 +682,7 @@
                                             <strong>Insured Value</strong><br />
                                             @Model.stockage.Insured_Value
                                         </label>
+                                        <input type="hidden" name="Zone" value="@Model.stockage.Insured_Value">
                                         @* <div>
                                         @Model.stockage.Insured_Value
                                         </div> *@
@@ -638,152 +691,165 @@
 
                                     <br />
                                     <br />
-                                </form>
+                                    @*  </form> *@
+                                </div>
+                                <br />
+                                 <br />
+                                <br />
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <div>
-                </div>
-            </div>
-
-            <div class="col">
-
-                <div class="card">
-                    <div class="card-header" style="background-color:#901F17;">
-                        <h5 class="text-light">Products</h5>
+                    <div>
                     </div>
-                    <div class="card-body">
-                        <div class="row d-flex">
-                            <!-- Left Form Column -->
-                            <div class="col-md-6">
+                </div>
 
-                                <form id="dataForm" >
-                                 
-                                    <table class="table table-bordered table-striped table-hover">
-                                        <thead class="">
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Quantity</th>
-                                                <th>Quantity Update</th>
-                                            </tr>
-                                        </thead>
-                                        @foreach (var item in Model.Products)
-                                        {
-                                            <tbody>
+                <div class="col" style="margin-top:1px">
+
+                    <div class="card">
+                        <div class="card-header" style="background-color:#901F17;">
+                            <h5 class="text-light">Products</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row d-flex">
+                                <!-- Left Form Column -->
+                                <div class="col-md-6">
+                                    @*  <form id="dataForm"> *@
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover">
+                                            <thead>
                                                 <tr>
-                                                    <td>@item.name</td>
-                                                    <td>@item.quantity</td>
-                                                    <td>
-                                                        <input type="number" name="quantity" class="form-control d-inline w-50" value="@item.quantity_update">
-                                                    </td>
+                                                    <th>Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Quantity Update</th>
                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Products)
+                                                {
+                                                    <tr>
+                                                        <td>@item.name</td>
+                                                        <input type="hidden" name="name" value="@item.name">
+                                                        <td>@item.quantity</td>
+                                                        <input type="hidden" name="quantity" value="@item.quantity">
+                                                        <td>
+                                                            <div class="number-input">
+                                                                <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
+                                                                <input type="number" class="num" name="quantity_update" value="@item.quantity_update" />
+                                                                <button type="button" class="btn-increment" onclick="increment(this)">+</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
                                             </tbody>
-                                        }
-                                   </table>
-                                  
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-
-                <div class="card">
-                    <div class="card-header" style="background-color:#901F17;">
-                        <h5 class="text-light">Forman Notes</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Left Form Column -->
-                            <div class="col-md-6">
-
-                                <form id="dataForm">
-
-                                    <div class="mb-1" style="width:100%">
-                                        <label class="form-label" for="foreman_notes">
-                                            <strong>Forman Notes</strong><br /><br />
-                                            <textarea class="form-control" style="width:280%;border:2px solid #36454F" name="foreman_notes" id="foreman_notes">@Model.Notes.foreman_notes</textarea>
-                                        </label>
-                                    
-                                        @*  <div>
-                                        @Model.Additional_Info.Extra_Info_Lift
-                                        </div> *@
+                                        </table>
                                     </div>
                                     <br />
-                                    <br />
-                                    
-                                </form>
+                                    @* </form> *@
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </<div>
-            </div>
+                <div class="col" style="margin-top:1px">
 
-           
+                    <div class="card">
+                        <div class="card-header" style="background-color:#901F17;">
+                            <h5 class="text-light">Forman Notes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Left Form Column -->
+                                <div class="col-md-12">
+                                    <div class="mb-1" style="width:100%">
+                                        <label class="form-label" for="foreman_notes">
+                                            <strong>Forman Notes</strong>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script>
-                
-                function saveData() {
-                    debugger;
-                    const form = document.getElementById('dataForm');
-                    const formData = new FormData(form);
-                    
-                    const data = {};
-                    formData.forEach((value, key) => {
-                        data[key] = value;
-                    });
+                                        </label>
+                                        @* <textarea id="textarea" name="foreman_notes" class="form-control responsive-textarea" placeholder="Enter your message here...">@Model.Notes.foreman_notes</textarea> *@
+                                        <div class="mb-3">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                      rows="3">@Model.Notes.foreman_notes</textarea>
+                                        </div>
+                                    </div>
+                                    <br /><br /><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </<div>
+                </div>
+                <footer>
+                    <div class="md-12" style="display: flex;justify-content: end">
+                        <button class="btn" style="justify-content:end;background-color:#dddd;color:black">Cancel</button>
+                        <button type="button" id="saveButton" class="btn" style="justify-content:end;background-color:#901F17;color:#ffff" onclick="saveData()">Save</button>
 
-                    // Validate if `foreman_notes` exists in the data
-                    if (!data.foreman_notes) {
-                        alert("Please enter notes.");
-                        return;
+                    </div>
+                </footer>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script>
+
+                    function saveData() {
+                        debugger;
+                        const form = document.getElementById('dataForm');
+                        const formData = new FormData(form);
+
+                        const data = {};
+                        formData.forEach((value, key) => {
+                            data[key] = value;
+                        });
+
+                        // Get the Save button
+                        const saveButton = document.getElementById('saveButton');
+
+                        // Disable the button and change the text to "Saving..."
+                        saveButton.disabled = true;
+                        saveButton.textContent = 'Saving...';
+
+                        fetch('/Home/Save', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                        })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.success) {
+                                    // Change button text to "Saved"
+                                    saveButton.textContent = 'Saved';
+                                    saveButton.disabled = false;
+                                } else {
+                                    // Reset button state on failure
+                                    saveButton.textContent = 'Save';
+                                    saveButton.disabled = false;
+                                    alert(result.message || 'Failed to save data.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                // Reset button state on error
+                                saveButton.textContent = 'Save';
+                                saveButton.disabled = false;
+                            });
                     }
 
-                    // AJAX request
-                    fetch('/Home/Save', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    })
-                        .then(response => response.json())
-                        .then(result => {
-                            if (result.success) {
-                                alert('Data saved successfully!');
-                            } else {
-                                alert(result.message || 'Failed to save data.');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                }
-            </script>
-            <script>
-                function increment() {
-                    var num = document.getElementById("num");
-                    num.value = parseInt(num.value) + 1;
-                }
-                function decrement() {
-                    var num = document.getElementById("num");
-                    num.value = parseInt(num.value) - 1;
-                }
-            </script>
 
-            <footer>
-                <div class="md-12" style="display: flex;justify-content: end">
-                    <button class="btn" style="justify-content:end;background-color:#dddd;color:black">Cancel</button>
-                    <button type="submit" class="btn" style="justify-content:end;background-color:#901F17;color:#ffff" onclick="saveData()">Save</button>
+                    function increment(button) {
+                        var num = button.previousElementSibling;
+                        num.value = parseInt(num.value) + 1;
+                    }
 
-                </div>
-            </footer>
+                    function decrement(button) {
+                        var num = button.nextElementSibling;
+                        num.value = parseInt(num.value) - 1;
+                    }
+                </script>
+
+
+
+        </form>
 </body>
 </html>
 
