@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoverAndStore.WebApp.Models;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace MoverAndStore.WebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

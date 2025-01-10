@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using MoverAndStore.WebApp.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,16 +15,17 @@ namespace MoverAndStore.WebApp.Controllers
     {
         private readonly IConfiguration _config;
         private readonly IClaimHelper _claimHelper;
+        private readonly HttpClient _httpClient;
 
-        public AccountController(IConfiguration config, IClaimHelper claimHelper)
+        public AccountController(IConfiguration config, IClaimHelper claimHelper, HttpClient httpClient)
         {
             _config = config;
             _claimHelper = claimHelper;
+            _httpClient = httpClient;
         }
 
         public IActionResult Login()
         {
-
             return View();
         }
 
@@ -49,6 +52,14 @@ namespace MoverAndStore.WebApp.Controllers
                     var jsonData = await loginresponse.Content.ReadAsStringAsync();
                     var data = JsonConvert.DeserializeObject<LoginResponse>(jsonData);
 
+                    TempData["errorMsg"] = null;
+                    if (data.Success == "false")
+                    {
+                        TempData["userName"] = data.Email;
+                        TempData["errorMsg"] = data.Message;
+                        return LocalRedirect("/Account/Login");
+                    }
+
                     var claims = new List<Claim>
                      {
                          new Claim(ClaimTypes.NameIdentifier, data.UserId),
@@ -69,18 +80,7 @@ namespace MoverAndStore.WebApp.Controllers
                             principal,
                             authenticationProperties);
 
-
-                    if (data.Success == "true")
-                    {
-                        return LocalRedirect("/Home/Index");
-                    }
-                    else
-                    {
-                        return LocalRedirect("/Home/Index");
-                        //TempData["errorMsg"] = "Wrong Credentials";
-                        //return RedirectToAction("Login");
-                    }
-
+                    return LocalRedirect("/Home/Index");
                 }
             }
             catch (Exception ex)
@@ -97,31 +97,81 @@ namespace MoverAndStore.WebApp.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<ActionResponseDto<string>> ChangePassword(string newPassword, string oldPassword)
         {
             var response = new ActionResponseDto<string>();
             try
             {
-                if (!string.IsNullOrEmpty(newPassword) && !string.IsNullOrEmpty(oldPassword))
+                if (string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(oldPassword))
                 {
-                    string hashedOldPassword = GetMd5Hash(oldPassword);
-
-                    //var user = _unitOfWork.UserRepository.Query().FirstOrDefault(x => x.UserID == _claimHelper.UserId && x.PasswordSalt == hashedOldPassword);
-                    //if (user == null)
-                    //{
-                    //    response.SetError("Incorrect old password.");
-                    //    return response;
-                    //}
-                    string hashedNewPassword = GetMd5Hash(newPassword);
-                    //user.PasswordSalt = hashedNewPassword;
-                    //_unitOfWork.UserRepository.Update(user);
-                    //await _unitOfWork.SaveChangesAsync();
-                    response.SetSuccess("success");
+                    response.SetError("new password, or old password cannot be empty.");
                     return response;
                 }
-                response.SetError("Requested data is null or empty.");
+
+                var userId = _claimHelper.UserId;
+                if (string.IsNullOrEmpty(userId))
+                {
+                    response.SetError("User is not authenticated.");
+                    return response;
+                }
+
+                var userResponse = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+                if (!userResponse.IsSuccessStatusCode)
+                {
+                    response.SetError("API call failed to fetch users.");
+                    return response;
+                }
+
+                var jsonData = await userResponse.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<UserDtoApiResponse>(jsonData, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    NullValueHandling = NullValueHandling.Ignore,
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
+                    Formatting = Formatting.None,
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    Converters = new List<JsonConverter> { new StringEnumConverter() },
+                });
+
+                if (result == null || result.Data == null)
+                {
+                    response.SetError("No users found.");
+                    return response;
+                }
+
+                // Check if the user exists
+                var user = result.Data.FirstOrDefault(u => u.UserId == userId);
+                if (user == null)
+                {
+                    response.SetError("User does not exist.");
+                    return response;
+                }
+
+                // Verify old password
+                if (user.Password != oldPassword)
+                {
+                    response.SetError("Old password does not match.");
+                    return response;
+                }
+
+                // Update the password via the webhook
+                var userToUpdate = new
+                {
+                    userId = userId,
+                    newPassword = newPassword
+                };
+
+                var jsonUser = JsonConvert.SerializeObject(userToUpdate);
+                var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
+
+                var updateResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/i81sy7odn3qiwulw5yjxe8h7aymowf7e", content);
+                if (updateResponse.IsSuccessStatusCode)
+                    response.SetSuccess("Password updated successfully.");
+                else
+                    response.SetError("Failed to update password. Please try again.");
+
+
                 return response;
             }
             catch (Exception ex)
@@ -130,31 +180,7 @@ namespace MoverAndStore.WebApp.Controllers
                 return response;
             }
         }
-
-        // Helper method to compute MD5 hash
-        private string GetMd5Hash(string input)
-        {
-            var salt = _config.GetValue<string>("AppSettings:KeySalt");
-            using (MD5 md5 = MD5.Create())
-            {
-                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-                byte[] saltBytes = Encoding.ASCII.GetBytes(salt);
-
-                byte[] combinedBytes = new byte[inputBytes.Length + saltBytes.Length];
-                Buffer.BlockCopy(inputBytes, 0, combinedBytes, 0, inputBytes.Length);
-                Buffer.BlockCopy(saltBytes, 0, combinedBytes, inputBytes.Length, saltBytes.Length);
-
-                byte[] hashBytes = md5.ComputeHash(combinedBytes);
-                StringBuilder sb = new StringBuilder();
-
-                for (int i = 0; i < hashBytes.Length; i++)
-                {
-                    sb.Append(hashBytes[i].ToString("X2"));
-                }
-
-                return sb.ToString();
-            }
-        }
+        
 
 
 

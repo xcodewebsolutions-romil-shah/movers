@@ -1,0 +1,159 @@
+﻿<style>
+    .card .card-header h5:after {
+        content: "";
+        background-color: #901F17;
+        position: absolute;
+        left: 0px;
+        top: 15px;
+        width: 5px;
+        height: 31px;
+    }
+
+    .text-end {
+        text-align: right !important;
+    }
+
+    .btn:disabled {
+        background-color: #ccc;
+        border-color: #ccc;
+        cursor: not-allowed;
+    }
+</style>
+<div class="pcoded-wrapper">
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Settings</h5>
+                                </div>
+                                <div class="pc-component" style="position: absolute; top: 0; right: 22px;">
+                                    <div class="bg-body" style="padding: 4px;">
+                                        <div id="bootstrapToast" class="toast fade hide" style="width: 350px;" role="alert" aria-live="assertive" aria-atomic="true">
+                                            <div class="toast-header">
+                                                <img src="~/images/favicon.ico" class="img-fluid m-r-5" alt="images" style="width: 17px;" />
+                                                <strong class="me-auto">Notification</strong>
+                                                <small style="padding: 0px 151px 0px 6px;">Just now</small>
+                                                <button type="button" class="btn-close btn-toaster-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body">
+                                                <!-- Toast message will be updated dynamically -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="smtpEmail">SMTP Email</label>
+                                                <input type="email" class="form-control" id="smtpEmail" placeholder="Enter email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="smtpPassword">SMTP Password</label>
+                                                <input type="password" class="form-control" id="smtpPassword" placeholder="Password" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="domain">Domain</label>
+                                                <input type="text" class="form-control" id="domain" placeholder="Enter domain">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button type="submit" id="submitBtn" class="btn btn-primary" disabled>Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ form-element ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function loadSmtpSettings() {
+            $.ajax({
+                url: "/Settings/GetSMTPDetails", 
+                type: "GET",
+                success: function (response) {
+                    if (response) {
+                        $("#smtpEmail").val(response.data.email);
+                        $("#domain").val(response.data.domain);
+                    }
+                },
+                error: function (xhr) {
+                    showToast(xhr.responseJSON ? xhr.responseJSON.message : "An error occurred while loading settings.", 'danger');
+                }
+            });
+        }
+
+        loadSmtpSettings();
+
+        function validateForm() {
+            const email = $("#smtpEmail").val().trim();
+            const password = $("#smtpPassword").val().trim();
+            const domain = $("#domain").val().trim();
+            const emailPattern = /^[a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            const isEmailValid = emailPattern.test(email);
+            const isPasswordValid = password.length > 0;
+            const isDomainValid = domain.length > 0;
+
+            $("#submitBtn").prop("disabled", !(isEmailValid && isPasswordValid && isDomainValid));
+        }
+
+        $("#smtpEmail, #smtpPassword, #domain").on("input", validateForm);
+
+        $("#submitBtn").on("click", function (e) {
+            e.preventDefault();
+
+            const email = $("#smtpEmail").val();
+            const password = $("#smtpPassword").val();
+            const domain = $("#domain").val();
+
+            $.ajax({
+                url: "/Settings/SaveSmtpSettings",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    Email: email,
+                    Password: password,
+                    Domain: domain
+                }),
+                success: function (response) {
+                    showToast(response.message, 'success');
+                },
+                error: function (xhr) {
+                    showToast(xhr.responseJSON ? xhr.responseJSON.message : "An error occurred.", 'danger');
+                },
+            });
+        });
+    });
+
+    //Toaster Notification
+    function showToast(message, type = 'primary', delay = 3000) {
+        const toast = $('#bootstrapToast');
+        toast.removeClass('text-bg-primary text-bg-success text-bg-danger');
+        toast.addClass(`text-bg-${type}`);
+        toast.find('.toast-body').text(message);
+
+        toast.attr('data-bs-delay', delay);
+        const bootstrapToast = new bootstrap.Toast(toast[0], { autohide: true, delay: delay });
+        bootstrapToast.show();
+    }
+
+</script>

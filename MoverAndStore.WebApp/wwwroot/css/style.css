@@ -3005,7 +3005,7 @@ p.text-muted {
     }
 
     .pcoded-navbar a {
-        color: black;
+        color: #ffffff;
     }
 
     .pcoded-navbar .navbar-content,
@@ -3086,7 +3086,7 @@ p.text-muted {
 
         .pcoded-navbar.navbar-collapsed .pcoded-inner-navbar > li > a {
             z-index: 1026;
-            padding: 7px 25px;
+            padding: 7px 20px;
         }
 
             .pcoded-navbar.navbar-collapsed .pcoded-inner-navbar > li > a > .pcoded-mtext {

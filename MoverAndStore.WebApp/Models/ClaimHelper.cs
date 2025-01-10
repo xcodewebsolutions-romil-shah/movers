@@ -11,19 +11,20 @@ namespace MoverAndStore.WebApp.Models
             _claimsIdentity = context.HttpContext.User?.Identity as ClaimsIdentity;
         }
 
-        public int UserId
+        public string UserId
         {
             get
             {
                 var value = GetClaim(ClaimTypes.NameIdentifier);
                 if (!string.IsNullOrEmpty(value))
                 {
-                    return int.Parse(value);
+                    return value;  // Return as string directly
                 }
                 else
                 {
-                    return 0;
+                    return null;  // Return null if not found
                 }
+
                 throw new Exception("Token is invalid");
             }
         }

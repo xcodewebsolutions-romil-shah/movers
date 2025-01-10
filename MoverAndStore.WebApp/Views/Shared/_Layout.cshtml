@@ -42,9 +42,9 @@
         }
 
         .btn-primary {
-            color: #fff;
-            background-color: #901F17;
-            border-color: #901F17;
+            color: #fff !important;
+            background-color: #901F17 !important;
+            border-color: #901F17 !important;
         }
 
         .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -134,9 +134,9 @@
         <div class="navbar-wrapper">
             <div class="navbar-brand header-logo" style="background: #ffffff !important;height: 70px !important;">
                 <a href="/Home">
-                    <img src="/images/move.jpg" style="width: 60%;" class="float-left ml-4">
+                    <img src="/images/LogoMSBV.png" style="width: 92%;" class="float-left">
                 </a>
-                <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+               <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
             </div>
             <div class="navbar-content scroll-div">
                 <ul class="nav pcoded-inner-navbar">
@@ -158,23 +158,15 @@
                                 <span class="pcoded-mtext">Users</span>
                             </a>
                         </li>
+                        <li data-username="settings" class="nav-item @Html.ActiveMenu("Settings")">
+                            <a href="@Url.Action("Index", "Settings")" class="nav-link">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-settings"></i>
+                                </span>
+                                <span class="pcoded-mtext">Settings</span>
+                            </a>
+                        </li>
                     }
-                    <!--<li data-username="users" class="nav-item @Html.ActiveMenu("Users")">
-                        <a href="/Users" class="nav-link">
-                            <span class="pcoded-micon">
-                                <i class="feather icon-users"></i>
-                            </span>
-                            <span class="pcoded-mtext">Users</span>
-                        </a>
-                    </li>
-                    <li data-username="roles" class="nav-item @Html.ActiveMenu("Roles")">
-                        <a href="/Roles" class="nav-link">
-                            <span class="pcoded-micon">
-                                <i class="feather icon-file"></i>
-                            </span>
-                            <span class="pcoded-mtext">Roles</span>
-                        </a>
-                    </li>-->
                 </ul>
             </div>
         </div>
@@ -183,49 +175,47 @@
         <div class="m-header">
             <a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
             <a href="/Home">
-                <img src="/images/move.jpg" style="width: 60%;margin-left: 3.5rem !important;width: 50%;" class="float-left ml-4">
+                <img src="/images/LogoMSBV.png" style="width: 60%;margin-left: 3.5rem !important;width: 50%;" class="float-left ml-4">
             </a>
         </div>
         <a class="mobile-menu" id="mobile-header" href="#!">
             <i class="feather icon-more-horizontal"></i>
         </a>
-        @* <div class="collapse navbar-collapse" style="background:white;">
-        <ul class="navbar-nav ml-auto">
-        <li class="pr-0">
-        <div class="drp-user mr-4">
-        <a href="~/Account/Logout">
-        <i class="icon feather icon-log-out"></i>
-        </a>
-        </div>
-        </li>
-        </ul>
-        </div> *@
-        <div class="collapse navbar-collapse" style="background: white;">
-            <ul class="navbar-nav ml-auto">
-                <li>
-                    <div class="dropdown drp-user">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon feather icon-settings"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right profile-notification">
-                            <div class="pro-head">
-                                @* <img src="~/images/avatar-@(ClaimHelper.Gender == "M" ? 2 : 5).jpg" class="img-radius" alt="User-Profile-Image"> *@
-                                <span> Welcome, Name</span>
-                                <a href="~/Account/Logout" class="dud-logout Logout" title="Logout">
-                                    <i class="feather icon-log-out"></i>
-                                </a>
-                            </div>
-                            @if (@ClaimHelper.Role == "user")
-                            {
-                                <ul class="pro-body">
-                                    <li style="line-height: 2.2;"><a href="#!" class="dropdown-item" data-toggle="modal" data-target="#changePasswordModal"><i class="fas fa-key"></i> Change Password</a></li>
-                                </ul>
-                            }
-                        </div>
-                    </div>
+
+        <div class="collapse navbar-collapse bg-white">
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+                <li class="nav-item pr-3">
+                    <img src="~/images/avatar-2.jpg" class="img-radius" alt="User-Profile-Image" style="width: 30px; height: 30px;">
+                    <span class="text-dark font-weight-bold">Welcome, @ClaimHelper.Name</span>
                 </li>
+                <li class="nav-item">
+                    <a href="~/Account/Logout" class="dud-logout Logout" title="Logout">
+                        <i class="feather icon-log-out"></i>
+                    </a>
+                </li>
+
+                @if (@ClaimHelper.Role == "Foreman")
+                {
+                    <li class="nav-item">
+                        <div class="dropdown drp-user">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon feather icon-settings"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-notification">
+                                <ul class="pro-body">
+                                    <li style="line-height: 2.2;">
+                                        <a href="#!" class="dropdown-item" data-toggle="modal" data-target="#changePasswordModal">
+                                            <i class="fas fa-key"></i> Change Password
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                }
             </ul>
         </div>
+
     </header>
     <div class="global-loader-overlay d-none">
         <div class="global-loader"></div>
@@ -275,18 +265,12 @@
                             <div class="progress-fill"></div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary btn-sm btn-rounded" data-dismiss="modal" style="cursor: pointer;">
-                        <span class="fas fa-undo"></span> Close
-                    </button>
-                    <button type="button" class="btn btn-primary btn-sm btn-rounded" id="btn-reset-password" style="cursor: pointer;">
-                        <span class="fas fa-save"></span> Save
-                    </button>
+                    <button type="button" class="btn btn-primary" id="btn-reset-password" style="cursor: pointer;"> Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="cursor: pointer;">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
 
@@ -436,7 +420,7 @@
                 dataType: "JSON",
                 success: function (response) {
                     $(".progress-bg").hide();
-                    makeButtonOriginal('#btn-reset-password', ' Save', 'fas fa-save');
+                    makeButtonOriginal('#btn-reset-password', ' Save');
                     if (response.message == 'success') {
                         $("#alert-password-save").removeClass('alert-danger');
                         notifySuccess('#alert-password-save', 'alert-success', 'Password change successfully.');
@@ -451,15 +435,25 @@
                     else {
                         $("#reset-password-alert").removeClass('alert-success');
                         $("#alert-password-save").removeClass('d-none');
-                        makeButtonOriginal('#btn-reset-password', ' Save', 'fas fa-save');
+                        makeButtonOriginal('#btn-reset-password', ' Save');
                         notifyError('#alert-password-save', 'alert-danger', response.message);
+
+                        setTimeout(function () {
+                            $("#changePasswordModal").modal('hide');
+                            $("#alert-password-save").hide();
+                        }, 3000);
                     }
                 },
                 error: function (err) {
                     $(".progress-bg").hide();
-                    makeButtonOriginal('#btn-reset-password', ' Save', 'fas fa-save');
+                    makeButtonOriginal('#btn-reset-password', ' Save');
                     $("#reset-password-alert").removeClass('alert-success');
                     notifyError('#alert-password-save', 'alert-danger', err.responseText);
+
+                    setTimeout(function () {
+                        $("#changePasswordModal").modal('hide');
+                        $("#alert-password-save").hide();
+                    }, 3000);
                 }
             });
         });

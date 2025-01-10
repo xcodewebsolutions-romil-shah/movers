@@ -2,7 +2,7 @@
 {
     public interface IClaimHelper
     {
-        int UserId { get; }
+        string UserId { get; }
         string Name { get; }
         string Role { get; }
         int UserType { get; }
