@@ -80,7 +80,14 @@ namespace MoverAndStore.WebApp.Controllers
                             principal,
                             authenticationProperties);
 
-                    return LocalRedirect("/Home/Index");
+                    if (data.Role == "Admin")
+                    {
+                        return LocalRedirect("/Users/Index");
+                    }
+                    else
+                    {
+                        return LocalRedirect("/Home/Index");
+                    }
                 }
             }
             catch (Exception ex)
@@ -180,7 +187,7 @@ namespace MoverAndStore.WebApp.Controllers
                 return response;
             }
         }
-        
+
 
 
 
