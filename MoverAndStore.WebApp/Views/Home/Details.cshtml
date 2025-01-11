@@ -1,13 +1,17 @@
 ﻿@model CardData
 
+@{
+    Layout = "_Layout";
+}
 
+@* 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details - @Model.Basic_Information.Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> *@
     <style>
         input[type="checkbox"] {
             width: 0;
@@ -100,15 +104,13 @@
         }
 
     </style>
-</head>
-<body style="background-color:#F4F7FA">
-    <div class="container">
+
         <!-- Dashboard Card (Small Long Title Card) -->
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header" style="width:100%">
-                        <h5 class="text-dark">@Model.Basic_Information.Title</h5>
+                    <div class="card-header" >
+                        <h4 class="text-dark" style="font-weight:bold">@Model.Basic_Information.Title</h4>
                     </div>
                 </div>
             </div>
@@ -117,7 +119,7 @@
             <!-- Other Cards in Pairs of Two -->
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
                 <!-- Card 1 -->
-                <div class="col">
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header" style="background-color:#901F17;">
                             <h5 class="text-light">Basic Information</h5>
@@ -133,7 +135,7 @@
                                             <strong>Title</strong><br />
                                             @Model.Basic_Information.Title
                                         </label>
-                                        
+
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="summary">
@@ -284,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-sm-6">
 
                     <div class="card">
                         <div class="card-header" style="background-color:#901F17;">
@@ -343,7 +345,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" style="margin-top:1px">
+                 <div class="col-sm-6" style="margin-top:1px">
                     <div class="card">
 
                         <div class="card-header" style="background-color:#901F17;">
@@ -388,11 +390,11 @@
                                             <option value="Test">Test</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="mb-3">
-                                    <label class="form-label" for="exampleFormControlSelect1">Voertuig</label>
-                                    <select class="form-select" id="exampleFormControlSelect1" name="@Model.Additional_Info.Voertuig_Enum">
-                                        <option value="Test">@Model.Additional_Info.Voertuig_Enum</option>
+                                        <label class="form-label" for="exampleFormControlSelect1">Voertuig</label>
+                                        <select class="form-select" id="exampleFormControlSelect1" name="@Model.Additional_Info.Voertuig_Enum">
+                                            <option value="Test">@Model.Additional_Info.Voertuig_Enum</option>
                                             <option value="Test">Test2</option>
                                             <option value="Test">Test3</option>
                                             <option value="Test">Test4</option>
@@ -510,7 +512,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" style="margin-top:1px">
+                <div class="col-sm-6" style="margin-top:1px">
                     <div class="card">
                         <div class="card-header" style="background-color:#901F17;">
                             <h5 class="text-light">Stockage</h5>
@@ -525,7 +527,7 @@
                                             @Model.stockage.Date_In
                                         </label>
                                         <input type="hidden" name="Date_In" value="@Model.stockage.Date_In">
-                                      
+
                                         @* <div>
                                         @Model.stockage.Date_In
                                         </div> *@
@@ -587,22 +589,22 @@
                                             <strong>Options Enum</strong><br />
                                         </label>
 
-                                           
-                                                <select class="form-select" id="exampleFormControlSelect1" name="@Model.stockage.Options_Enum">
-                                                    <option value="Test">@Model.stockage.Options_Enum</option>
-                                                    <option value="Test">Test2</option>
-                                                    <option value="Test">Test3</option>
-                                                    <option value="Test">Test4</option>
-                                                    <option value="Test">Test</option>
-                                                </select>
-                                            </div>
-                                       
+
+                                        <select class="form-select" id="exampleFormControlSelect1" name="@Model.stockage.Options_Enum">
+                                            <option value="Test">@Model.stockage.Options_Enum</option>
+                                            <option value="Test">Test2</option>
+                                            <option value="Test">Test3</option>
+                                            <option value="Test">Test4</option>
+                                            <option value="Test">Test</option>
+                                        </select>
+                                    </div>
 
 
-                                        @* <div>
-                                        @Model.stockage.Options_Enum
-                                        </div> *@
-                                  
+
+                                    @* <div>
+                                    @Model.stockage.Options_Enum
+                                    </div> *@
+
                                     <div class="mb-1">
 
                                         <label class="from-label"><strong>Contract</strong></label>
@@ -613,7 +615,7 @@
                                         @Model.stockage.Contract
                                         </div> *@
                                     </div>
-                                   
+
                                     @*  </form> *@
                                 </div>
                                 <div class="col-md-6">
@@ -694,7 +696,7 @@
                                     @*  </form> *@
                                 </div>
                                 <br />
-                                 <br />
+                                <br />
                                 <br />
                             </div>
                         </div>
@@ -703,7 +705,7 @@
                     </div>
                 </div>
 
-                <div class="col" style="margin-top:1px">
+                      <div class="col-sm-6" style="margin-top:1px">
 
                     <div class="card">
                         <div class="card-header" style="background-color:#901F17;">
@@ -712,7 +714,7 @@
                         <div class="card-body">
                             <div class="row d-flex">
                                 <!-- Left Form Column -->
-                                <div class="col-md-6">
+                                <div class="col-md-12   ">
                                     @*  <form id="dataForm"> *@
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped table-hover">
@@ -750,7 +752,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" style="margin-top:1px">
+                <div class="col-sm-6" style="margin-top:1px">
 
                     <div class="card">
                         <div class="card-header" style="background-color:#901F17;">
@@ -777,11 +779,11 @@
                         </div>
                     </div>
                 </div>
-                </<div>
+               
                 </div>
                 <footer>
                     <div class="md-12" style="display: flex;justify-content: end">
-                        <button type="button" class="btn" style="justify-content:end;background-color:#dddd;color:black" onclick="redirectToIndex()" >Cancel</button>
+                        <button type="button" class="btn" style="justify-content:end;background-color:#dddd;color:black" onclick="redirectToIndex()">Cancel</button>
                         <button type="button" id="saveButton" class="btn" style="justify-content:end;background-color:#901F17;color:#ffff" onclick="saveData()">Save</button>
 
                     </div>
@@ -790,7 +792,7 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
                     function redirectToIndex() {
-                        window.location.href = '/Home/Index'; 
+                        window.location.href = '/Home/Index';
                     }
 
                     function saveData() {
@@ -853,6 +855,7 @@
 
 
         </form>
-</body>
+@* </body>
 </html>
 
+ *@
