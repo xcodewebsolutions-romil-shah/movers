@@ -123,7 +123,7 @@ namespace MoverAndStore.WebApp.Models
         public DateTime? Date_In { get; set; }
 
         [JsonPropertyName("date_in_update")]
-        public string Date_In_Update { get; set; }
+        public string? Date_In_Update { get; set; }
 
         [JsonPropertyName("date_out")]
         public DateTime? Date_Out { get; set; }

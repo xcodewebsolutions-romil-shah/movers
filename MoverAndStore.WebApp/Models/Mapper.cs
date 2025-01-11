@@ -67,8 +67,8 @@ namespace MoverAndStore.WebApp.Models
                 {
                     Date_In = Convert.ToDateTime(source.Date_In),
                     Date_Out = Convert.ToDateTime(source.Date_Out),
-                    Date_In_Update = source.Date_In_Update,
-                    Date_Out_Update = source.Date_Out_Update,
+                    Date_In_Update = source.Date_In_Update.ToString(),
+                    Date_Out_Update = source.Date_Out_Update.ToString(),
                     Cubic_Meters = source.Cubic_Meters,
                     Cubic_Meters_Update = source.Cubic_Meters_Update,
                     Exact_Location = source.Exact_Location,

@@ -103,6 +103,11 @@
         border: 3px solid #000000;
     }
 
+    .card {
+        border-radius: 15px; /* Rounded corners for the card */
+        overflow: hidden; /* Ensure the rounded corners apply to inner elements */
+    }
+
 </style>
 
 <!-- Dashboard Card (Small Long Title Card) -->
@@ -133,14 +138,14 @@
                             <input type="hidden" name="title" value="@Model.Basic_Information.Title">
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Title</strong><br />
+                                    <strong><b>Title</b></strong><br />
                                     @Model.Basic_Information.Title
                                 </label>
 
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Summary</strong><br />
+                                    <strong><b>Summary</b></strong><br />
                                     Test @Model.Basic_Information.Summary
                                 </label>
                                 <input type="hidden" name="summary" value="@Model.Basic_Information.Summary">
@@ -150,7 +155,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="reference">
-                                    <strong>Reference</strong><br />
+                                    <strong><b>Reference</b></strong><br />
                                     @Model.Basic_Information.Reference
                                 </label>
                                 <input type="hidden" name="reference" value="@Model.Basic_Information.Reference">
@@ -160,7 +165,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Contact person</strong><br />
+                                    <strong><b>Contact person</b></strong><br />
                                     @Model.Basic_Information.Lead.Contact_Person
 
                                 </label>
@@ -172,7 +177,19 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Address A</strong><br />
+                                    <strong><b>Contact person Telephone</b></strong><br />
+                                    @Model.Basic_Information.Lead.Contact_Person_Telephone
+
+                                </label>
+                                <input type="hidden" name="Contact_Person_Telephone" value="@Model.Basic_Information.Lead.Contact_Person_Telephone">
+                                @*  <div>
+                                @Model.Basic_Information.Lead.Contact_Person
+                                </div> *@
+
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="title">
+                                    <strong><b>Address A</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.address_a
 
                                 </label>
@@ -184,7 +201,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Address B</strong><br />
+                                    <strong><b>Address B</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.address_b
 
                                 </label>
@@ -196,7 +213,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Address C</strong><br />
+                                    <strong><b>Address C</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.address_c
 
                                 </label>
@@ -208,7 +225,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>PV Extra Info</strong><br />
+                                    <strong><b>PV Extra Info</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.pv_extra_info
 
                                 </label>
@@ -219,7 +236,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>General Extra Info</strong><br />
+                                    <strong><b>General Extra Info</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.extra_info_contact.general_extra_info
 
                                 </label>
@@ -235,7 +252,7 @@
                         <div class="col-md-6">
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Status</strong><br />
+                                    <strong><b>Status</b></strong><br />
                                     @Model.Basic_Information.Status
 
                                 </label>
@@ -246,7 +263,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Company</strong><br />
+                                    <strong><b>Company</b></strong><br />
                                     Insuarance @Model.Basic_Information.Company
 
                                 </label>
@@ -258,7 +275,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Customer</strong><br />
+                                    <strong><b>Customer</b></strong><br />
                                     @Model.Basic_Information.Lead.Customer
 
                                 </label>
@@ -266,19 +283,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="from-label"><strong>PV 1</strong></label>
+                                <label class="from-label"><strong><b>PV 1</b></strong></label>
                                 <input class="toggle" type="checkbox" id="pv_1_bool" name="pv_1_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
                                 <label class="toggle" for="IsActive">PV 1</label>
                                 @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
                             </div>
                             <div class="form-group">
-                                <label class="from-label"><strong>PV 2</strong></label>
+                                <label class="from-label"><strong><b>PV 2</b></strong></label>
                                 <input class="toggle" type="checkbox" id="pv_2_bool" name="pv_2_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
                                 <label class="toggle" for="IsActive">PV 2</label>
                                 @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
                             </div>
                             <div class="form-group">
-                                <label class="from-label"><strong>PV 3</strong></label>
+                                <label class="from-label"><strong><b>PV 3</b></strong></label>
                                 <input class="toggle" type="checkbox" id="pv_3_bool" name="pv_3_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
                                 <label class="toggle" for="IsActive">PV 3</label>
                                 @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
@@ -301,7 +318,7 @@
                             @*   <form id="dataForm"> *@
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>From Date</strong><br />
+                                    <strong><b>From Date</b></strong><br />
                                     @Model.Moving_Date.moving_from_date
                                 </label>
                                 <input type="hidden" name="Moving_From_Date" value="@Model.Moving_Date.moving_from_date">
@@ -311,7 +328,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>To Date</strong><br />
+                                    <strong><b>To Date</b></strong><br />
                                     @Model.Moving_Date.moving_to_date
                                 </label>
                                 <input type="hidden" name="Moving_To_Date" value="@Model.Moving_Date.moving_to_date">
@@ -321,7 +338,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="reference">
-                                    <strong>Client Arrival Time</strong><br />
+                                    <strong><b>Client Arrival Time</b></strong><br />
                                     @Model.Moving_Date.client_arrival_time_update
                                 </label>
                                 <input type="hidden" name="Client_Arrival_Time_update" value="@Model.Moving_Date.client_arrival_time_update">
@@ -364,7 +381,7 @@
                             @* <form id="dataForm"> *@
                             <div class="mb-1">
                                 <label class="form-label" for="title">
-                                    <strong>Extra Info Lift</strong><br />
+                                    <strong><b>Extra Info Lift</b></strong><br />
                                     @Model.Additional_Info.Extra_Info_Lift
                                     <input type="hidden" name="Extra_Info_Lift" value="@Model.Additional_Info.Extra_Info_Lift">
                                 </label>
@@ -374,7 +391,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Lift Location</strong><br />
+                                    <strong><b>Lift Location</b></strong><br />
                                     @Model.Additional_Info.Lift_Location_Enum
                                     <input type="hidden" name="Lift_Location_Enum" value="@Model.Additional_Info.Lift_Location_Enum">
                                 </label>
@@ -383,7 +400,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="exampleFormControlSelect1">Lift Type Enum</label>
+                                <label class="form-label" for="exampleFormControlSelect1"><strong><b>Lift Type Enum</b></b></strong></label>
                                 <select class="form-select" id="exampleFormControlSelect1" name="Lift_Type_Enum">
                                     <option value="Test">@Model.Additional_Info.Lift_Type_Enum</option>
                                     <option value="Test">Test2</option>
@@ -394,7 +411,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="exampleFormControlSelect1">Voertuig</label>
+                                <label class="form-label" for="exampleFormControlSelect1"><strong><b>Voertuig</b></strong></label>
                                 <select class="form-select" id="exampleFormControlSelect1" name="Voertuig_Enum">
                                     <option value="Test">@Model.Additional_Info.Voertuig_Enum</option>
                                     <option value="Test">Test2</option>
@@ -404,7 +421,7 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleFormControlSelect1">Voertuig Type</label>
+                                <label class="form-label" for="exampleFormControlSelect1"><strong><b>Voertuig Type</b></strong></label>
                                 <select class="form-select" id="exampleFormControlSelect1" name="Voertuig_Type_Enum">
                                     <option value="Test">@Model.Additional_Info.Voertuig_Type_Enum</option>
                                     <option value="Test">Test12</option>
@@ -415,7 +432,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="summary">
-                                    <strong>Number Of Movers</strong><br />
+                                    <strong><b>Number Of Movers</b></strong><br />
                                     @Model.Additional_Info.Number_Of_Movers
                                     <input type="hidden" name="Number_Of_Movers" value="@Model.Additional_Info.Number_Of_Movers">
                                 </label>
@@ -426,7 +443,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="summary">
-                                    <strong>Number Of Movers Update</strong><br />
+                                    <strong><b>Number Of Movers Update</b></strong><br />
                                     <div class="number-input">
                                         <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
                                         <input type="number" class="num" name="Number_Of_Movers_Update" value="@Model.Additional_Info.Number_Of_Movers_Update" />
@@ -439,7 +456,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="timeEstimate">
-                                    <strong>Items To Dismentale</strong><br />
+                                    <strong><b>Items To Dismentale</b></strong><br />
                                     @Model.Additional_Info.Items_To_Dismantle
 
                                 </label>
@@ -450,7 +467,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Items To Dismentale Update</strong><br />
+                                    <strong><b>Items To Dismentale Update</b></strong><br />
                                     <input type="text" id="itemsToDismentleUpdate" class="form-control" name="itemsToDismentleUpdate" value="@Model.Additional_Info.Items_To_Dismantle_Update">
                                 </label>
                                 @*  <div>
@@ -462,18 +479,18 @@
                         <div class="col-md-6">
                             @*  <form id="dataForm"> *@
                             <div class="form-group">
-                                <label class="from-label"><strong>Dismentaling</strong></label>
+                                <label class="from-label"><strong><b>Dismentaling</b></strong></label>
                                 <input class="toggle" type="checkbox" id="Dismantling_Bool" name="Dismantling_Boo" value="true" @(Model.Additional_Info.Dismantling_Bool ? "checked" : "") />
                                 <label class="toggle" for="IsActive">Dismentaling</label>
                             </div>
                             <div class="form-group">
-                                <label class="from-label"><strong>Dismentaling Update</strong></label>
+                                <label class="from-label"><strong><b>Dismentaling Update</b></strong></label>
                                 <input class="toggle" type="checkbox" id="Dismantling_Bool_Update" name="Dismantling_Bool_Update" value="true" @(Model.Additional_Info.Dismantling_Bool_Update ? "checked" : "") />
                                 <label class="toggle" for="IsActive">Dismentaling Update</label>
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="timeEstimate">
-                                    <strong>Time Estimate</strong><br />
+                                    <strong><b>Time Estimate</b></strong><br />
                                     @Model.Additional_Info.Time_Estimate
                                 </label>
                                 <input type="hidden" name="Time_Estimate" value="@Model.Additional_Info.Time_Estimate">
@@ -485,7 +502,7 @@
 
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Time Estimate Update</strong><br />
+                                    <strong><b>Time Estimate Update</b></strong><br />
                                     <input type="text" id="timeEstimateUpdate" class="form-control" name="timeEstimateUpdate" value=" @Model.Additional_Info.Time_Estimate_Update">
                                 </label>
                                 @*   <div>
@@ -495,7 +512,7 @@
 
                             <div class="mb-1">
                                 <label class="form-label" for="Additional_General_Info">
-                                    <strong>Additional General Info</strong><br />
+                                    <strong><b>Additional General Info</b></strong><br />
                                     @Model.Additional_Info.Additional_General_Info
                                 </label>
                                 <input type="hidden" name="Additional_General_Info" value="@Model.Additional_Info.Additional_General_Info">
@@ -505,7 +522,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Additional General Info Update</strong><br />
+                                    <strong><b>Additional General Info Update</b></strong><br />
                                     <input type="text" id="additionalGeneralInfo" class="form-control" name="Additional_General_Info_update" value="@Model.Additional_Info.Additional_General_Info_update">
                                 </label>
                                 @*  <div>
@@ -514,7 +531,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="Additional_General_Info">
-                                    <strong>Hour start update</strong><br />
+                                    <strong><b>Hour start update</b></strong><br />
                                     @Model.Additional_Info.Hour_start_update
                                 </label>
                                 <input type="hidden" name="Hour_start_update" value="@Model.Additional_Info.Hour_start_update">
@@ -524,7 +541,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Hour stop update</strong><br />  
+                                    <strong><b>Hour stop update</b></strong><br />  
                                     @Model.Additional_Info.Hour_stop_update
                                 </label>
                                 <input type="hidden" name="Hour_stop_update" value="@Model.Additional_Info.Hour_stop_update">
@@ -556,7 +573,7 @@
                             @* <form id="dataForm"> *@
                             <div class="mb-1">
                                 <label class="form-label" for="timeEstimate">
-                                    <strong>Date In</strong><br />
+                                    <strong><b>Date In</b></strong><br />
                                     @Model.stockage.Date_In
                                 </label>
                                 <input type="hidden" name="Date_In" value="@Model.stockage.Date_In">
@@ -567,8 +584,8 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Date In Update</strong><br />
-                                    <input type="text" id="dateInUpdate" class="form-control" name="dateInUpdate" value="@Model.stockage.Date_In_Update">
+                                    <strong><b>Date In Update</b></strong><br />
+                                    <input type="date" id="dateInUpdate" class="form-control" name="DateInUpdate" value="@Model.stockage.Date_In_Update">
 
                                 </label>
                                 @*  <div>
@@ -577,7 +594,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="timeEstimate">
-                                    <strong>Date Out</strong><br />
+                                    <strong><b>Date Out</b></strong><br />
                                     @Model.stockage.Date_Out
                                 </label>
                                 <input type="hidden" name="Date_Out" value="@Model.stockage.Date_Out">
@@ -587,8 +604,8 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Date Out Update</strong><br />
-                                    <input type="text" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
+                                    <strong><b>Date Out Update</b></strong><br />
+                                    <input type="date" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
                                 </label>
                                 @* <div>
                                 <input type="text" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
@@ -596,7 +613,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="CubicMeters">
-                                    <strong>Cubic_Meters</strong><br />
+                                    <strong><b>Cubic_Meters</b></strong><br />
                                     @Model.stockage.Cubic_Meters
                                 </label>
                                 <input type="hidden" name="Cubic_Meters" value="@Model.stockage.Cubic_Meters">
@@ -606,7 +623,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong>Cubic_Meters_Update</strong><br />
+                                    <strong><b>Cubic_Meters_Update</b></strong><br />
                                     <div class="number-input">
                                         <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
                                         <input type="number" class="form-control" name="Cubic_Meters_Update" value="@Model.stockage.Cubic_Meters_Update" />
@@ -619,7 +636,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="exactlocation">
-                                    <strong>Options Enum</strong><br />
+                                    <strong><b>Options Enum</b></strong><br />
                                 </label>
 
 
@@ -640,7 +657,7 @@
 
                             <div class="mb-1">
 
-                                <label class="from-label"><strong>Contract</strong></label>
+                                <label class="from-label"><strong><b>Contract</b></strong></label>
                                 <input class="toggle" type="checkbox" id="Contract" name="Contract" value="true" @(Model.stockage.Contract ? "checked" : "") />
                                 <label class="toggle" for="IsActive">Contract</label>
                             
@@ -655,7 +672,7 @@
                             @* <form id="dataForm"> *@
                             <div class="mb-1">
                                 <label class="form-label" for="Storage">
-                                    <strong>Storage</strong><br />
+                                    <strong><b>Storage</b></strong><br />
                                     @Model.stockage.Storage
                                 </label>
                                 <input type="hidden" name="Storage" value="@Model.stockage.Storage">
@@ -665,7 +682,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="Storage">
-                                    <strong>Storage Update</strong><br />
+                                    <strong><b>Storage Update</b></strong><br />
                                     <input type="text" class="form-control" name="Storage_Update" value="@Model.stockage.Storage_Update" />
                                 </label>
                                 @*   <div>
@@ -675,7 +692,7 @@
 
                             <div class="mb-1">
                                 <label class="form-label" for="Storage">
-                                    <strong>Zone</strong><br />
+                                    <strong><b>Zone</b></strong><br />
                                     @Model.stockage.Zone
                                 </label>
                                 <input type="hidden" name="Zone" value="@Model.stockage.Zone">
@@ -685,7 +702,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="Storage">
-                                    <strong>Zone Update</strong><br />
+                                    <strong><b>Zone Update</b></strong><br />
                                     <input type="text" id="Zone" class="form-control" name="Zone_Update" value="@Model.stockage.Zone_Update">
                                 </label>
                                 @* <div>
@@ -695,7 +712,7 @@
 
                             <div class="mb-1">
                                 <label class="form-label" for="exactlocation">
-                                    <strong>Exact Location</strong><br />
+                                    <strong><b>Exact Location</b></strong><br />
                                     @Model.stockage.Exact_Location
                                 </label>
                                 <input type="hidden" name="Exact_Location" value="@Model.stockage.Exact_Location">
@@ -705,7 +722,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="exactlocation">
-                                    <strong>Zone Update</strong><br />
+                                    <strong><b>Zone Update</b></strong><br />
                                     <input type="text" id="exactlocation" class="form-control" name="Exact_Location_Update" value="@Model.stockage.Exact_Location_Update">
                                 </label>
                                 @* <div>
@@ -714,7 +731,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="exactlocation">
-                                    <strong>Insured Value</strong><br />
+                                    <strong><b>Insured Value</b></strong><br />
                                     @Model.stockage.Insured_Value
                                 </label>
                                 <input type="hidden" name="Insured_Value" value="@Model.stockage.Insured_Value">
@@ -798,7 +815,7 @@
                         <div class="col-md-12">
                             <div class="mb-1" style="width:100%">
                                 <label class="form-label" for="foreman_notes">
-                                    <strong>Forman Notes</strong>
+                                    <strong><b>Forman Notes</b></strong>
 
                                 </label>
                                 @* <textarea id="textarea" name="foreman_notes" class="form-control responsive-textarea" placeholder="Enter your message here...">@Model.Notes.foreman_notes</textarea> *@
