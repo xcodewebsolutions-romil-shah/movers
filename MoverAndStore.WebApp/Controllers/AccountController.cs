@@ -86,7 +86,7 @@ namespace MoverAndStore.WebApp.Controllers
                     }
                     else
                     {
-                        return LocalRedirect("/Home/Index");
+                        return LocalRedirect($"/Home/Index?formenName={Uri.EscapeDataString(data.FullName)}");
                     }
                 }
             }

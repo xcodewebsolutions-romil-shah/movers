@@ -22,12 +22,12 @@ namespace MoverAndStore.WebApp.Controllers
             _httpClientFactory = httpClientFactory;
             _logger = logger;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string formenName)
         {
             try
             {
                 var client = _httpClientFactory.CreateClient();
-                var response = await client.GetAsync("https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt");
+                var response = await client.GetAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt?foreman_name={formenName}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -48,19 +48,19 @@ namespace MoverAndStore.WebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> Details(string formanName)
+        public async Task<IActionResult> Details(string id)
         {
 
             try
             {
                 var client = _httpClientFactory.CreateClient();
-                var response = await client.GetAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt?{formanName}"); // Replace with your API endpoint
+                var response = await client.GetAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt"); // Replace with your API endpoint
 
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
                     var data = System.Text.Json.JsonSerializer.Deserialize<List<CardData>>(jsonData);
-                    var finaldata = data.FirstOrDefault();
+                    var finaldata = data.Where(x => x.Basic_Information.id == id).FirstOrDefault();
                     return View(finaldata);
                 }
                 else
@@ -146,16 +146,13 @@ namespace MoverAndStore.WebApp.Controllers
             public string Lift_Type_Enum { get; set; }
             public int Number_Of_Movers { get; set; }
             public int Number_Of_Movers_Update { get; set; }
-            //public string Date_In { get; set; }
-            //public string Date_In_Update { get; set; }
-            //public string Date_Out { get; set; }
-            //public string Date_Out_Update { get; set; }
 
-            //[JsonPropertyName("cubic_meters")]
-            //public int Cubic_Meters { get; set; }
+            [JsonPropertyName("items_to_dismantle")]
+            public string Items_To_Dismantle { get; set; }
 
-            //[JsonPropertyName("cubic_meters_update")]
-            //public int Cubic_Meters_Update { get; set; }
+            [JsonPropertyName("items_to_dismantle_update")]
+            public string? Items_To_Dismantle_Update { get; set; }
+
 
             [JsonPropertyName("time_estimate")]
             public string Time_Estimate { get; set; }
@@ -163,11 +160,18 @@ namespace MoverAndStore.WebApp.Controllers
             [JsonPropertyName("time_estimate_update")]
             public int Time_Estimate_Update { get; set; }
 
-            //[JsonPropertyName("items_to_dismantle")]
-            //public string Items_To_Dismantle { get; set; }
+            //public string Date_In { get; set; }
+            //public string? Date_In_Update { get; set; }
+            //public string Date_Out { get; set; }
+            //public string? Date_Out_Update { get; set; }
 
-            //[JsonPropertyName("items_to_dismantle_update")]
-            //public string Items_To_Dismantle_Update { get; set; }
+            //[JsonPropertyName("cubic_meters")]
+            //public int Cubic_Meters { get; set; }
+
+            //[JsonPropertyName("cubic_meters_update")]
+            //public int Cubic_Meters_Update { get; set; }
+
+            
 
             //[JsonPropertyName("additional_general_info")]
             //public string Additional_General_Info { get; set; }
@@ -175,7 +179,7 @@ namespace MoverAndStore.WebApp.Controllers
             //[JsonPropertyName("additional_general_info_update")]
             //public string Additional_General_Info_update { get; set; }
 
-            public bool Lift_bool { get; set; }
+            //public bool Lift_bool { get; set; }
 
             //[JsonPropertyName("storage")]
             //public string Storage { get; set; }
@@ -226,8 +230,8 @@ namespace MoverAndStore.WebApp.Controllers
 
             public string? client_arrival_time_update { get; set; }
 
-            //[JsonPropertyName("lift_bool")]
-            //public bool Lift_bool { get; set; }
+            [JsonPropertyName("lift_bool")]
+            public bool Lift_bool { get; set; }
 
             //[JsonPropertyName("voertuig_enum")]
             //public string Voertuig_Enum { get; set; }
@@ -240,7 +244,7 @@ namespace MoverAndStore.WebApp.Controllers
             //[JsonPropertyName("dismantling_bool_update")]
             //public bool Dismantling_Bool_Update { get; set; }
 
-            
+
 
             //[JsonPropertyName("items_to_dismantle")]
             //public string Items_To_Dismantle { get; set; }
