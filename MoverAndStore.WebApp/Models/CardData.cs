@@ -69,10 +69,10 @@ namespace MoverAndStore.WebApp.Models
         public string Voertuig_Enum { get; set; }
 
         [JsonPropertyName("Hour_start_update")]       
-        public string Hour_start_update { get; set; }
+        public DateTime Hour_start_update { get; set; }
 
         [JsonPropertyName("Hour_Stop_Update")]
-	    public string Hour_stop_update { get; set; }
+	    public DateTime Hour_stop_update { get; set; }
 
         [JsonPropertyName("voertuig_type_enum")]
         public string Voertuig_Type_Enum { get; set; }
@@ -114,7 +114,7 @@ namespace MoverAndStore.WebApp.Models
 
         public DateTime? moving_to_date { get; set; }
 
-        public string client_arrival_time_update { get; set; }
+        public DateTime? client_arrival_time_update { get; set; }
     }
 
     public class Stockage
