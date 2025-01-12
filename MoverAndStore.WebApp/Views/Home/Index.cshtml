@@ -34,6 +34,14 @@
             {
                 <div class="col-sm-12 col-md-4">
                     <div class="card" style="border: 1px solid #CCC; border-radius: 15px; transition: transform 0.3s ease;">
+                        <a href="@Url.Action("Details", "Home", new { id = item.Basic_Information.id })" style="text-decoration: none;">
+                            <div class="card-header py-3 d-flex align-items-center justify-content-between" style="background-color: #901F17; color: #000000; border-top-left-radius: 15px; border-top-right-radius: 15px; cursor: pointer;">
+                                <h5 class="d-flex align-items-center" style="font-size: 18px; font-weight: bold; color: #ffff; margin: 0;">
+                                    @item.Basic_Information.Title
+                                </h5>
+                                <i class="fas fa-edit" style="color: #ffff;"></i>
+                            </div>
+                        </a>
                         <div class="card-header py-3 d-flex align-items-center justify-content-between" style="background-color: #901F17; color: #000000; border-top-left-radius: 15px; border-top-right-radius: 15px;">
                             <h5 class="d-flex align-items-center" style="font-size: 18px; font-weight: bold; color:#ffff;">
                                 @item.Basic_Information.Title
