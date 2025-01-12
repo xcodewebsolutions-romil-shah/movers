@@ -11,6 +11,7 @@ namespace MoverAndStore.WebApp.Models
             {
                 Basic_Information = new BasicInformation 
                 {
+                    id = source.PID,
                     Title = source.Title,
                     Status = source.Status,
                     Summary = source.Summary,
@@ -20,6 +21,7 @@ namespace MoverAndStore.WebApp.Models
                     {
                         Contact_Person = source.Contact_Person,
                         Customer = source.Customer,
+                        Contact_Person_Telephone = source.Contact_Person_Telephone
                         
 
                     },
@@ -85,6 +87,10 @@ namespace MoverAndStore.WebApp.Models
                 Notes = new Notes
                 {
                     foreman_notes = source.foreman_notes,
+                },
+                user_dashboard = new Userashboard
+                {
+                    Foremanname = source.Foreman_name,
                 },
                 Products = new List<Product>
                 {

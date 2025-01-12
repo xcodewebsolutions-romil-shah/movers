@@ -134,6 +134,12 @@ namespace MoverAndStore.WebApp.Models
         public string? moving_to_date { get; set; }
 
         public string? client_arrival_time_update { get; set; }
+
+        public string?  Contact_Person_Telephone { get; set; }
+
+        public string? Foreman_name { get; set; }
+
+
     }
 
 

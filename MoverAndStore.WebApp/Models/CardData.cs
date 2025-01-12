@@ -21,7 +21,12 @@ namespace MoverAndStore.WebApp.Models
 
         [JsonPropertyName("notes")]
 
+
         public Notes Notes { get; set; }
+
+        [JsonPropertyName("user_dashboard")]
+
+        public Userashboard user_dashboard { get; set; }
     }
 
     public class BasicInformation
@@ -236,5 +241,12 @@ namespace MoverAndStore.WebApp.Models
     {
         [JsonPropertyName("foreman_notes")]
         public string foreman_notes { get; set; }
+    }
+
+    public class Userashboard
+    {
+        [JsonPropertyName("foreman_name")]
+        public string Foremanname { get; set; }
+
     }
 }
