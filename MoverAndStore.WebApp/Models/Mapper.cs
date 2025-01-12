@@ -90,7 +90,7 @@ namespace MoverAndStore.WebApp.Models
                 },
                 user_dashboard = new Userashboard
                 {
-                    Foremanname = source.Foreman_name,
+                    Foremanname = source.Foreman_name
                 },
                 Products = new List<Product>
                 {
@@ -100,6 +100,13 @@ namespace MoverAndStore.WebApp.Models
                         name = source.name,
                         quantity = source.quantity,
                         quantity_update = source.quantity_update,
+                    },
+                    new Product
+                    {
+                        id = "b4624bc6-44ef-0ce0-847a-351451853a05",
+                        name = "Alex test product",
+                        quantity = 1,
+                        quantity_update = 1,
                     }
                 }
 
