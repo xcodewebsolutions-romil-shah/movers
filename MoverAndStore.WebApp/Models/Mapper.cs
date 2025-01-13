@@ -25,16 +25,16 @@ namespace MoverAndStore.WebApp.Models
                         
 
                     },
-                    AddressGroup = new AddressGroup 
+                    AddressGroup = new AddressGroup
                     {
                         address_a = source.Address_A,
                         address_b = source.Address_B,
                         address_c = source.Address_C,
-                        pv_1_bool = source.Pv1Bool,
-                        pv_2_bool = source.Pv2Bool,
-                        pv_3_bool = source.Pv3Bool,
+                        pv_1_bool = source.pv_1_bool,
+                        pv_2_bool = source.pv_2_bool,
+                        pv_3_bool = source.pv_3_bool,
                     }
-                    
+                
                 },
                 Moving_Date = new MovingDate
                 {

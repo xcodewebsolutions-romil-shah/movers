@@ -304,20 +304,20 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="from-label"><strong><b>PV 1</b></strong></label>
-                                    <input class="toggle" type="checkbox" id="pv_1_bool" name="pv_1_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
-                                    <label class="toggle" for="IsActive">PV 1</label>
+                                <input class="toggle" type="checkbox" id="pv_1_bool" name="pv_1_bool" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
+                                <label class="toggle" for="pv_1_bool">PV 1</label>
                                     @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
                                 </div>
                                 <div class="form-group">
                                     <label class="from-label"><strong><b>PV 2</b></strong></label>
-                                    <input class="toggle" type="checkbox" id="pv_2_bool" name="pv_2_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
-                                    <label class="toggle" for="IsActive">PV 2</label>
+                                <input class="toggle" type="checkbox" id="pv_2_bool" name="pv_2_bool" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
+                                <label class="toggle" for="pv_2_bool">PV 2</label>
                                     @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
                                 </div>
                                 <div class="form-group">
                                     <label class="from-label"><strong><b>PV 3</b></strong></label>
-                                    <input class="toggle" type="checkbox" id="pv_3_bool" name="pv_3_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
-                                    <label class="toggle" for="IsActive">PV 3</label>
+                                <input class="toggle" type="checkbox" id="pv_3_bool" name="pv_3_bool" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
+                                <label class="toggle" for="pv_3_bool">PV 3</label>
                                     @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
                                 </div>
                                 </div>
@@ -875,6 +875,10 @@
                 data[key] = value;
             });
 
+            //Manually handle checkboxes to store boolean values
+            const checkboxes = form.querySelectorAll('input[type="checkbox"]'); 
+            checkboxes.forEach((checkbox) => { data[checkbox.name] = checkbox.checked });
+               // true if checked, false if unchecked 
             // Get the Save button
             const saveButton = document.getElementById('saveButton');
 
@@ -928,4 +932,4 @@
 @* </body>
 </html>
 
- *@ 
+ *@     

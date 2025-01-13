@@ -20,9 +20,9 @@ namespace MoverAndStore.WebApp.Models
         public string Address_A { get; set; }
         public string Address_B { get; set; }
         public string Address_C { get; set; }
-        public bool Pv1Bool { get; set; }
-        public bool Pv3Bool { get; set; }
-        public bool Pv2Bool { get; set; }
+        public bool pv_1_bool { get; set; }
+        public bool pv_2_bool { get; set; }
+        public bool pv_3_bool { get; set; }
 
         //Lead
 
@@ -136,12 +136,23 @@ namespace MoverAndStore.WebApp.Models
         public string? client_arrival_time_update { get; set; }
 
         public string?  Contact_Person_Telephone { get; set; }
-
+             
         public string? Foreman_name { get; set; }
 
 
     }
 
+    public class Products
+    {
+        public string id { get; set; }
 
+        [JsonPropertyName("name")]
+        public string name { get; set; }
+        [JsonPropertyName("quantity")]
+        public int quantity { get; set; }
+
+        [JsonPropertyName("quantity_update")]
+        public int quantity_update { get; set; }
+    }
 }
 
