@@ -38,6 +38,7 @@ namespace MoverAndStore.WebApp.Controllers
                         {
                             data = new
                             {
+                                Id = result.Id,
                                 email = result.Email,
                                 password = result.Password,
                                 domain = result.Domain
@@ -61,7 +62,7 @@ namespace MoverAndStore.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveSmtpSettings([FromBody] SmtpSettings settings)
         {
-            if (string.IsNullOrEmpty(settings.Email) || string.IsNullOrEmpty(settings.Password) || string.IsNullOrEmpty(settings.Domain))
+            if (string.IsNullOrEmpty(settings.Id) || string.IsNullOrEmpty(settings.Email) || string.IsNullOrEmpty(settings.Password) || string.IsNullOrEmpty(settings.Domain))
                 return BadRequest("All fields are required.");
             try
             {

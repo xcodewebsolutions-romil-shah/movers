@@ -49,6 +49,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
+                                        <input type="hidden" id="smtpId" />
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="smtpEmail">SMTP Email</label>
@@ -87,10 +88,11 @@
     $(document).ready(function () {
         function loadSmtpSettings() {
             $.ajax({
-                url: "/Settings/GetSMTPDetails", 
+                url: "/Settings/GetSMTPDetails",
                 type: "GET",
                 success: function (response) {
-                    if (response) {
+                    if (response && response.data) {
+                        $("#smtpId").val(response.data.id);
                         $("#smtpEmail").val(response.data.email);
                         $("#domain").val(response.data.domain);
                     }
@@ -121,6 +123,7 @@
         $("#submitBtn").on("click", function (e) {
             e.preventDefault();
 
+            const id = $("#smtpId").val();
             const email = $("#smtpEmail").val();
             const password = $("#smtpPassword").val();
             const domain = $("#domain").val();
@@ -130,6 +133,7 @@
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({
+                    Id: id,
                     Email: email,
                     Password: password,
                     Domain: domain
