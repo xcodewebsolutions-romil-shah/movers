@@ -11,6 +11,7 @@ namespace MoverAndStore.WebApp.Models
             {
                 Basic_Information = new BasicInformation 
                 {
+                    id = source.PID,
                     Title = source.Title,
                     Status = source.Status,
                     Summary = source.Summary,
@@ -20,6 +21,7 @@ namespace MoverAndStore.WebApp.Models
                     {
                         Contact_Person = source.Contact_Person,
                         Customer = source.Customer,
+                        Contact_Person_Telephone = source.Contact_Person_Telephone
                         
 
                     },
@@ -86,6 +88,10 @@ namespace MoverAndStore.WebApp.Models
                 {
                     foreman_notes = source.foreman_notes,
                 },
+                user_dashboard = new Userashboard
+                {
+                    Foremanname = source.Foreman_name
+                },
                 Products = new List<Product>
                 {
                     new Product
@@ -94,6 +100,13 @@ namespace MoverAndStore.WebApp.Models
                         name = source.name,
                         quantity = source.quantity,
                         quantity_update = source.quantity_update,
+                    },
+                    new Product
+                    {
+                        id = "b4624bc6-44ef-0ce0-847a-351451853a05",
+                        name = "Alex test product",
+                        quantity = 1,
+                        quantity_update = 1,
                     }
                 }
 

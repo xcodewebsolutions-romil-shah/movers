@@ -187,6 +187,60 @@
                                 </div> *@
 
                             </div>
+                           
+                        </div>
+
+                        <!-- Right Form Column -->
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="form-label" for="title">
+                                    <strong><b>Status</b></strong><br />
+                                    @Model.Basic_Information.Status
+
+                                </label>
+                                <input type="hidden" name="status" value="@Model.Basic_Information.Status">
+                                @*  <div>
+                                @Model.Basic_Information.Status
+                                </div> *@
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="title">
+                                    <strong><b>Company</b></strong><br />
+                                    Insuarance @Model.Basic_Information.Company
+
+                                </label>
+                                <input type="hidden" name="company" value="@Model.Basic_Information.Company">
+
+                                @* <div>
+                                Insuarance @Model.Basic_Information.Company
+                                </div> *@
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="title">
+                                    <strong><b>Customer</b></strong><br />
+                                    @Model.Basic_Information.Lead.Customer
+
+                                </label>
+                                <input type="hidden" name="customer" value="@Model.Basic_Information.Lead.Customer">
+                            </div>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+
+            <div class="card">
+                <div class="card-header" style="background-color:#901F17;">
+                    <h5 class="text-light">Address Group</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Form Column -->
+                        <div class="col-md-6">
+                            @*   <form id="dataForm"> *@
                             <div class="mb-1">
                                 <label class="form-label" for="title">
                                     <strong><b>Address A</b></strong><br />
@@ -246,124 +300,31 @@
                                 </div> *@
 
                             </div>
-                        </div>
-
-                        <!-- Right Form Column -->
-                        <div class="col-md-6">
-                            <div class="mb-1">
-                                <label class="form-label" for="title">
-                                    <strong><b>Status</b></strong><br />
-                                    @Model.Basic_Information.Status
-
-                                </label>
-                                <input type="hidden" name="status" value="@Model.Basic_Information.Status">
-                                @*  <div>
-                                @Model.Basic_Information.Status
-                                </div> *@
                             </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="title">
-                                    <strong><b>Company</b></strong><br />
-                                    Insuarance @Model.Basic_Information.Company
-
-                                </label>
-                                <input type="hidden" name="company" value="@Model.Basic_Information.Company">
-
-                                @* <div>
-                                Insuarance @Model.Basic_Information.Company
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="title">
-                                    <strong><b>Customer</b></strong><br />
-                                    @Model.Basic_Information.Lead.Customer
-
-                                </label>
-                                <input type="hidden" name="customer" value="@Model.Basic_Information.Lead.Customer">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>PV 1</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_1_bool" name="pv_1_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
-                                <label class="toggle" for="IsActive">PV 1</label>
-                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
-                            </div>
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>PV 2</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_2_bool" name="pv_2_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
-                                <label class="toggle" for="IsActive">PV 2</label>
-                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
-                            </div>
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>PV 3</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_3_bool" name="pv_3_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
-                                <label class="toggle" for="IsActive">PV 3</label>
-                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>PV 1</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="pv_1_bool" name="pv_1_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
+                                    <label class="toggle" for="IsActive">PV 1</label>
+                                    @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
+                                </div>
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>PV 2</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="pv_2_bool" name="pv_2_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
+                                    <label class="toggle" for="IsActive">PV 2</label>
+                                    @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
+                                </div>
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>PV 3</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="pv_3_bool" name="pv_3_bool" value="true" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
+                                    <label class="toggle" for="IsActive">PV 3</label>
+                                    @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-
-            <div class="card">
-                <div class="card-header" style="background-color:#901F17;">
-                    <h5 class="text-light">Moving Dates</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <!-- Left Form Column -->
-                        <div class="col-md-6">
-                            @*   <form id="dataForm"> *@
-                            <div class="mb-1">
-                                <label class="form-label" for="title">
-                                    <strong><b>From Date</b></strong><br />
-                                    @Model.Moving_Date.moving_from_date
-                                </label>
-                                <input type="hidden" name="Moving_From_Date" value="@Model.Moving_Date.moving_from_date">
-                                @* <div>
-                                -  @Model.Moving_Date.moving_from_date
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="summary">
-                                    <strong><b>To Date</b></strong><br />
-                                    @Model.Moving_Date.moving_to_date
-                                </label>
-                                <input type="hidden" name="Moving_To_Date" value="@Model.Moving_Date.moving_to_date">
-                                @*  <div>
-                                @Model.Moving_Date.moving_to_date
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="reference">
-                                    <strong><b>Client Arrival Time</b></strong><br />
-                                    @Model.Moving_Date.client_arrival_time_update
-                                </label>
-                                <input type="hidden" name="Client_Arrival_Time_update" value="@Model.Moving_Date.client_arrival_time_update">
-
-                                <br /> <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="col-sm-6" style="margin-top:1px">
             <div class="card">
 
@@ -541,7 +502,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="summary">
-                                    <strong><b>Hour stop update</b></strong><br />  
+                                    <strong><b>Hour stop update</b></strong><br />
                                     @Model.Additional_Info.Hour_stop_update
                                 </label>
                                 <input type="hidden" name="Hour_stop_update" value="@Model.Additional_Info.Hour_stop_update">
@@ -549,13 +510,6 @@
                                 <input type="text" id="Hour_stop_update" class="form-control" name="Hour_stop_update" value="@Model.Additional_Info.Hour_stop_update">
                                 </div> *@
                             </div>
-
-
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
                             @*  </form> *@
                         </div>
                     </div>
@@ -660,7 +614,7 @@
                                 <label class="from-label"><strong><b>Contract</b></strong></label>
                                 <input class="toggle" type="checkbox" id="Contract" name="Contract" value="true" @(Model.stockage.Contract ? "checked" : "") />
                                 <label class="toggle" for="IsActive">Contract</label>
-                            
+
                                 @*  <div>
                                 @Model.stockage.Contract
                                 </div> *@
@@ -755,6 +709,69 @@
             </div>
         </div>
 
+        <div class="col-sm-6">
+
+            <div class="card">
+                <div class="card-header" style="background-color:#901F17;">
+                    <h5 class="text-light">Moving Dates</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Form Column -->
+                        <div class="col-md-6">
+                            @*   <form id="dataForm"> *@
+                            <div class="mb-1">
+                                <label class="form-label" for="title">
+                                    <strong><b>From Date</b></strong><br />
+                                    @Model.Moving_Date.moving_from_date
+                                </label>
+                                <input type="hidden" name="Moving_From_Date" value="@Model.Moving_Date.moving_from_date">
+                                @* <div>
+                                -  @Model.Moving_Date.moving_from_date
+                                </div> *@
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="summary">
+                                    <strong><b>To Date</b></strong><br />
+                                    @Model.Moving_Date.moving_to_date
+                                </label>
+                                <input type="hidden" name="Moving_To_Date" value="@Model.Moving_Date.moving_to_date">
+                                @*  <div>
+                                @Model.Moving_Date.moving_to_date
+                                </div> *@
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="reference">
+                                    <strong><b>Client Arrival Time</b></strong><br />
+                                    <input type="datetime" name="Client_Arrival_Time_update" value="@Model.Moving_Date.client_arrival_time_update">
+                                </label>
+                               
+
+                                <br /> <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+
         <div class="col-sm-6" style="margin-top:1px">
 
             <div class="card">
@@ -802,8 +819,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6" style="margin-top:1px">
 
             <div class="card">
                 <div class="card-header" style="background-color:#901F17;">
@@ -822,13 +837,17 @@
                                 <div class="mb-3">
                                     <textarea class="form-control" id="exampleFormControlTextarea1"
                                               name="foreman_notes" rows="3">@Model.Notes.foreman_notes</textarea>
+                                    <input type="hidden" name="Foreman_name" value="@Model.user_dashboard.Foremanname">
                                 </div>
                             </div>
-                            <br /><br /><br />
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-6" style="margin-top:1px">
+
+           
         </div>
 
     </div>
