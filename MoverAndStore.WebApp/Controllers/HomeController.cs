@@ -27,7 +27,14 @@ namespace MoverAndStore.WebApp.Controllers
             try
             {
                 var client = _httpClientFactory.CreateClient();
-                var response = await client.GetAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt?foreman_name={formenName}");
+                var requestData = new
+                {
+                    foreman_name = formenName,
+                };
+
+                string json = JsonConvert.SerializeObject(requestData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt", content);
 
                 if (response.IsSuccessStatusCode)
                 {
