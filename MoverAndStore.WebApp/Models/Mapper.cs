@@ -7,9 +7,15 @@ namespace MoverAndStore.WebApp.Models
     {
         public static CardData Map(SaveDataModel source)
         {
+            DateTime? dateTimeValue = DateTime.Now; // Your nullable DateTime value
+
+            DateOnly? dateOnlyValue = dateTimeValue.HasValue
+                ? DateOnly.FromDateTime(dateTimeValue.Value)
+                : (DateOnly?)null;
+
             return new CardData
             {
-                Basic_Information = new BasicInformation 
+                Basic_Information = new BasicInformation
                 {
                     id = source.PID,
                     Title = source.Title,
@@ -17,12 +23,12 @@ namespace MoverAndStore.WebApp.Models
                     Summary = source.Summary,
                     Company = source.Company,
                     Reference = source.Reference,
-                    Lead = new Lead 
+                    Lead = new Lead
                     {
                         Contact_Person = source.Contact_Person,
                         Customer = source.Customer,
                         Contact_Person_Telephone = source.Contact_Person_Telephone
-                        
+
 
                     },
                     AddressGroup = new AddressGroup
@@ -34,36 +40,36 @@ namespace MoverAndStore.WebApp.Models
                         pv_2_bool = source.pv_2_bool,
                         pv_3_bool = source.pv_3_bool,
                     }
-                
+
                 },
                 Moving_Date = new MovingDate
                 {
                     moving_from_date = Convert.ToDateTime(source.moving_from_date),
                     moving_to_date = Convert.ToDateTime(source.moving_to_date),
-                    client_arrival_time_update = Convert.ToDateTime(source.client_arrival_time_update)
+                    client_arrival_time_update = Convert.ToDateTime(source.Client_Arrival_Time_update)
                 },
                 Additional_Info = new AdditionalInfo
                 {
                     Extra_Info_Lift = source.Extra_Info_Lift,
                     Lift_Location_Enum = source.Lift_Location_Enum,
-                    Lift_bool  = source.Lift_bool,
+                    Lift_bool = source.Lift_bool,
                     Lift_Type_Enum = source.Lift_Type_Enum,
                     Items_To_Dismantle = source.Items_To_Dismantle,
                     Items_To_Dismantle_Update = source.Items_To_Dismantle_Update,
-                    Number_Of_Movers = source.Number_Of_Movers,
-                    Number_Of_Movers_Update = source.Number_Of_Movers_Update,
+                    Number_Of_Movers = source.Number_Of_Movers.ToString(),
+                    Number_Of_Movers_Update = source.Number_Of_Movers_Update.ToString(),
                     Time_Estimate = source.Time_Estimate,
-                    Time_Estimate_Update = source.Time_Estimate_Update,
+                    Time_Estimate_Update = source.Time_Estimate_Update.ToString(),
                     Dismantling_Bool = source.Dismantling_Bool,
                     Dismantling_Bool_Update = source.Dismantling_Bool_Update,
                     Additional_General_Info = source.Additional_General_Info,
-                    Hour_start_update = Convert.ToDateTime(source.Hour_start_update),
-                    Hour_stop_update = Convert.ToDateTime(source.Hour_stop_update),
+                    Hour_start_update = source.Hour_start_update,
+                    Hour_stop_update = source.Hour_stop_update,
                     Additional_General_Info_update = source.Additional_General_Info_update,
                     Voertuig_Enum = source.Voertuig_Enum,
                     Voertuig_Type_Enum = source.Voertuig_Type_Enum
-                    
-                   
+
+
                 },
                 stockage = new Stockage
                 {
@@ -71,18 +77,18 @@ namespace MoverAndStore.WebApp.Models
                     Date_Out = Convert.ToDateTime(source.Date_Out),
                     Date_In_Update = source.Date_In_Update.ToString(),
                     Date_Out_Update = source.Date_Out_Update.ToString(),
-                    Cubic_Meters = source.Cubic_Meters,
-                    Cubic_Meters_Update = source.Cubic_Meters_Update,
+                    Cubic_Meters = source.Cubic_Meters.ToString(),
+                    Cubic_Meters_Update = source.Cubic_Meters_Update.ToString(),
                     Exact_Location = source.Exact_Location,
                     Exact_Location_Update = source.Exact_Location_Update,
                     Options_Enum = source.Options_Enum,
-                    Storage = source.Storage,   
+                    Storage = source.Storage,
                     Storage_Update = source.Storage_Update,
                     Insured_Value = source.Insured_Value,
                     Zone = source.Zone,
                     Zone_Update = source.Zone_Update,
 
-                   
+
                 },
                 Notes = new Notes
                 {
@@ -92,29 +98,20 @@ namespace MoverAndStore.WebApp.Models
                 {
                     Foremanname = source.Foreman_name
                 },
-                Products = new List<Product>
+                Products = source.Products?.Select(sourceProduct => new Product
                 {
-                    new Product
-                    {
-                        id = source.id,
-                        name = source.name,
-                        quantity = source.quantity,
-                        quantity_update = source.quantity_update,
-                    },
-                    new Product
-                    {
-                        id = "b4624bc6-44ef-0ce0-847a-351451853a05",
-                        name = "Alex test product",
-                        quantity = 1,
-                        quantity_update = 1,
-                    }
-                }
+                    id = sourceProduct.id,
+                    name = sourceProduct.name,
+                    quantity = sourceProduct.quantity,
+                    quantity_update = sourceProduct.quantity_update,
+                }).ToList() ?? new List<Product>()
 
-                
-               
 
-                
-            };
+
+
+
+
+        };
         }
 
     }

@@ -157,7 +157,7 @@ namespace MoverAndStore.WebApp.Controllers
                         <div class='content'>
                             <p>Hi {FullName}!</p>
                             <p>We are excited to have you on board with us. Your account has been created successfully, and you are now part of the Mover and Store family!</p>
-                            <p><strong>Username:</strong> {EmailAddress}</p>
+                            <p><strong>Email:</strong> {EmailAddress}</p>
                             <p><strong>Password:</strong> {GeneratedPassword}</p>
                             <p>To get started, please log in to your account using the link below.</p>
                             <a href='https://smartgroup-mover.azurewebsites.net/'>Log In to Your Account</a>

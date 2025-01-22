@@ -36,8 +36,8 @@ namespace MoverAndStore.WebApp.Models
         public string Extra_Info_Lift { get; set; }
         public string Lift_Location_Enum { get; set; }
         public string Lift_Type_Enum { get; set; }
-        public int Number_Of_Movers { get; set; }
-        public int Number_Of_Movers_Update { get; set; }
+        public string Number_Of_Movers { get; set; }
+        public string Number_Of_Movers_Update { get; set; }
 
         [JsonPropertyName("items_to_dismantle")]
         public string Items_To_Dismantle { get; set; }
@@ -48,8 +48,8 @@ namespace MoverAndStore.WebApp.Models
         [JsonPropertyName("time_estimate")]
         public string Time_Estimate { get; set; }
 
-        [JsonPropertyName("time_estimate_update")]
-        public int Time_Estimate_Update { get; set; }
+        [JsonPropertyName("Time_Estimate_Update")]
+        public string Time_Estimate_Update { get; set; }
 
         [JsonPropertyName("voertuig_enum")]
         public string? Voertuig_Enum { get; set; }
@@ -83,10 +83,10 @@ namespace MoverAndStore.WebApp.Models
         public DateOnly? Date_Out_Update { get; set; }
 
         [JsonPropertyName("cubic_meters")]
-        public int Cubic_Meters { get; set; }
+        public string Cubic_Meters { get; set; }
 
         [JsonPropertyName("cubic_meters_update")]
-        public int Cubic_Meters_Update { get; set; }
+        public string Cubic_Meters_Update { get; set; }
 
         [JsonPropertyName("storage")]
         public string Storage { get; set; }
@@ -116,16 +116,6 @@ namespace MoverAndStore.WebApp.Models
         [JsonPropertyName("general_extra_info")]
         public string general_extra_info { get; set; }
 
-        public string id { get; set; }
-
-        [JsonPropertyName("name")]
-        public string name { get; set; }
-        [JsonPropertyName("quantity")]
-        public int quantity { get; set; }
-
-        [JsonPropertyName("quantity_update")]
-        public int quantity_update { get; set; }
-
         [JsonPropertyName("foreman_notes")]
         public string foreman_notes { get; set; }
 
@@ -133,26 +123,27 @@ namespace MoverAndStore.WebApp.Models
 
         public string? moving_to_date { get; set; }
 
-        public string? client_arrival_time_update { get; set; }
+        public DateTime? Client_Arrival_Time_update { get; set; }
 
         public string?  Contact_Person_Telephone { get; set; }
              
         public string? Foreman_name { get; set; }
-
+        public List<Product> Products { get; set; }
 
     }
 
     public class Products
     {
-        public string id { get; set; }
+        public string? id { get; set; }
 
         [JsonPropertyName("name")]
-        public string name { get; set; }
+        public string? name { get; set; }
+
         [JsonPropertyName("quantity")]
-        public int quantity { get; set; }
+        public string? quantity { get; set; }
 
         [JsonPropertyName("quantity_update")]
-        public int quantity_update { get; set; }
+        public string? quantity_update { get; set; }
     }
 }
 

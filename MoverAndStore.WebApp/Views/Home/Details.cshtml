@@ -2,6 +2,7 @@
 
 @{
     Layout = "_Layout";
+    string formattedDateTime = @Model.Moving_Date.client_arrival_time_update?.ToString("yyyy-MM-dd");
 }
 
 @*
@@ -164,7 +165,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="contact_person">
                                     <strong><b>Contact person</b></strong><br />
                                     @Model.Basic_Information.Lead.Contact_Person
 
@@ -176,7 +177,7 @@
 
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="Contact_Person_Telephone">
                                     <strong><b>Contact person Telephone</b></strong><br />
                                     @Model.Basic_Information.Lead.Contact_Person_Telephone
 
@@ -187,13 +188,13 @@
                                 </div> *@
 
                             </div>
-                           
+
                         </div>
 
                         <!-- Right Form Column -->
                         <div class="col-md-6">
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="status">
                                     <strong><b>Status</b></strong><br />
                                     @Model.Basic_Information.Status
 
@@ -204,7 +205,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="company">
                                     <strong><b>Company</b></strong><br />
                                     Insuarance @Model.Basic_Information.Company
 
@@ -216,7 +217,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="customer">
                                     <strong><b>Customer</b></strong><br />
                                     @Model.Basic_Information.Lead.Customer
 
@@ -224,7 +225,7 @@
                                 <input type="hidden" name="customer" value="@Model.Basic_Information.Lead.Customer">
                             </div>
 
-                           
+
                         </div>
                     </div>
                 </div>
@@ -242,7 +243,7 @@
                         <div class="col-md-6">
                             @*   <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="address_a">
                                     <strong><b>Address A</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.address_a
 
@@ -254,7 +255,7 @@
 
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="address_b">
                                     <strong><b>Address B</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.address_b
 
@@ -266,7 +267,7 @@
 
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="address_c">
                                     <strong><b>Address C</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.address_c
 
@@ -278,7 +279,7 @@
 
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="pv_extra_info">
                                     <strong><b>PV Extra Info</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.pv_extra_info
 
@@ -289,7 +290,7 @@
                                 <input type="hidden" name="pv_extra_info" value="@Model.Basic_Information.AddressGroup.pv_extra_info">
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="general_extra_info">
                                     <strong><b>General Extra Info</b></strong><br />
                                     @Model.Basic_Information.AddressGroup.extra_info_contact.general_extra_info
 
@@ -300,31 +301,31 @@
                                 </div> *@
 
                             </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="from-label"><strong><b>PV 1</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_1_bool" name="pv_1_bool" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="from-label"><strong><b>PV 1</b></strong></label>
+                                <input class="toggle" type="checkbox" id="pv_1_bool" disabled name="pv_1_bool" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
                                 <label class="toggle" for="pv_1_bool">PV 1</label>
-                                    @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
-                                </div>
-                                <div class="form-group">
-                                    <label class="from-label"><strong><b>PV 2</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_2_bool" name="pv_2_bool" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
+                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
+                            </div>
+                            <div class="form-group">
+                                <label class="from-label"><strong><b>PV 2</b></strong></label>
+                                <input class="toggle" type="checkbox" id="pv_2_bool" disabled name="pv_2_bool" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
                                 <label class="toggle" for="pv_2_bool">PV 2</label>
-                                    @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
-                                </div>
-                                <div class="form-group">
-                                    <label class="from-label"><strong><b>PV 3</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_3_bool" name="pv_3_bool" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
+                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
+                            </div>
+                            <div class="form-group">
+                                <label class="from-label"><strong><b>PV 3</b></strong></label>
+                                <input class="toggle" type="checkbox" id="pv_3_bool" disabled name="pv_3_bool" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
                                 <label class="toggle" for="pv_3_bool">PV 3</label>
-                                    @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
-                                </div>
-                                </div>
+                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
         <div class="col-sm-6" style="margin-top:1px">
             <div class="card">
 
@@ -341,7 +342,7 @@
 
                             @* <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="Extra_Info_Lift">
                                     <strong><b>Extra Info Lift</b></strong><br />
                                     @Model.Additional_Info.Extra_Info_Lift
                                     <input type="hidden" name="Extra_Info_Lift" value="@Model.Additional_Info.Extra_Info_Lift">
@@ -351,7 +352,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Lift_Location_Enum">
                                     <strong><b>Lift Location</b></strong><br />
                                     @Model.Additional_Info.Lift_Location_Enum
                                     <input type="hidden" name="Lift_Location_Enum" value="@Model.Additional_Info.Lift_Location_Enum">
@@ -361,8 +362,8 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="exampleFormControlSelect1"><strong><b>Lift Type Enum</b></b></strong></label>
-                                <select class="form-select" id="exampleFormControlSelect1" name="Lift_Type_Enum">
+                                <label class="form-label" for="Lift_Type_Enum"><strong><b>Lift Type Enum</b></b></strong></label>
+                                <select class="form-select" id="Lift_Type_Enum" name="Lift_Type_Enum" disabled>
                                     <option value="Test">@Model.Additional_Info.Lift_Type_Enum</option>
                                     <option value="Test">Test2</option>
                                     <option value="Test">Test3</option>
@@ -372,8 +373,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="exampleFormControlSelect1"><strong><b>Voertuig</b></strong></label>
-                                <select class="form-select" id="exampleFormControlSelect1" name="Voertuig_Enum">
+                                <label class="form-label" for="Voertuig_Enum"><strong><b>Voertuig</b></strong></label>
+                                <select class="form-select" id="Voertuig_Enum" name="Voertuig_Enum">
                                     <option value="Test">@Model.Additional_Info.Voertuig_Enum</option>
                                     <option value="Test">Test2</option>
                                     <option value="Test">Test3</option>
@@ -382,8 +383,8 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleFormControlSelect1"><strong><b>Voertuig Type</b></strong></label>
-                                <select class="form-select" id="exampleFormControlSelect1" name="Voertuig_Type_Enum">
+                                <label class="form-label" for="Voertuig_Type_Enum"><strong><b>Voertuig Type</b></strong></label>
+                                <select class="form-select" id="Voertuig_Type_Enum" name="Voertuig_Type_Enum">
                                     <option value="Test">@Model.Additional_Info.Voertuig_Type_Enum</option>
                                     <option value="Test">Test12</option>
                                     <option value="Test">Test33</option>
@@ -392,7 +393,7 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Number_Of_Movers">
                                     <strong><b>Number Of Movers</b></strong><br />
                                     @Model.Additional_Info.Number_Of_Movers
                                     <input type="hidden" name="Number_Of_Movers" value="@Model.Additional_Info.Number_Of_Movers">
@@ -403,7 +404,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Number_Of_Movers_Update">
                                     <strong><b>Number Of Movers Update</b></strong><br />
                                     <div class="number-input">
                                         <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
@@ -416,7 +417,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="timeEstimate">
+                                <label class="form-label" for="Items_To_Dismantle">
                                     <strong><b>Items To Dismentale</b></strong><br />
                                     @Model.Additional_Info.Items_To_Dismantle
 
@@ -426,28 +427,28 @@
                                 @Model.Additional_Info.Items_To_Dismantle
                                 </div> *@
                             </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="summary">
+                            @* <div class="mb-1">
+                                <label class="form-label" for="itemsToDismentleUpdate">
                                     <strong><b>Items To Dismentale Update</b></strong><br />
                                     <input type="text" id="itemsToDismentleUpdate" class="form-control" name="itemsToDismentleUpdate" value="@Model.Additional_Info.Items_To_Dismantle_Update">
                                 </label>
                                 @*  <div>
                                 <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.Additional_Info.Items_To_Dismantle_Update">
                                 </div> *@
-                            </div>
+                            <!--</div>-->
                             @*  </form> *@
                         </div>
                         <div class="col-md-6">
                             @*  <form id="dataForm"> *@
                             <div class="form-group">
                                 <label class="from-label"><strong><b>Dismentaling</b></strong></label>
-                                <input class="toggle" type="checkbox" id="Dismantling_Bool" name="Dismantling_Boo" value="true" @(Model.Additional_Info.Dismantling_Bool ? "checked" : "") />
-                                <label class="toggle" for="IsActive">Dismentaling</label>
+                                <input class="toggle" type="checkbox" id="Dismantling_Bool" name="Dismantling_Boo" disabled value="true" @(Model.Additional_Info.Dismantling_Bool ? "checked" : "") />
+                                <label class="toggle" for="Dismantling_Bool">Dismentaling</label>
                             </div>
                             <div class="form-group">
                                 <label class="from-label"><strong><b>Dismentaling Update</b></strong></label>
                                 <input class="toggle" type="checkbox" id="Dismantling_Bool_Update" name="Dismantling_Bool_Update" value="true" @(Model.Additional_Info.Dismantling_Bool_Update ? "checked" : "") />
-                                <label class="toggle" for="IsActive">Dismentaling Update</label>
+                                <label class="toggle" for="Dismantling_Bool">Dismentaling Update</label>
                             </div>
                             <div class="mb-1">
                                 <label class="form-label" for="timeEstimate">
@@ -462,9 +463,9 @@
                             </div>
 
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Time_Estimate_Update">
                                     <strong><b>Time Estimate Update</b></strong><br />
-                                    <input type="text" id="timeEstimateUpdate" class="form-control" name="timeEstimateUpdate" value=" @Model.Additional_Info.Time_Estimate_Update">
+                                    <input type="text" id="Time_Estimate_Update" class="form-control" name="Time_Estimate_Update" value="@Model.Additional_Info.Time_Estimate_Update">
                                 </label>
                                 @*   <div>
                                 <input type="text" id="timeEstimateUpdate" class="form-control" name="timeEstimateUpdate" value=" @Model.Additional_Info.Time_Estimate_Update">
@@ -482,7 +483,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Additional_General_Info_update">
                                     <strong><b>Additional General Info Update</b></strong><br />
                                     <input type="text" id="additionalGeneralInfo" class="form-control" name="Additional_General_Info_update" value="@Model.Additional_Info.Additional_General_Info_update">
                                 </label>
@@ -501,7 +502,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Hour_stop_update">
                                     <strong><b>Hour stop update</b></strong><br />
                                     @Model.Additional_Info.Hour_stop_update
                                 </label>
@@ -526,7 +527,7 @@
                         <div class="col-md-6">
                             @* <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="timeEstimate">
+                                <label class="form-label" for="Date_In">
                                     <strong><b>Date In</b></strong><br />
                                     @Model.stockage.Date_In
                                 </label>
@@ -537,7 +538,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="DateInUpdate">
                                     <strong><b>Date In Update</b></strong><br />
                                     <input type="date" id="dateInUpdate" class="form-control" name="DateInUpdate" value="@Model.stockage.Date_In_Update">
 
@@ -547,7 +548,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="timeEstimate">
+                                <label class="form-label" for="Date_Out">
                                     <strong><b>Date Out</b></strong><br />
                                     @Model.stockage.Date_Out
                                 </label>
@@ -557,7 +558,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="dateOutUpdate">
                                     <strong><b>Date Out Update</b></strong><br />
                                     <input type="date" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
                                 </label>
@@ -566,7 +567,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="CubicMeters">
+                                <label class="form-label" for="Cubic_Meters">
                                     <strong><b>Cubic_Meters</b></strong><br />
                                     @Model.stockage.Cubic_Meters
                                 </label>
@@ -576,7 +577,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Cubic_Meters_Update">
                                     <strong><b>Cubic_Meters_Update</b></strong><br />
                                     <div class="number-input">
                                         <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
@@ -589,7 +590,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="exactlocation">
+                                <label class="form-label" for="Options_Enum">
                                     <strong><b>Options Enum</b></strong><br />
                                 </label>
 
@@ -612,8 +613,8 @@
                             <div class="mb-1">
 
                                 <label class="from-label"><strong><b>Contract</b></strong></label>
-                                <input class="toggle" type="checkbox" id="Contract" name="Contract" value="true" @(Model.stockage.Contract ? "checked" : "") />
-                                <label class="toggle" for="IsActive">Contract</label>
+                                <input class="toggle" type="checkbox" id="Contract" name="Contract" disabled value="true" @(Model.stockage.Contract ? "checked" : "") />
+                                <label class="toggle" for="Contract">Contract</label>
 
                                 @*  <div>
                                 @Model.stockage.Contract
@@ -635,7 +636,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="Storage">
+                                <label class="form-label" for="Storage_Update">
                                     <strong><b>Storage Update</b></strong><br />
                                     <input type="text" class="form-control" name="Storage_Update" value="@Model.stockage.Storage_Update" />
                                 </label>
@@ -645,7 +646,7 @@
                             </div>
 
                             <div class="mb-1">
-                                <label class="form-label" for="Storage">
+                                <label class="form-label" for="Zone">
                                     <strong><b>Zone</b></strong><br />
                                     @Model.stockage.Zone
                                 </label>
@@ -655,9 +656,9 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="Storage">
+                                <label class="form-label" for="Zone_Update">
                                     <strong><b>Zone Update</b></strong><br />
-                                    <input type="text" id="Zone" class="form-control" name="Zone_Update" value="@Model.stockage.Zone_Update">
+                                    <input type="text" id="Zone_Update" class="form-control" name="Zone_Update" value="@Model.stockage.Zone_Update">
                                 </label>
                                 @* <div>
                                 <input type="text" id="Zone" class="form-control" name="Zone" value="@Model.stockage.Zone_Update">
@@ -665,7 +666,7 @@
                             </div>
 
                             <div class="mb-1">
-                                <label class="form-label" for="exactlocation">
+                                <label class="form-label" for="Exact_Location">
                                     <strong><b>Exact Location</b></strong><br />
                                     @Model.stockage.Exact_Location
                                 </label>
@@ -675,16 +676,16 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="exactlocation">
+                                <label class="form-label" for="Exact_Location_Update">
                                     <strong><b>Zone Update</b></strong><br />
-                                    <input type="text" id="exactlocation" class="form-control" name="Exact_Location_Update" value="@Model.stockage.Exact_Location_Update">
+                                    <input type="text" id="Exact_Location_Update" class="form-control" name="Exact_Location_Update" value="@Model.stockage.Exact_Location_Update">
                                 </label>
                                 @* <div>
                                 <input type="text" id="exactlocation" class="form-control" name="exactlocationUpdate" value="@Model.stockage.Exact_Location_Update">
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="exactlocation">
+                                <label class="form-label" for="Insured_Value">
                                     <strong><b>Insured Value</b></strong><br />
                                     @Model.stockage.Insured_Value
                                 </label>
@@ -721,7 +722,7 @@
                         <div class="col-md-6">
                             @*   <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="title">
+                                <label class="form-label" for="Moving_From_Date">
                                     <strong><b>From Date</b></strong><br />
                                     @Model.Moving_Date.moving_from_date
                                 </label>
@@ -731,7 +732,7 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
+                                <label class="form-label" for="Moving_To_Date">
                                     <strong><b>To Date</b></strong><br />
                                     @Model.Moving_Date.moving_to_date
                                 </label>
@@ -741,12 +742,27 @@
                                 </div> *@
                             </div>
                             <div class="mb-1">
-                                <label class="form-label" for="reference">
-                                    <strong><b>Client Arrival Time</b></strong><br />
-                                    <input type="datetime" name="Client_Arrival_Time_update" value="@Model.Moving_Date.client_arrival_time_update">
-                                </label>
-                               
 
+                                <label class="form-label" for="Client_Arrival_Date">
+                                    <strong><b>Client Arrival Date</b></strong><br />
+                                    <input type="date"
+                                           id="Client_Arrival_Date"
+                                           value="@formattedDateTime"
+                                           readonly>
+                                </label>
+                                <br />
+                                <label class="form-label" for="Client_Arrival_Time">
+                                    <strong><b>Client Arrival Time</b></strong><br />
+                                    <input type="time"
+                                           id="Client_Arrival_Time"
+                                           required>
+                                </label>
+
+                                <!-- Hidden input to store the combined value -->
+                                <input type="hidden" name="Client_Arrival_Time_update" id="Client_Arrival_Time_update">
+
+
+                                <br />                           
                                 <br /> <br />
                                 <br />
                                 <br />
@@ -769,8 +785,8 @@
             </div>
         </div>
 
-        
-        
+
+
 
         <div class="col-sm-6" style="margin-top:1px">
 
@@ -793,18 +809,40 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in Model.Products)
+                                        @*  @foreach (var item in Model.Products)
                                         {
+                                        <tr>
+                                        <td>@item.name</td>
+                                        <input type="hidden" name="id" value="@item.id">
+                                        <input type="hidden" name="name" value="@item.name">
+                                        <td>@item.quantity</td>
+                                        <input type="hidden" name="quantity" value="@item.quantity">
+                                        <td>
+                                        <div class="number-input">
+                                        <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
+                                        <input type="number" class="num" name="quantity_update" value="@item.quantity_update" />
+                                        <button type="button" class="btn-increment" onclick="increment(this)">+</button>
+                                        </div>
+                                        </td>
+                                        </tr>
+                                        } *@
+                                        @for (int i = 0; i < Model.Products.Count(); i++)
+                                        {
+
                                             <tr>
-                                                <td>@item.name</td>
-                                                <input type="hidden" name="id" value="@item.id">
-                                                <input type="hidden" name="name" value="@item.name">
-                                                <td>@item.quantity</td>
-                                                <input type="hidden" name="quantity" value="@item.quantity">
+                                                @Html.HiddenFor(m => m.Products[i].id)
+                                                <td>@Model.Products[i].name</td>
+                                                @* <input type="hidden" name="Products[@i].id" value="@Model.Products[i].id"> *@
+                                                @Html.HiddenFor(m=>m.Products[i].name)
+                                                @* <input type="hidden" name="Products[@i].name" value="@Model.Products[i].name"> *@
+                                                <td>@Model.Products[i].quantity</td>
+                                                @Html.HiddenFor(m=>m.Products[i].quantity)
+                                                @* <input type="hidden" name="Products[@i].quantity" value="@Model.Products[i].quantity"> *@
                                                 <td>
                                                     <div class="number-input">
                                                         <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
-                                                        <input type="number" class="num" name="quantity_update" value="@item.quantity_update" />
+                                                        @Html.TextBoxFor(m => m.Products[i].quantity_update)
+                                                        @* <input type="number" class="num" name="Products[@i].quantity_update" value="@Model.Products[i].quantity_update" /> *@
                                                         <button type="button" class="btn-increment" onclick="increment(this)">+</button>
                                                     </div>
                                                 </td>
@@ -835,7 +873,7 @@
                                 </label>
                                 @* <textarea id="textarea" name="foreman_notes" class="form-control responsive-textarea" placeholder="Enter your message here...">@Model.Notes.foreman_notes</textarea> *@
                                 <div class="mb-3">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1"
+                                    <textarea class="form-control" id="foreman_notes"
                                               name="foreman_notes" rows="3">@Model.Notes.foreman_notes</textarea>
                                     <input type="hidden" name="Foreman_name" value="@Model.user_dashboard.Foremanname">
                                 </div>
@@ -846,8 +884,6 @@
             </div>
         </div>
         <div class="col-sm-6" style="margin-top:1px">
-
-           
         </div>
 
     </div>
@@ -865,20 +901,63 @@
             window.location.href = '/Home/Index';
         }
 
+        document.addEventListener('DOMContentLoaded', function () {
+            const dateField = document.getElementById('Client_Arrival_Date');
+            const timeField = document.getElementById('Client_Arrival_Time');
+            const hiddenField = document.getElementById('Client_Arrival_Time_update');
+
+            function getCurrentTime() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                return `${hours}:${minutes}`;
+            }
+
+            timeField.addEventListener('input', function () {
+                const timeValue = timeField.value || getCurrentTime(); 
+                if (dateField.value) {
+                    hiddenField.value = `${dateField.value}T${timeValue}`;
+                }
+            });
+
+      
+            if (dateField.value) {
+                const timeValue = timeField.value || getCurrentTime(); // Use current time if empty
+                hiddenField.value = `${dateField.value}T${timeValue}`;
+            }
+        });
+
+
+
         function saveData() {
             debugger;
             const form = document.getElementById('dataForm');
             const formData = new FormData(form);
-
             const data = {};
             formData.forEach((value, key) => {
-                data[key] = value;
+                // Split the key to get the array name, index, and field
+                let keys = key.split(/[\[\]\.]/).filter(Boolean);
+                if (keys.length === 3) {
+                    let [arrayName, index, field] = keys;
+                    if (!data[arrayName]) {
+                        data[arrayName] = [];
+                    }
+                    if (!data[arrayName][index]) {
+                        data[arrayName][index] = {};
+                    }
+                    data[arrayName][index][field] = value;
+                } else {
+                    data[key] = value;
+                }
             });
 
+
+            console.log(data);
+
             //Manually handle checkboxes to store boolean values
-            const checkboxes = form.querySelectorAll('input[type="checkbox"]'); 
+            const checkboxes = form.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach((checkbox) => { data[checkbox.name] = checkbox.checked });
-               // true if checked, false if unchecked 
+            // true if checked, false if unchecked
             // Get the Save button
             const saveButton = document.getElementById('saveButton');
 
@@ -899,6 +978,7 @@
                         // Change button text to "Saved"
                         saveButton.textContent = 'Saved';
                         saveButton.disabled = false;
+                        alert('Data saved successfully');
                     } else {
                         // Reset button state on failure
                         saveButton.textContent = 'Save';
@@ -916,8 +996,13 @@
 
 
         function increment(button) {
-            var num = button.previousElementSibling;
-            num.value = parseInt(num.value) + 1;
+            const inputElement = button.previousElementSibling;
+            let value = parseInt(inputElement.value, 10); // Convert string to integer
+            if (isNaN(value)) {
+                value = 0; // Handle invalid numbers
+            }
+            value += 1;
+            inputElement.value = value;
         }
 
         function decrement(button) {

@@ -74,31 +74,31 @@ namespace MoverAndStore.WebApp.Models
         public string Voertuig_Enum { get; set; }
 
         [JsonPropertyName("Hour_start_update")]       
-        public DateTime Hour_start_update { get; set; }
+        public string Hour_start_update { get; set; }
 
         [JsonPropertyName("Hour_Stop_Update")]
-	    public DateTime Hour_stop_update { get; set; }
+	    public string Hour_stop_update { get; set; }
 
         [JsonPropertyName("voertuig_type_enum")]
         public string Voertuig_Type_Enum { get; set; }
 
         [JsonPropertyName("number_of_movers")]
-        public int Number_Of_Movers { get; set; }
+        public string Number_Of_Movers { get; set; }
 
         [JsonPropertyName("number_of_movers_update")]
-        public int Number_Of_Movers_Update { get; set; }
+        public string Number_Of_Movers_Update { get; set; }
 
         [JsonPropertyName("dismantling_bool")]
         public bool Dismantling_Bool { get; set; }
 
-        [JsonPropertyName("dismantling_bool_update")]
-        public bool Dismantling_Bool_Update { get; set; }
+        [JsonPropertyName("dismantling_bool_update")] 
+        public bool Dismantling_Bool_Update { get; set; } = false;
 
         [JsonPropertyName("time_estimate")]
         public string Time_Estimate { get; set; }
 
         [JsonPropertyName("time_estimate_update")]
-        public int Time_Estimate_Update { get; set; }
+        public string Time_Estimate_Update { get; set; }
 
         [JsonPropertyName("items_to_dismantle")]
         public string Items_To_Dismantle { get; set; }
@@ -137,10 +137,10 @@ namespace MoverAndStore.WebApp.Models
         public string Date_Out_Update { get; set; }
 
         [JsonPropertyName("cubic_meters")]
-        public int  Cubic_Meters { get; set; }
+        public string  Cubic_Meters { get; set; }
 
         [JsonPropertyName("cubic_meters_update")]
-        public int Cubic_Meters_Update { get; set; }
+        public string Cubic_Meters_Update { get; set; }
 
         [JsonPropertyName("storage")]
         public string Storage { get; set; }
@@ -180,6 +180,11 @@ namespace MoverAndStore.WebApp.Models
 
         [JsonPropertyName("contact_person_telephone")]
         public string Contact_Person_Telephone { get; set; }
+
+        [JsonPropertyName("company_name")]
+
+        public string Company_Name  { get; set; }
+       
 
     }
 
