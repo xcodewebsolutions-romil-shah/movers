@@ -4,6 +4,7 @@ using MoverAndStore.WebApp.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,14 +23,15 @@ namespace MoverAndStore.WebApp.Controllers
             _httpClientFactory = httpClientFactory;
             _logger = logger;
         }
-        public async Task<IActionResult> Index(string formenName)
+        public async Task<IActionResult> Index()
         {
             try
             {
+                var fullName = User.FindFirstValue(ClaimTypes.Name);
                 var client = _httpClientFactory.CreateClient();
                 var requestData = new
                 {
-                    foreman_name = formenName,
+                    foreman_name = fullName,
                 };
 
                 string json = JsonConvert.SerializeObject(requestData);
@@ -60,8 +62,16 @@ namespace MoverAndStore.WebApp.Controllers
 
             try
             {
+                var Foremanname = User.FindFirstValue(ClaimTypes.Name);
                 var client = _httpClientFactory.CreateClient();
-                var response = await client.GetAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt"); // Replace with your API endpoint
+                var requestData = new
+                {
+                    foreman_name = Foremanname,
+                };
+
+                string json = JsonConvert.SerializeObject(requestData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt", content);
 
                 if (response.IsSuccessStatusCode)
                 {
