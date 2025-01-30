@@ -1,0 +1,185 @@
+﻿@model TaskData
+
+@{
+    Layout = "_Layout";
+}
+
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head> *@
+<body style="background-color:#F4F7FA">
+    <style>
+        .card:hover {
+            transform: scale(1.05); /* Slightly enlarge the card on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for a "lift" effect */
+        }
+
+        .card {
+            border-radius: 15px; /* Rounded corners for the card */
+            overflow: hidden; /* Ensure the rounded corners apply to inner elements */
+        }
+        /* Modal Background */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+        }
+
+        /* Modal Content Box */
+        .modal-content {
+            background-color: #901F17; /* Red Theme */
+            color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Close Button */
+        .close-btn {
+            color: white;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .close-btn:hover {
+                color: #ddd;
+            }
+    </style>
+    <form id="dataForm">
+    <div class="mb-2">
+
+        <div class="container">
+
+            <h4 class="text-left p-3" style="font-size:32px;padding-left:0px !important">My Tasks</h4>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+               
+                @foreach (var item in Model.TaskList)
+                {
+                    <div class="col-sm-12 col-md-4">
+                            <input type="hidden" name="Id" id="Id" value="@item.Id" />
+                        <div class="card" style="border: 1px solid #CCC; border-radius: 15px; transition: transform 0.3s ease;">
+                            <div class="card-header py-3 d-flex align-items-center justify-content-between" style="background-color: #901F17; color: #000000; border-top-left-radius: 15px; border-top-right-radius: 15px; cursor: pointer;">
+                                <h5 class="d-flex align-items-center" style="font-size: 18px; font-weight: bold; color: #ffff; margin: 0;">
+                                        <input type="hidden" name="Title" id="Title" value="@item.Title" />
+                                    @item.Title
+                                </h5>
+
+                            </div>
+                            <div class="card-body py-3 border-bottom d-flex justify-content-between">
+                                <div class="d-flex flex-column">
+                                    <p class="d-block mb-1">
+                                            <input type="hidden" name="description" id="description" value="@item.Description" />
+                                            <i class="fa fa-sticky-note"></i> <b>Description:</b> @item.Description
+                                    </p>
+
+                                    <p class="d-block mb-1">
+                                            <input type="hidden" name="Foreman_Name" id="Foreman_Name" value="@item.Foreman_Name" />
+                                            <i class="fa fa-user-circle"></i> <b>Foreman Name:</b> @item.Foreman_Name
+                                    </p>
+
+                                    <p class="d-block mb-1">
+                                            <input type="hidden" name="Status" id="Status" value="@item.Status" />
+                                            @if (item.Status)
+                                            {
+                                                <i class="fa fa-check-square"></i>
+                                            }
+                                            else if (!item.Status)
+                                            {
+                                                <i class="fa fa-times-circle"></i>
+                                            }
+
+                                            <b>Status:</b> @item.Status
+                                    </p>
+
+                                    <p class="d-block mb-1">
+                                            <input type="hidden" name="Task_Date" id="Task_Date" value="@item.Task_Date" />
+                                        <i class="fa fa-calendar"></i> <b>Task Date:</b>  @item.Task_Date
+                                    </p>
+                               
+                                </div>
+                            </div>
+                            <div class="card-footer p-2 text-center">
+                                <button type="button" name="Completetask" id="completeTask" class="btn" style="background-color:#901F17; color:#fff ;align-items:center; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="UpdateTask()">Complete Task</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+          
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function UpdateTask() {
+            let userConfirmation = confirm("Are you sure you want to complete the task?");
+
+            if (userConfirmation) {
+                const form = document.getElementById('dataForm');
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => {
+                    let keys = key.split(/[\[\]\.]/).filter(Boolean);
+                    if (keys.length === 3) {
+                        let [arrayName, index, field] = keys;
+                        if (!data[arrayName]) {
+                            data[arrayName] = [];
+                        }
+                        if (!data[arrayName][index]) {
+                            data[arrayName][index] = {};
+                        }
+                        data[arrayName][index][field] = value;
+                    } else {
+                        data[key] = value;
+                    }
+                });
+
+
+                console.log(data);
+                const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach((checkbox) => { data[checkbox.name] = checkbox.checked });
+                fetch('/Home/UpdateTask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            alert('Task updated successfully.');
+                        } else {
+                            alert(result.message || 'Failed to update the task.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            } else {
+                alert("Task update cancelled");
+            }
+  
+          
+        }
+    </script>
+    </body>
+@* </body>
+</html>  *@
+

@@ -4,6 +4,7 @@ using MoverAndStore.WebApp.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -41,22 +42,24 @@ namespace MoverAndStore.WebApp.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
-                    var data = System.Text.Json.JsonSerializer.Deserialize<List<CardData>>(jsonData);
+                    var data = System.Text.Json.JsonSerializer.Deserialize<List<DealData>>(jsonData);
                     return View(data);
                 }
                 else
                 {
-                    return View(new List<CardData>());
+                    return View(new List<DealData>());
                 }
 
 
             }
             catch (Exception ex)
             {
-                return View(new List<CardData>());
+                return View(new List<DealData>());
             }
         }
 
+
+        
         public async Task<IActionResult> Details(string id)
         {
 
@@ -76,7 +79,7 @@ namespace MoverAndStore.WebApp.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
-                    var data = System.Text.Json.JsonSerializer.Deserialize<List<CardData>>(jsonData);
+                    var data = System.Text.Json.JsonSerializer.Deserialize<List<DealData>>(jsonData);
                     var finaldata = data.Where(x => x.Basic_Information.id == id).FirstOrDefault();
                     return View(finaldata);
                 }
@@ -87,7 +90,7 @@ namespace MoverAndStore.WebApp.Controllers
             }
             catch (Exception ex)
             {
-                return View(new List<CardData>());
+                return View(new List<DealData>());
             }
 
         }
@@ -109,7 +112,7 @@ namespace MoverAndStore.WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    CardData cardData = Mapper.Map(model);
+                    DealData cardData = Mapper.Map(model);
                     string jsonString = JsonConvert.SerializeObject(cardData);
 
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -140,6 +143,72 @@ namespace MoverAndStore.WebApp.Controllers
 
         }
 
-    }       
+        public async Task<IActionResult> Task()
+        {
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                var response = await client.GetAsync($"https://hook.eu2.make.com/t9tlv377fglv4y8c8cx6kb6g8qcpifwn");
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonData = await response.Content.ReadAsStringAsync();
+                    var data = System.Text.Json.JsonSerializer.Deserialize<TaskData>(jsonData);
+                    return View(data);
+                }
+                return View(new TaskData());
+            }
+            catch (Exception ex)
+            {
+                return View(new TaskData());
+            }
+        }
+
+        public async Task<IActionResult> UpdateTask([FromBody] UpdateTask model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //DealData cardData = Mapper.Map(model);
+                    var Foremanname = User.FindFirstValue(ClaimTypes.Name);
+                    var finalmodel = new
+                    {
+                        id = model.Id,
+                        status = true,
+                        foreman_name = Foremanname
+                    };
+                    string jsonString = JsonConvert.SerializeObject(finalmodel);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                    using (var httpClient = new HttpClient())
+                    {
+                        var response = await httpClient.PostAsync("https://hook.eu2.make.com/cgrwhim4hmfarrdbsf2w3bx57237zj7m", content);
+                        var jsonData = await response.Content.ReadAsStringAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            //var responseData = await response.Content.ReadAsStringAsync();
+                            //var data = System.Text.Json.JsonSerializer.Deserialize<>(jsonData);
+                            //return View(data);
+                        }
+
+                    }
+                    return Json(new { success = true, message = jsonString });
+
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Invalid data." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+
+        }
+
+
+    }
 }
 

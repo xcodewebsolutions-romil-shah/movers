@@ -24,7 +24,7 @@ namespace MoverAndStore.WebApp.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
-                var data = JsonSerializer.Deserialize<List<CardData>>(jsonData);
+                var data = JsonSerializer.Deserialize<List<DealData>>(jsonData);
                 var finaldata = data.FirstOrDefault();
                 return View(finaldata);
             }

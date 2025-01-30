@@ -68,7 +68,7 @@
         .box-shadow {
             box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
         }
-
+      
         button.accept-policy {
             font-size: 1rem;
             line-height: inherit;
@@ -152,6 +152,14 @@
                                     <i class="feather icon-home"></i>
                                 </span>
                                 <span class="pcoded-mtext">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.ActiveMenu("Home")">
+                            <a href="/Home/Task" class="nav-link">
+                                <span class="pcoded-micon">
+                                    <i class="fas fa-tasks"></i>
+                                </span>
+                                <span class="pcoded-mtext">Task</span>
                             </a>
                         </li>
                     }

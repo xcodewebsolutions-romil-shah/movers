@@ -7,7 +7,6 @@
 body {
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
-   
     font-weight: 400;
     background: #f4f7fa;
     position: relative;
@@ -305,15 +304,15 @@ p.text-muted {
             position: relative;
         }*/
 
-            /*.card .card-header h5:after {*/
-               /* content: "";
+        /*.card .card-header h5:after {*/
+        /* content: "";
                 background-color: #3b1c1c;
                 position: absolute;
                 left: -25px;
                 top: 0;
                 width: 4px;
                 height: 20px;*/
-            /*}*/
+        /*}*/
 
         .card .card-header.borderless {
             border-bottom: none;
@@ -3259,6 +3258,8 @@ p.text-muted {
 
     .pcoded-navbar .pcoded-inner-navbar > .pcoded-menu-caption.active:after, .pcoded-navbar .pcoded-inner-navbar > .pcoded-menu-caption.pcoded-trigger:after {
         display: none;
+        background: #ffffff;
+        color: #fff;
     }
 
     .pcoded-navbar.mob-open ~ .pcoded-header,

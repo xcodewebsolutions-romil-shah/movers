@@ -1,4 +1,4 @@
-﻿@model CardData
+﻿@model DealData
 
 @{
     Layout = "_Layout";
@@ -59,11 +59,11 @@
     .toggle:active:after {
         width: 30px;
     }
+        
 
     .number-input {
         display: flex;
         align-items: center;
-        justify-content: center;
         gap: 10px;
     }
 
@@ -77,8 +77,8 @@
         }
 
         .number-input button {
-            width: 30px;
-            height: 30px;
+            width: 30px !important;
+            height: 30px !important;
             font-size: 20px;
             background-color: #901F17;
             color: #fff;
@@ -105,8 +105,8 @@
     }
 
     .card {
-        border-radius: 15px; /* Rounded corners for the card */
-        overflow: hidden; /* Ensure the rounded corners apply to inner elements */
+        border-radius: 15px; 
+        overflow: hidden;
     }
 
 </style>
@@ -783,80 +783,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
-
-        <div class="col-sm-6" style="margin-top:1px">
-
-            <div class="card">
-                <div class="card-header" style="background-color:#901F17;">
-                    <h5 class="text-light">Products</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row d-flex">
-                        <!-- Left Form Column -->
-                        <div class="col-md-12   ">
-                            @*  <form id="dataForm"> *@
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Quantity Update</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @*  @foreach (var item in Model.Products)
-                                        {
-                                        <tr>
-                                        <td>@item.name</td>
-                                        <input type="hidden" name="id" value="@item.id">
-                                        <input type="hidden" name="name" value="@item.name">
-                                        <td>@item.quantity</td>
-                                        <input type="hidden" name="quantity" value="@item.quantity">
-                                        <td>
-                                        <div class="number-input">
-                                        <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
-                                        <input type="number" class="num" name="quantity_update" value="@item.quantity_update" />
-                                        <button type="button" class="btn-increment" onclick="increment(this)">+</button>
-                                        </div>
-                                        </td>
-                                        </tr>
-                                        } *@
-                                        @for (int i = 0; i < Model.Products.Count(); i++)
-                                        {
-
-                                            <tr>
-                                                @Html.HiddenFor(m => m.Products[i].id)
-                                                <td>@Model.Products[i].name</td>
-                                                @* <input type="hidden" name="Products[@i].id" value="@Model.Products[i].id"> *@
-                                                @Html.HiddenFor(m=>m.Products[i].name)
-                                                @* <input type="hidden" name="Products[@i].name" value="@Model.Products[i].name"> *@
-                                                <td>@Model.Products[i].quantity</td>
-                                                @Html.HiddenFor(m=>m.Products[i].quantity)
-                                                @* <input type="hidden" name="Products[@i].quantity" value="@Model.Products[i].quantity"> *@
-                                                <td>
-                                                    <div class="number-input">
-                                                        <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
-                                                        @Html.TextBoxFor(m => m.Products[i].quantity_update)
-                                                        @* <input type="number" class="num" name="Products[@i].quantity_update" value="@Model.Products[i].quantity_update" /> *@
-                                                        <button type="button" class="btn-increment" onclick="increment(this)">+</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <br />
-                            @* </form> *@
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="card">
                 <div class="card-header" style="background-color:#901F17;">
@@ -883,15 +809,65 @@
                 </div>
             </div>
         </div>
+       
+
+
+
+
         <div class="col-sm-6" style="margin-top:1px">
-        </div>
+
+            <div class="card" style="margin: 0;">
+                <div class="card-header" style="background-color:#901F17; margin: 0; border-radius: 0;">
+                    <h5 class="text-light" style="margin: 0;">Products</h5>
+                </div>
+                <div class="card-body" style="margin: 0; padding: 0;">
+                    <div class="row d-flex" style="margin: 0;">
+                        <div class="col-md-12" style="margin: 0; padding: 0;">
+                            <div class="table-responsive" style="margin: 0; padding: 0;">
+                                <div class="row" style="margin: 0;">
+                                    @for (int i = 0; i < Model.Products.Count(); i++)
+                                    {
+                                        <div class="col-md-12" style="margin: 0; padding: 0;">
+                                            <div class="card" style="margin: 0; border-radius: 0; box-shadow:none; border-bottom:1px solid 	#F0F0F0;">
+                                                <div class="card-body" style="margin: 0; padding: 10px;">
+                                                    @Html.HiddenFor(m => m.Products[i].id)
+
+                                                    @Html.HiddenFor(m => m.Products[i].name)
+                                                    <p style="margin: 0;"><b>Name</b>: @Model.Products[i].name</p>
+
+                                                    @Html.HiddenFor(m => m.Products[i].quantity)
+                                                    <p class="card-text" style="margin: 0;"><b>Quantity</b>: @Model.Products[i].quantity</p>
+
+                                                    <div class="number-input" style="display: flex; align-items: center;">
+                                                        <b>Update Quantity:</b>
+                                                        <button type="button" class="btn-decrement" onclick="decrement(this)" style="margin-left: 10px;">-</button>
+
+                                                        @Html.TextBoxFor(m => m.Products[i].quantity_update, new { @class = "num", @style = "width: 60px; text-align: center; margin: 0 5px;" })
+
+                                                        <button type="button" class="btn-increment" onclick="increment(this)" style="margin-left: 5px;">+</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            @* </form> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
     </div>
+    </div>
     <footer>
-        <div class="md-12" style="display: flex;justify-content: end">
-            <button type="button" class="btn" style="justify-content:end;background-color:#dddd;color:black" onclick="redirectToIndex()">Cancel</button>
-            <button type="button" id="saveButton" class="btn" style="justify-content:end;background-color:#901F17;color:#ffff" onclick="saveData()">Save</button>
-
+        <div class="md-12" style="position: fixed; bottom: 20px; right: 20px; display: flex; justify-content: end; gap: 10px;">
+            <button type="button" class="btn" style="background-color:#dddd; color:black; padding: 10px 20px; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="redirectToIndex()">Cancel</button>
+            <button type="button" id="saveButton" class="btn" style="background-color:#901F17; color:#fff; padding: 10px 20px; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="saveData()">Save</button>
         </div>
     </footer>
 
@@ -953,12 +929,9 @@
 
 
             console.log(data);
-
-            //Manually handle checkboxes to store boolean values
             const checkboxes = form.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach((checkbox) => { data[checkbox.name] = checkbox.checked });
-            // true if checked, false if unchecked
-            // Get the Save button
+
             const saveButton = document.getElementById('saveButton');
 
             // Disable the button and change the text to "Saving..."
@@ -988,7 +961,6 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    // Reset button state on error
                     saveButton.textContent = 'Save';
                     saveButton.disabled = false;
                 });
@@ -997,9 +969,9 @@
 
         function increment(button) {
             const inputElement = button.previousElementSibling;
-            let value = parseInt(inputElement.value, 10); // Convert string to integer
+            let value = parseInt(inputElement.value, 10); 
             if (isNaN(value)) {
-                value = 0; // Handle invalid numbers
+                value = 0; 
             }
             value += 1;
             inputElement.value = value;

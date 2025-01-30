@@ -5,7 +5,7 @@ namespace MoverAndStore.WebApp.Models
 {
     public class Mapper
     {
-        public static CardData Map(SaveDataModel source)
+        public static DealData Map(SaveDataModel source)
         {
             DateTime? dateTimeValue = DateTime.Now; // Your nullable DateTime value
 
@@ -13,7 +13,7 @@ namespace MoverAndStore.WebApp.Models
                 ? DateOnly.FromDateTime(dateTimeValue.Value)
                 : (DateOnly?)null;
 
-            return new CardData
+            return new DealData
             {
                 Basic_Information = new BasicInformation
                 {

@@ -2,7 +2,7 @@
 
 namespace MoverAndStore.WebApp.Models
 {
-    public class CardData
+    public class DealData
     {
         [JsonPropertyName("basic_information")]
         public BasicInformation Basic_Information { get; set; }
