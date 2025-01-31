@@ -15,120 +15,88 @@
 <body style="background-color:#F4F7FA">
     <style>
         .card:hover {
-            transform: scale(1.05); /* Slightly enlarge the card on hover */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for a "lift" effect */
+            transform: scale(1.05); 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
         }
 
         .card {
-            border-radius: 15px; /* Rounded corners for the card */
-            overflow: hidden; /* Ensure the rounded corners apply to inner elements */
+            border-radius: 15px; 
+            overflow: hidden;
         }
 
-        #confirm-popup
-        {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
 
         .popup {
-            position: fixed;
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            width: 80%; 
+            height: 100%; 
+            background-color: rgba(0, 0, 0, 0.5); 
         }
+
         .popup-content {
-            background-color: white ; /* Red theme */
-            padding: 40px; /* Increased padding for a larger popup */
-            border-radius: 10px; /* Slightly larger border-radius */
+            background-color: white; 
             color: #901F17;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid black;
+            box-shadow: 5px 10px #901F17;
+            width: 50%;
+            font-size: 14px;
+            font-weight : bold;
             text-align: center;
-            font-size:22px;
-            max-width: 600px; /* Limit the maximum width */
-            width: 80%; /* Allow it to be responsive */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+            border-radius: 10px;
         }
 
-        #popup-close,
-        #confirm-yes,
-        #confirm-no {
-            background-color: #901F17; /* White background */
-            color: #ffffff; /* Red text */
-            border: 2px solid black; /* Red border */
+        .popup-button {
+            background-color: #901F17;
+            color: white;
+            border: none;
             padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
-            font-size: 16px;
             cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
         }
 
-            #popup-close:hover,
-            #confirm-yes:hover,
-            #confirm-no:hover {
-                background-color: dimgray; /* Red background on hover */
-                color: #ffffff; /* White text on hover */
+            .popup-button:hover {
+                background-color: #d9534f;
             }
-
-            #popup-close:focus,
-            #confirm-yes:focus,
-            #confirm-no:focus {
-                outline: none;
-            }
-
-
-        .popup.hidden {
-            display: none;
-        }
-        
-       
 
     </style>
     <form id="dataForm">
-    <div class="mb-2">
+        <div class="mb-2">
 
-        <div class="container">
+            <div class="container">
 
-            <h4 class="text-left p-3" style="font-size:32px;padding-left:0px !important">My Tasks</h4>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-               
-                @foreach (var item in Model.TaskList)
-                {
-                    <div class="col-sm-12 col-md-4">
+                <h4 class="text-left p-3" style="font-size:32px;padding-left:0px !important">My Tasks</h4>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                    @foreach (var item in Model.TaskList)
+                    {
+                        <div class="col-sm-12 col-md-4">
                             <input type="hidden" name="Id" id="Id" value="@item.Id" />
-                        <div class="card" style="border: 1px solid #CCC; border-radius: 15px; transition: transform 0.3s ease;">
-                            <div class="card-header py-3 d-flex align-items-center justify-content-between" style="background-color: #901F17; color: #000000; border-top-left-radius: 15px; border-top-right-radius: 15px; cursor: pointer;">
-                                <h5 class="d-flex align-items-center" style="font-size: 18px; font-weight: bold; color: #ffff; margin: 0;">
+                            <div class="card" style="border: 1px solid #CCC; border-radius: 15px; transition: transform 0.3s ease;">
+                                <div class="card-header py-3 d-flex align-items-center justify-content-between" style="background-color: #901F17; color: #000000; border-top-left-radius: 15px; border-top-right-radius: 15px; cursor: pointer;">
+                                    <h5 class="d-flex align-items-center" style="font-size: 18px; font-weight: bold; color: #ffff; margin: 0;">
                                         <input type="hidden" name="Title" id="Title" value="@item.Title" />
-                                    @item.Title
-                                </h5>
+                                        @item.Title
+                                    </h5>
 
-                            </div>
-                            <div class="card-body py-3 border-bottom d-flex justify-content-between">
-                                <div class="d-flex flex-column">
-                                    <p class="d-block mb-1">
+                                </div>
+                                <div class="card-body py-3 border-bottom d-flex justify-content-between">
+                                    <div class="d-flex flex-column">
+                                        <p class="d-block mb-1">
                                             <input type="hidden" name="description" id="description" value="@item.Description" />
                                             <i class="fa fa-sticky-note"></i> <b>Description:</b> @item.Description
-                                    </p>
+                                        </p>
 
-                                    <p class="d-block mb-1">
+                                        <p class="d-block mb-1">
                                             <input type="hidden" name="Foreman_Name" id="Foreman_Name" value="@item.Foreman_Name" />
                                             <i class="fa fa-user-circle"></i> <b>Foreman Name:</b> @item.Foreman_Name
-                                    </p>
+                                        </p>
 
-                                    <p class="d-block mb-1">
+                                        <p class="d-block mb-1">
                                             <input type="hidden" name="Status" id="Status" value="@item.Status" />
                                             @if (item.Status)
                                             {
@@ -140,87 +108,78 @@
                                             }
 
                                             <b>Status:</b> @item.Status
-                                    </p>
+                                        </p>
 
-                                    <p class="d-block mb-1">
+                                        <p class="d-block mb-1">
                                             <input type="hidden" name="Task_Date" id="Task_Date" value="@item.Task_Date" />
-                                        <i class="fa fa-calendar"></i> <b>Task Date:</b>  @item.Task_Date
-                                    </p>
-                               
+                                            <i class="fa fa-calendar"></i> <b>Task Date:</b>  @item.Task_Date
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer p-2 text-center">
+                                    <button type="button" name="Completetask" id="completeTask" class="btn" style="background-color:#901F17; color:#fff ;align-items:center; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="UpdateTask()">Complete Task</button>
                                 </div>
                             </div>
-                            <div class="card-footer p-2 text-center">
-                                <button type="button" name="Completetask" id="completeTask" class="btn" style="background-color:#901F17; color:#fff ;align-items:center; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="UpdateTask()">Complete Task</button>
-                            </div>
                         </div>
-                    </div>
-                }
-          
+                    }
+
+                </div>
             </div>
         </div>
-    </div>
     </form>
-    <div id="popup" class="popup hidden">
+
+    <div id="confirmation-popup" class="popup">
         <div class="popup-content">
-            <span id="popup-message"></span>
-            <button id="popup-close">Close</button>
+            <span id="confirmation-message"></span><br /><br />
+            <button id="confirmation-yes" class="popup-button">Yes</button>
+            <button id="confirmation-no" class="popup-button">No</button>
         </div>
     </div>
 
-    <div id="confirm-popup" class="popup hidden">
+    <div id="result-popup" class="popup">
         <div class="popup-content">
-            <span id="confirm-message"></span>
-            <button id="confirm-yes">Yes</button>
-            <button id="confirm-no">No</button>
+            <span id="result-message"></span><br /><br />
+            <button id="result-ok" class="popup-button">OK</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const popup = document.getElementById('popup');
-        const popupMessage = document.getElementById('popup-message');
-        const popupClose = document.getElementById('popup-close');
 
-        
+        function showConfirmationPopup(message, onYes, onNo) {
+            const popup = document.getElementById('confirmation-popup');
+            const popupMessage = document.getElementById('confirmation-message');
+            const popupYes = document.getElementById('confirmation-yes');
+            const popupNo = document.getElementById('confirmation-no');
 
-      popupClose.addEventListener('click', () => {
-            popup.classList.add('hidden');
-        });  
-
-        // confirmYes.addEventListener('click', () => {
-        //     confirmPopup.classList.add('hidden');
-        //     updateTask();
-        // });
-
-        // confirmNo.addEventListener('click', () => {
-        //     confirmPopup.classList.add('hidden');
-        //     showPopup('Task update cancelled');
-        // });
-
-        function showPopup(message) {
             popupMessage.textContent = message;
-            popup.classList.remove('hidden');
-        }
-        function showConfirmPopup(message, onYes, onNo) {
-            const confirmPopup = document.getElementById('confirm-popup');
-            const confirmMessage = document.getElementById('confirm-message');
-            const confirmYes = document.getElementById('confirm-yes');
-            const confirmNo = document.getElementById('confirm-no');
+            popup.style.display = 'block';
 
-            confirmMessage.textContent = message;
-            confirmPopup.style.display = 'block';
-
-            confirmYes.onclick = function () {
-                confirmPopup.style.display = 'none';
+            popupYes.onclick = function () {
+                popup.style.display = 'none';
                 if (onYes) onYes();
             };
 
-            confirmNo.onclick = function () {
-                confirmPopup.style.display = 'none';
+            popupNo.onclick = function () {
+                popup.style.display = 'none';
                 if (onNo) onNo();
             };
         }
+
+        function showResultPopup(message) {
+            const popup = document.getElementById('result-popup');
+            const popupMessage = document.getElementById('result-message');
+            const popupOk = document.getElementById('result-ok');
+
+            popupMessage.textContent = message;
+            popup.style.display = 'block';
+
+            popupOk.onclick = function () {
+                popup.style.display = 'none';
+            };
+        }
         document.getElementById('completeTask').onclick = function () {
-            showConfirmPopup('Are you sure you want to update the task?', function () {
+            showConfirmationPopup('Are you sure you  want to mark the task as complete?', function () {
                 const form = document.getElementById('dataForm');
                 const formData = new FormData(form);
                 const data = {};
@@ -240,7 +199,9 @@
                     }
                 });
 
-
+                const saveButton = document.getElementById('completeTask');
+                saveButton.disabled = true;
+                saveButton.textContent = 'Updating...';
                 console.log(data);
                 const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                 checkboxes.forEach((checkbox) => { data[checkbox.name] = checkbox.checked });
@@ -254,20 +215,24 @@
                     .then(response => response.json())
                     .then(result => {
                         if (result.success) {
-                            showPopup('Task updated successfully.');
+                            saveButton.textContent = 'Completed';
+                            saveButton.disabled = true;
+                            showResultPopup('Task updated successfully.');
                         } else {
-                            showPopup(result.message || 'Failed to update the task.');
+                            saveButton.textContent = 'Complete Task';
+                            saveButton.disabled = false;
+                            showResultPopup(result.message || 'Failed to update the task.');
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
                     });
             }, function () {
-                showPopup('Task update cancelled');
+                showResultPopup('Task update cancelled.');
             });
         };
     </script>
-    </body>
+</body>
 @* </body>
 </html>  *@
 

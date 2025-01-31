@@ -109,6 +109,44 @@
         overflow: hidden;
     }
 
+    .popup {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        width: 80%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-content {
+        background-color: white;
+        color: #901F17;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid black;
+        box-shadow: 5px 10px #901F17;
+        width: 50%;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .popup-button {
+        background-color: #901F17;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 10px;
+    }
+
+        .popup-button:hover {
+            background-color: #d9534f;
+        }
+
 </style>
 
 <!-- Dashboard Card (Small Long Title Card) -->
@@ -864,12 +902,20 @@
 
     </div>
     </div>
+    <div id="result-popup" class="popup">
+        <div class="popup-content">
+            <span id="result-message"></span><br /><br />
+            <button id="result-ok" class="popup-button">OK</button>
+        </div>
+    </div>
+
     <footer>
         <div class="md-12" style="position: fixed; bottom: 20px; right: 20px; display: flex; justify-content: end; gap: 10px;">
             <button type="button" class="btn" style="background-color:#dddd; color:black; padding: 10px 20px; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="redirectToIndex()">Cancel</button>
             <button type="button" id="saveButton" class="btn" style="background-color:#901F17; color:#fff; padding: 10px 20px; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="saveData()">Save</button>
         </div>
     </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -898,11 +944,23 @@
 
       
             if (dateField.value) {
-                const timeValue = timeField.value || getCurrentTime(); // Use current time if empty
+                const timeValue = timeField.value || getCurrentTime(); 
                 hiddenField.value = `${dateField.value}T${timeValue}`;
             }
         });
 
+        function showResultPopup(message) {
+            const popup = document.getElementById('result-popup');
+            const popupMessage = document.getElementById('result-message');
+            const popupOk = document.getElementById('result-ok');
+
+            popupMessage.textContent = message;
+            popup.style.display = 'block';
+
+            popupOk.onclick = function () {
+                popup.style.display = 'none';
+            };
+        }
 
 
         function saveData() {
@@ -911,7 +969,6 @@
             const formData = new FormData(form);
             const data = {};
             formData.forEach((value, key) => {
-                // Split the key to get the array name, index, and field
                 let keys = key.split(/[\[\]\.]/).filter(Boolean);
                 if (keys.length === 3) {
                     let [arrayName, index, field] = keys;
@@ -951,12 +1008,12 @@
                         // Change button text to "Saved"
                         saveButton.textContent = 'Saved';
                         saveButton.disabled = false;
-                        alert('Data saved successfully');
+                        showResultPopup('Data saved successfully.');
                     } else {
                         // Reset button state on failure
                         saveButton.textContent = 'Save';
                         saveButton.disabled = false;
-                        alert(result.message || 'Failed to save data.');
+                        showResultPopup(result.message || 'Failed to save data.');
                     }
                 })
                 .catch(error => {

@@ -190,9 +190,13 @@ namespace MoverAndStore.WebApp.Controllers
                             //var data = System.Text.Json.JsonSerializer.Deserialize<>(jsonData);
                             //return View(data);
                         }
+                        else
+                        {
+                            return Json(new { success = false, message = "Failed to update due to some error." });
+                        }
 
                     }
-                    return Json(new { success = true, message = jsonString });
+                    return Json(new { success = false, message = jsonString });
 
                 }
                 else
