@@ -49,6 +49,65 @@
             border-radius: 10px;
         }
 
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+       .switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+            background-color: #901F17;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+
         .popup-button {
             background-color: #901F17;
             color: white;
@@ -98,17 +157,24 @@
 
                                         <p class="d-block mb-1">
                                             <input type="hidden" name="Status" id="Status" value="@item.Status" />
+
                                             @if (item.Status)
                                             {
                                                 <i class="fa fa-check-square"></i>
                                             }
-                                            else if (!item.Status)
+                                            else
                                             {
                                                 <i class="fa fa-times-circle"></i>
                                             }
 
-                                            <b>Status:</b> @item.Status
+                                            <b>Status:</b>
+
+                                            <label class="switch">
+                                                <input type="checkbox" id="toggleStatus" disabled @(item.Status ? "checked" : "") onchange="toggleStatus(this)">
+                                                <span class="slider round"></span>
+                                            </label>
                                         </p>
+
 
                                         <p class="d-block mb-1">
                                             <input type="hidden" name="Task_Date" id="Task_Date" value="@item.Task_Date" />
@@ -118,7 +184,15 @@
                                     </div>
                                 </div>
                                 <div class="card-footer p-2 text-center">
-                                    <button type="button" name="Completetask" id="completeTask" class="btn" style="background-color:#901F17; color:#fff ;align-items:center; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="UpdateTask()">Complete Task</button>
+                                    @if(item.Status)
+                                    {
+                                        <button type="button" name="Completetask" id="completeTask" class="btn" style="background-color:#901F17; color:#fff ;align-items:center; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" disabled onclick="UpdateTask()">Completed</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" name="Completetask" id="completeTask" class="btn" style="background-color:#901F17; color:#fff ;align-items:center; border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onclick="UpdateTask()">Complete Task</button>
+                                    }
+
                                 </div>
                             </div>
                         </div>
@@ -145,6 +219,14 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+        function toggleStatus(element) {
+            let statusValue = element.checked; // Boolean value (true/false)
+
+            console.log("Status changed:", statusValue);
+
+            // Optionally, send an AJAX request to update the backend
+        }
 
         function showConfirmationPopup(message, onYes, onNo) {
             const popup = document.getElementById('confirmation-popup');
@@ -218,10 +300,12 @@
                             saveButton.textContent = 'Completed';
                             saveButton.disabled = true;
                             showResultPopup('Task updated successfully.');
+                            document.getElementById("toggleStatus").checked = true;
                         } else {
                             saveButton.textContent = 'Complete Task';
                             saveButton.disabled = false;
                             showResultPopup(result.message || 'Failed to update the task.');
+                            //document.getElementById("toggleStatus").checked = false;
                         }
                     })
                     .catch(error => {

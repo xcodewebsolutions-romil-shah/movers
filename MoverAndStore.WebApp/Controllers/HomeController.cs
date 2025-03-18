@@ -147,8 +147,16 @@ namespace MoverAndStore.WebApp.Controllers
         {
             try
             {
+                var fullName = User.FindFirstValue(ClaimTypes.Name);
                 var client = _httpClientFactory.CreateClient();
-                var response = await client.GetAsync($"https://hook.eu2.make.com/t9tlv377fglv4y8c8cx6kb6g8qcpifwn");
+                var requestData = new
+                {
+                    foreman_name = fullName,
+                };
+
+                string json = JsonConvert.SerializeObject(requestData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync($"https://hook.eu2.make.com/t9tlv377fglv4y8c8cx6kb6g8qcpifwn", content);
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
@@ -186,9 +194,9 @@ namespace MoverAndStore.WebApp.Controllers
                         var jsonData = await response.Content.ReadAsStringAsync();
                         if (response.IsSuccessStatusCode)
                         {
-                            //var responseData = await response.Content.ReadAsStringAsync();
-                            //var data = System.Text.Json.JsonSerializer.Deserialize<>(jsonData);
-                            //return View(data);
+                            var responseData = await response.Content.ReadAsStringAsync();
+                            var data = System.Text.Json.JsonSerializer.Deserialize<UpdateTaskResponse>(responseData);
+                            return Json(new { success = true, message = data.message });
                         }
                         else
                         {
@@ -196,7 +204,7 @@ namespace MoverAndStore.WebApp.Controllers
                         }
 
                     }
-                    return Json(new { success = false, message = jsonString });
+        
 
                 }
                 else

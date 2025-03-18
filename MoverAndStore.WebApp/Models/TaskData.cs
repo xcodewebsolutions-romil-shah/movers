@@ -27,7 +27,7 @@ namespace MoverAndStore.WebApp.Models
         [JsonPropertyName("foreman_name")]
         public string? Foreman_Name { get; set; }
 
-        [JsonPropertyName("status")]
+        [JsonPropertyName("complete")]
         public bool Status { get; set; }
 
         [JsonPropertyName("task_due_on")]
@@ -38,5 +38,12 @@ namespace MoverAndStore.WebApp.Models
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }
+    }
+
+    public class UpdateTaskResponse
+    {
+        public bool success { get; set; }
+
+        public string message { get; set; }
     }
 }
