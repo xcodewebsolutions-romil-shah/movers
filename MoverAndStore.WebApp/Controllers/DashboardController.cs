@@ -20,7 +20,7 @@ namespace MoverAndStore.WebApp.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var response = await client.GetAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt"); // Replace with your API endpoint
-            //var response = await client.GetAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt"); // Replace with your API endpoint
+           endpoint
 
             if (response.IsSuccessStatusCode)
             {
