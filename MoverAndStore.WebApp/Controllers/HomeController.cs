@@ -37,7 +37,8 @@ namespace MoverAndStore.WebApp.Controllers
 
                 string json = JsonConvert.SerializeObject(requestData);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt", content);
+                //var response = await client.PostAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt", content);
+                var response = await client.PostAsync($"https://hook.eu2.make.com/rrgnbgmvzwv3pmqcgh57ze11rx29gjbi", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -74,7 +75,8 @@ namespace MoverAndStore.WebApp.Controllers
 
                 string json = JsonConvert.SerializeObject(requestData);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt", content);
+                //var response = await client.PostAsync($"https://hook.eu2.make.com/0axyvo1uh9vvr1i98upg70vh9ns86jnt", content);
+                var response = await client.PostAsync($"https://hook.eu2.make.com/rrgnbgmvzwv3pmqcgh57ze11rx29gjbi", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -118,7 +120,8 @@ namespace MoverAndStore.WebApp.Controllers
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
                     using (var httpClient = new HttpClient())
                     {
-                        var response = await httpClient.PostAsync("https://hook.eu2.make.com/c3pqlr90n0h8tvpkj8i248u1ssngbihx", content);
+                        //var response = await httpClient.PostAsync("https://hook.eu2.make.com/c3pqlr90n0h8tvpkj8i248u1ssngbihx", content); 
+                        var response = await httpClient.PostAsync("https://hook.eu2.make.com/yp9jdye390dcb2b968dwry9paay2rsua", content); 
                         var jsonData = await response.Content.ReadAsStringAsync();
                         if (response.IsSuccessStatusCode)
                         {
@@ -156,7 +159,8 @@ namespace MoverAndStore.WebApp.Controllers
 
                 string json = JsonConvert.SerializeObject(requestData);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync($"https://hook.eu2.make.com/t9tlv377fglv4y8c8cx6kb6g8qcpifwn", content);
+                //var response = await client.PostAsync($"https://hook.eu2.make.com/t9tlv377fglv4y8c8cx6kb6g8qcpifwn", content);
+                var response = await client.PostAsync($"https://hook.eu2.make.com/44nfx2w9529qkevtvs98x3t8gyqipwx1", content);
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
@@ -190,7 +194,9 @@ namespace MoverAndStore.WebApp.Controllers
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
                     using (var httpClient = new HttpClient())
                     {
-                        var response = await httpClient.PostAsync("https://hook.eu2.make.com/cgrwhim4hmfarrdbsf2w3bx57237zj7m", content);
+                        
+                        //var response = await httpClient.PostAsync("https://hook.eu2.make.com/cgrwhim4hmfarrdbsf2w3bx57237zj7m", content);
+                        var response = await httpClient.PostAsync("https://hook.eu2.make.com/791nhwsjwqheypb0781fmjbaigfg1vvb", content);
                         var jsonData = await response.Content.ReadAsStringAsync();
                         if (response.IsSuccessStatusCode)
                         {

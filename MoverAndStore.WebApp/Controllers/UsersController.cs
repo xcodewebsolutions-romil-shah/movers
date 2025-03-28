@@ -32,7 +32,8 @@ namespace MoverAndStore.WebApp.Controllers
         {
             try
             {
-                var response = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+                //var response = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+                var response = await _httpClient.GetAsync("https://hook.eu2.make.com/z41cfuf2fsy7dibb678j5ct7j7gbakzo");
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
@@ -62,7 +63,8 @@ namespace MoverAndStore.WebApp.Controllers
                 return BadRequest("All fields are required.");
             }
 
-            var response = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+            //var response = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+            var response = await _httpClient.GetAsync("https://hook.eu2.make.com/z41cfuf2fsy7dibb678j5ct7j7gbakzo");
             if (!response.IsSuccessStatusCode)
             {
                 return Json(new { success = false, message = "API call failed to fetch users." });
@@ -96,7 +98,8 @@ namespace MoverAndStore.WebApp.Controllers
 
             try
             {
-                var createResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/0grr76mcpx43stfwfj8lgv6ytoq8h42h", content);
+               // var createResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/0grr76mcpx43stfwfj8lgv6ytoq8h42h", content);
+                var createResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/o76t71wxwar22omj9b9b11z09x1j0lnk", content);
                 if (createResponse.IsSuccessStatusCode)
                 {
                     string emailTemplate = @"
@@ -208,7 +211,8 @@ namespace MoverAndStore.WebApp.Controllers
                     var jsonUser = JsonConvert.SerializeObject(new { UserId = request.UserId });
                     var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
 
-                    var response = await _httpClient.PostAsync("https://hook.eu2.make.com/sw1zs8y5xw8c8o47hs4wn34d21su3m2g", content);
+                    //var response = await _httpClient.PostAsync("https://hook.eu2.make.com/sw1zs8y5xw8c8o47hs4wn34d21su3m2g", content);
+                    var response = await _httpClient.PostAsync("https://hook.eu2.make.com/7wheko1ajir693cupucrebdp8uehav4w", content);
                     if (response.IsSuccessStatusCode)
                     {
                         return Json(new { success = true, message = "User deleted successfully!" });

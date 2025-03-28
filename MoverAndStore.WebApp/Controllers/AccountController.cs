@@ -48,7 +48,8 @@ namespace MoverAndStore.WebApp.Controllers
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 using (var httpClient = new HttpClient())
                 {
-                    var loginresponse = await httpClient.PostAsync("https://hook.eu2.make.com/ldxe1qlmi55qalq4c947obnqvrqbmoxi", content);
+                    //var loginresponse = await httpClient.PostAsync("https://hook.eu2.make.com/ldxe1qlmi55qalq4c947obnqvrqbmoxi", content);
+                    var loginresponse = await httpClient.PostAsync("https://hook.eu2.make.com/c4go325aht0j498kwkhm7avr0uv6er93", content);
                     var jsonData = await loginresponse.Content.ReadAsStringAsync();
                     var data = JsonConvert.DeserializeObject<LoginResponse>(jsonData);
 
@@ -123,7 +124,9 @@ namespace MoverAndStore.WebApp.Controllers
                     return response;
                 }
 
-                var userResponse = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+                //var userResponse = await _httpClient.GetAsync("https://hook.eu2.make.com/dosmsl3ugl9ebhr8k26n9oo6rmtfmy5p");
+
+                var userResponse = await _httpClient.GetAsync("https://hook.eu2.make.com/z41cfuf2fsy7dibb678j5ct7j7gbakzo");
                 if (!userResponse.IsSuccessStatusCode)
                 {
                     response.SetError("API call failed to fetch users.");
@@ -172,7 +175,8 @@ namespace MoverAndStore.WebApp.Controllers
                 var jsonUser = JsonConvert.SerializeObject(userToUpdate);
                 var content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
 
-                var updateResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/i81sy7odn3qiwulw5yjxe8h7aymowf7e", content);
+                //var updateResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/i81sy7odn3qiwulw5yjxe8h7aymowf7e", content);
+                var updateResponse = await _httpClient.PostAsync("https://hook.eu2.make.com/etr6mwhiq2fufigrv3hcwvm7enln6ix1", content);
                 if (updateResponse.IsSuccessStatusCode)
                     response.SetSuccess("Password updated successfully.");
                 else
