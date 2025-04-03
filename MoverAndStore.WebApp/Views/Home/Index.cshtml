@@ -49,33 +49,23 @@
                             <div class="d-flex flex-column">
 
 
-                                <p class="d-block mb-2" style="font-weight:bold;font-size:16px;">
+                               @*  <p class="d-block mb-2" style="font-weight:bold;font-size:16px;">
                                         @item.Basic_Information.Lead.Company_Name
-                                </p>
+                               </p>       *@                           
 
                                 <p class="d-block mb-1">
                                     @*  <i class="fa fa-calendar"></i> Moving Date : @item.Moving_Date.moving_to_date *@
                                     <i class='fas fa-user-alt'></i> Contact Person: @item.Basic_Information.Lead.Contact_Person
+                                </p>                               
+
+                                <p class="d-block mb-1">
+                                        @*  <i class="fa fa-calendar"></i> Moving Date : @item.Moving_Date.moving_to_date *@
+                                        <i class='fas fa-user-alt'></i> Responsible : @item.user_dashboard.Foremanname
                                 </p>
 
                                 <p class="d-block mb-1">
-                                    @*  <i class="fa fa-calendar"></i> Moving Date : @item.Moving_Date.moving_to_date *@
-                                    <i class="fa fa-phone"></i> Phone: @item.Basic_Information.Lead.Contact_Person_Telephone
-                                </p>
-
-                                <p class="d-block mb-1">
-                                    <i class='fas fa-user-plus'></i> Team Members: @item.Additional_Info.Number_Of_Movers
-                                </p>
-                                <p class="d-block mb-1">
-                                    @*  <i class="fa fa-calendar"></i> Moving Date : @item.Moving_Date.moving_to_date *@
-                                        <i class="fa fa-calendar"></i> Moving Date: @item.Moving_Date.moving_from_date.Value.ToString("dd-MM-yy")
-                                </p>
-                                <p class="d-block mb-1">
-                                        <i class="fa fa-clock"></i> Client Arrivale Time: @item.Moving_Date.client_arrival_time_update.Value.ToString("HH:mm tt")
-                                </p>
-                                    <p class="d-block mb-1">
-                                        <i class="fas fa-file-alt"></i> Lift Name Info: @item.Additional_Info.Extra_Info_Lift
-                                    </p>
+                                    <i class='fas fa-user-plus'></i> Team Members: @item.Basic_Information.Extra_Info_Group.estimated_movers
+                               
 
                             </div>
 
@@ -89,5 +79,3 @@
         </div>
     </div>
 </div>
-@* </body>
-</html> *@

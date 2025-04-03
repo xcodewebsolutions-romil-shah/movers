@@ -19,99 +19,99 @@ namespace MoverAndStore.WebApp.Models
                 {
                     id = source.PID,
                     Title = source.Title,
-                    Status = source.Status,
-                    Summary = source.Summary,
-                    Company = source.Company,
-                    Reference = source.Reference,
+                    Moving_Date = Convert.ToDateTime(source.Moving_Date),
                     Lead = new Lead
                     {
                         Contact_Person = source.Contact_Person,
-                        Customer = source.Customer,
-                        Contact_Person_Telephone = source.Contact_Person_Telephone
-
-
                     },
                     AddressGroup = new AddressGroup
                     {
-                        address_a = source.Address_A,
-                        address_b = source.Address_B,
-                        address_c = source.Address_C,
-                        pv_1_bool = source.pv_1_bool,
-                        pv_2_bool = source.pv_2_bool,
-                        pv_3_bool = source.pv_3_bool,
+                        Address_1 = source.Address_1,
+                        Address_3 = source.Address_3,
+                        Address_2 = source.Address_2,
+                        Living_1_Levels = source.Living_1_Levels,
+                        Living_2_Levels = source.Living_2_Levels,
+                        Living_3_Levels = source.Living_3_Levels,
+                        Living_2_Layers = source.Living_2_Layers,
+                        Living_1_Layers = source.Living_1_Layers,
+                        Living_3_Layers = source.Living_3_Layers,
+                        //Lift_1_Bool = source.lift_1_bool,
+                        Lift_2_Bool = source.Lift_2_Bool,
+                        Lift_3_Bool = source.Lift_3_Bool,
+                        Type_1_Living = source.Type_1_Living,
+                        Type_2_Living = source.Type_2_Living,
+                        Type_3_Living = source.Type_3_Living,
+                        Lift_1_Distance_Door = source.lift_1_distance_door,
+                        Lift_2_Distance_Door = source.Lift_2_Distance_Door,
+                        Lift_3_Distance_Door = source.Lift_3_Distance_Door,
+                        Parking_1_bool = source.Parking_1_bool,
+                        Parking_2_bool = source.Parking_2_bool,
+                        Parking_3_bool = source.Parking_3_bool,
+
+                    },
+
+                    Activitiesgroup = new Activitiesgroup
+                    {
+                        Furniture_Assembly_Bool = source.Furniture_Assembly_Bool,
+                        Items_To_Assemble = source.Items_To_Assemble,
+                    },
+
+                    PreferedDatesGroup = new PreferedDatesGroup
+                    {
+                        option1 = Convert.ToDateTime(source.option1),
+                        option2 = Convert.ToDateTime(source.option2),
+                        option3 = Convert.ToDateTime(source.option3),
+                    },
+                    Extra_Info_Group = new Extra_info_group
+                    {
+                        start_time = source.start_time,
+                        end_time = source.end_time,
+                        estimated_movers = source.estimated_movers,
+                        estimated_movers_update = source.estimated_movers_update,   
+                        extra_info = source.extra_info,
+                        type_moving_wagen = source.type_moving_wagen,
+                    },
+                    MaterialGroup = new MaterialGroup
+                    {
+                        boxes = source.boxes,
+                        boxes_update = source.boxes_update,
+                        wardrobe_boxes_update = source.wardrobe_boxes_update,
+                        wardrobe_boxes = source.wardrobe_boxes,
+                        folie = source.folieboxes,
+                        folie_update = source.folie_update,
+                    },
+
+                    ContentGroup = new ContentGroup
+                    {
+                        Content_1 = source.Content_1,
+                        Content_2 = source.Content_2,
                     }
 
                 },
-                Moving_Date = new MovingDate
+                Crminfo = new CrmInfo
                 {
-                    moving_from_date = Convert.ToDateTime(source.moving_from_date),
-                    moving_to_date = Convert.ToDateTime(source.moving_to_date),
-                    client_arrival_time_update = Convert.ToDateTime(source.Client_Arrival_Time_update)
-                },
-                Additional_Info = new AdditionalInfo
-                {
-                    Extra_Info_Lift = source.Extra_Info_Lift,
-                    Lift_Location_Enum = source.Lift_Location_Enum,
-                    Lift_bool = source.Lift_bool,
-                    Lift_Type_Enum = source.Lift_Type_Enum,
-                    Items_To_Dismantle = source.Items_To_Dismantle,
-                    Items_To_Dismantle_Update = source.Items_To_Dismantle_Update,
-                    Number_Of_Movers = source.Number_Of_Movers.ToString(),
-                    Number_Of_Movers_Update = source.Number_Of_Movers_Update.ToString(),
-                    Time_Estimate = source.Time_Estimate,
-                    Time_Estimate_Update = source.Time_Estimate_Update.ToString(),
-                    Dismantling_Bool = source.Dismantling_Bool,
-                    Dismantling_Bool_Update = source.Dismantling_Bool_Update,
-                    Additional_General_Info = source.Additional_General_Info,
-                    Hour_start_update = source.Hour_start_update,
-                    Hour_stop_update = source.Hour_stop_update,
-                    Additional_General_Info_update = source.Additional_General_Info_update,
-                    Voertuig_Enum = source.Voertuig_Enum,
-                    Voertuig_Type_Enum = source.Voertuig_Type_Enum
-
-
-                },
-                stockage = new Stockage
-                {
-                    Date_In = Convert.ToDateTime(source.Date_In),
-                    Date_Out = Convert.ToDateTime(source.Date_Out),
-                    Date_In_Update = source.Date_In_Update.ToString(),
-                    Date_Out_Update = source.Date_Out_Update.ToString(),
-                    Cubic_Meters = source.Cubic_Meters.ToString(),
-                    Cubic_Meters_Update = source.Cubic_Meters_Update.ToString(),
-                    Exact_Location = source.Exact_Location,
-                    Exact_Location_Update = source.Exact_Location_Update,
-                    Options_Enum = source.Options_Enum,
-                    Storage = source.Storage,
-                    Storage_Update = source.Storage_Update,
-                    Insured_Value = source.Insured_Value,
-                    Zone = source.Zone,
-                    Zone_Update = source.Zone_Update,
-
-
-                },
-                Notes = new Notes
-                {
-                    foreman_notes = source.foreman_notes,
-                },
-                user_dashboard = new Userashboard
-                {
-                    Foremanname = source.Foreman_name
-                },
-                Products = source.Products?.Select(sourceProduct => new Product
-                {
-                    id = sourceProduct.id,
-                    name = sourceProduct.name,
-                    quantity = sourceProduct.quantity,
-                    quantity_update = sourceProduct.quantity_update,
-                }).ToList() ?? new List<Product>()
-
-
-
-
-
-
-        };
+                    //Source = source.Source,
+                    //Currency = source.Currency,
+                    //Success_percentage = source.Success_percentage,
+                    //Pipeline = source.Pipeline,
+                    //Responsible = source.Responsible,
+                }
+                //Notes = new Notes
+                //{
+                //    foreman_notes = source.foreman_notes,
+                //},
+                //user_dashboard = new Userashboard
+                //{
+                //    Foremanname = source.Foreman_name
+                //},
+                //Products = source.Products?.Select(sourceProduct => new Product
+                //{
+                //    id = sourceProduct.id,
+                //    name = sourceProduct.name,
+                //    quantity = sourceProduct.quantity,
+                //    quantity_update = sourceProduct.quantity_update,
+                //}).ToList() ?? new List<Product>()
+            };
         }
 
     }

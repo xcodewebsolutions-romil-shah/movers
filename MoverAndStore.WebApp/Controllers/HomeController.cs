@@ -42,7 +42,11 @@ namespace MoverAndStore.WebApp.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var jsonData = await response.Content.ReadAsStringAsync();
+                    string jsonData = await response.Content.ReadAsStringAsync();
+                    //jsonData = jsonData.Replace("},\"notes_group\"", "}},\"notes_group\"");
+                    //int position = jsonData.IndexOf(@"""notes_group""");
+                    //string modifiedJson = jsonData.Insert(position - 5, "}");
+
                     var data = System.Text.Json.JsonSerializer.Deserialize<List<DealData>>(jsonData);
                     return View(data);
                 }
@@ -82,7 +86,8 @@ namespace MoverAndStore.WebApp.Controllers
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
                     var data = System.Text.Json.JsonSerializer.Deserialize<List<DealData>>(jsonData);
-                    var finaldata = data.Where(x => x.Basic_Information.id == id).FirstOrDefault();
+                    var finaldata = data.FirstOrDefault(x => x.Basic_Information.id == id);
+                    finaldata.Basic_Information.Extra_Info_Group.start_time = finaldata.Basic_Information.Extra_Info_Group.start_time.ToString().Replace("Z", "");                 finaldata.Basic_Information.Extra_Info_Group.end_time = finaldata.Basic_Information.Extra_Info_Group.end_time.ToString().Replace("Z", ""); 
                     return View(finaldata);
                 }
                 else
@@ -121,7 +126,7 @@ namespace MoverAndStore.WebApp.Controllers
                     using (var httpClient = new HttpClient())
                     {
                         //var response = await httpClient.PostAsync("https://hook.eu2.make.com/c3pqlr90n0h8tvpkj8i248u1ssngbihx", content); 
-                        var response = await httpClient.PostAsync("https://hook.eu2.make.com/yp9jdye390dcb2b968dwry9paay2rsua", content); 
+                        var response = await httpClient.PostAsync("https://hook.eu2.make.com/9a3rr43ahwbuq1dm6r3b652nr19qd834", content); 
                         var jsonData = await response.Content.ReadAsStringAsync();
                         if (response.IsSuccessStatusCode)
                         {

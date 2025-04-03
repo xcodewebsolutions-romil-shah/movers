@@ -2,7 +2,8 @@
 
 @{
     Layout = "_Layout";
-    string formattedDateTime = @Model.Moving_Date.client_arrival_time_update?.ToString("yyyy-MM-dd");
+    string formattedStartTime = @Model.Basic_Information.Extra_Info_Group.start_time;
+    string formattedEndTime = @Model.Basic_Information.Extra_Info_Group.end_time.ToString();
 }
 
 @*
@@ -59,7 +60,7 @@
     .toggle:active:after {
         width: 30px;
     }
-        
+
 
     .number-input {
         display: flex;
@@ -105,7 +106,7 @@
     }
 
     .card {
-        border-radius: 15px; 
+        border-radius: 15px;
         overflow: hidden;
     }
 
@@ -173,7 +174,7 @@
                         <!-- Left Form Column -->
                         <div class="col-md-6">
                             <input type="hidden" name="PID" value="@Model.Basic_Information.id">
-                            <input type="hidden" name="pv_requested_enum" value="@Model.Basic_Information.AddressGroup.pv_requested_enum">
+                           
                             <input type="hidden" name="title" value="@Model.Basic_Information.Title">
                             <div class="mb-1">
                                 <label class="form-label" for="title">
@@ -182,45 +183,14 @@
                                 </label>
 
                             </div>
+
                             <div class="mb-1">
-                                <label class="form-label" for="summary">
-                                    <strong><b>Summary</b></strong><br />
-                                    Test @Model.Basic_Information.Summary
-                                </label>
-                                <input type="hidden" name="summary" value="@Model.Basic_Information.Summary">
-                                @*  <div>
-                                @Model.Basic_Information.Summary
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="reference">
-                                    <strong><b>Reference</b></strong><br />
-                                    @Model.Basic_Information.Reference
-                                </label>
-                                <input type="hidden" name="reference" value="@Model.Basic_Information.Reference">
-                                @*  <div>
-                                @Model.Basic_Information.Reference
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="contact_person">
-                                    <strong><b>Contact person</b></strong><br />
+                                <label class="form-label" for="Contact_Person">
+                                    <strong><b>Contact Person</b></strong><br />
                                     @Model.Basic_Information.Lead.Contact_Person
 
                                 </label>
-                                <input type="hidden" name="contact_person" value="@Model.Basic_Information.Lead.Contact_Person">
-                                @*  <div>
-                                @Model.Basic_Information.Lead.Contact_Person
-                                </div> *@
-
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Contact_Person_Telephone">
-                                    <strong><b>Contact person Telephone</b></strong><br />
-                                    @Model.Basic_Information.Lead.Contact_Person_Telephone
-
-                                </label>
-                                <input type="hidden" name="Contact_Person_Telephone" value="@Model.Basic_Information.Lead.Contact_Person_Telephone">
+                                <input type="hidden" name="Contact_Person" value=" @Model.Basic_Information.Lead.Contact_Person">
                                 @*  <div>
                                 @Model.Basic_Information.Lead.Contact_Person
                                 </div> *@
@@ -231,39 +201,41 @@
 
                         <!-- Right Form Column -->
                         <div class="col-md-6">
+
                             <div class="mb-1">
-                                <label class="form-label" for="status">
-                                    <strong><b>Status</b></strong><br />
-                                    @Model.Basic_Information.Status
+                                <label class="form-label" for="Responsible">
+                                    <strong><b>Responsible</b></strong><br />
+                                    @Model.Crminfo.Responsible
 
                                 </label>
-                                <input type="hidden" name="status" value="@Model.Basic_Information.Status">
+                                <input type="hidden" name="Responsible" value="@Model.Crminfo.Responsible">
                                 @*  <div>
-                                @Model.Basic_Information.Status
+                                @Model.Basic_Information.Lead.Contact_Person
                                 </div> *@
+
                             </div>
+
                             <div class="mb-1">
-                                <label class="form-label" for="company">
-                                    <strong><b>Company</b></strong><br />
-                                    Insuarance @Model.Basic_Information.Company
+                                <label class="form-label" for="Moving_Date">
+                                   <strong><b>Moving From Date</b></strong><br />
+                                  @Model.Basic_Information.Moving_Date 
 
                                 </label>
-                                <input type="hidden" name="company" value="@Model.Basic_Information.Company">
-
-                                @* <div>
-                                Insuarance @Model.Basic_Information.Company
+                                <input type="hidden" name="Moving_Date" value=" @Model.Basic_Information.Moving_Date">
+                                @*  <div>
+                                @Model.Basic_Information.Lead.Contact_Person
                                 </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="customer">
-                                    <strong><b>Customer</b></strong><br />
-                                    @Model.Basic_Information.Lead.Customer
 
-                                </label>
-                                <input type="hidden" name="customer" value="@Model.Basic_Information.Lead.Customer">
                             </div>
 
-
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                        
                         </div>
                     </div>
                 </div>
@@ -273,7 +245,9 @@
 
             <div class="card">
                 <div class="card-header" style="background-color:#901F17;">
-                    <h5 class="text-light">Address Group</h5>
+                    <h5 class="text-light">
+                        START ADDRESS
+                    </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -281,83 +255,110 @@
                         <div class="col-md-6">
                             @*   <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="address_a">
-                                    <strong><b>Address A</b></strong><br />
-                                    @Model.Basic_Information.AddressGroup.address_a
+                                <label class="form-label" for="address_1">
+                                    <strong><b>Start address</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Address_1
 
                                 </label>
-                                <input type="hidden" name="address_a" value="@Model.Basic_Information.AddressGroup.address_a">
+                                <input type="hidden" name="Address_1" value="@Model.Basic_Information.AddressGroup.Address_1">
                                 @*  <div>
                                 @Model.Basic_Information.AddressGroup.address_a
                                 </div> *@
 
                             </div>
+
                             <div class="mb-1">
-                                <label class="form-label" for="address_b">
-                                    <strong><b>Address B</b></strong><br />
-                                    @Model.Basic_Information.AddressGroup.address_b
+                                <label class="form-label" for="Type_1_Living">
+                                    <strong><b>Type of residence</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Type_1_Living
 
                                 </label>
-                                <input type="hidden" name="address_b" value="@Model.Basic_Information.AddressGroup.address_b">
-                                @* <div>
-                                @Model.Basic_Information.AddressGroup.address_b
-                                </div> *@
-
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="address_c">
-                                    <strong><b>Address C</b></strong><br />
-                                    @Model.Basic_Information.AddressGroup.address_c
-
-                                </label>
-                                <input type="hidden" name="address_c" value="@Model.Basic_Information.AddressGroup.address_c">
+                                <input type="hidden" name="Type_1_Living" value="@Model.Basic_Information.AddressGroup.Type_1_Living">
                                 @*  <div>
                                 @Model.Basic_Information.AddressGroup.address_c
                                 </div> *@
 
                             </div>
+
                             <div class="mb-1">
-                                <label class="form-label" for="pv_extra_info">
-                                    <strong><b>PV Extra Info</b></strong><br />
-                                    @Model.Basic_Information.AddressGroup.pv_extra_info
+                                <label class="form-label" for="Living_1_Levels">
+                                    <strong><b>Floors</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Living_1_Levels
 
                                 </label>
-                                @* <div>
-                                @Model.Basic_Information.AddressGroup.pv_extra_info
+                                <input type="hidden" name="Living_1_Levels" value="@Model.Basic_Information.AddressGroup.Living_1_Levels">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
                                 </div> *@
-                                <input type="hidden" name="pv_extra_info" value="@Model.Basic_Information.AddressGroup.pv_extra_info">
+
                             </div>
+
+
                             <div class="mb-1">
-                                <label class="form-label" for="general_extra_info">
-                                    <strong><b>General Extra Info</b></strong><br />
-                                    @Model.Basic_Information.AddressGroup.extra_info_contact.general_extra_info
+                                <label class="form-label" for="Living_1_Layers">
+                                    <strong><b>Number of floors</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Living_1_Layers
 
                                 </label>
-                                <input type="hidden" name="general_extra_info" value="@Model.Basic_Information.AddressGroup.extra_info_contact.general_extra_info">
+                                <input type="hidden" name="Living_1_Layers" value="@Model.Basic_Information.AddressGroup.Living_1_Layers">
                                 @* <div>
-                                @Model.Basic_Information.AddressGroup.extra_info_contact.general_extra_info
+                                @Model.Basic_Information.AddressGroup.address_b
                                 </div> *@
 
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>PV 1</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_1_bool" disabled name="pv_1_bool" @(Model.Basic_Information.AddressGroup.pv_1_bool ? "checked" : "") />
-                                <label class="toggle" for="pv_1_bool">PV 1</label>
-                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_1_bool"> *@
+                            <div class="mb-1">
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>Internal lift</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="Lift_1_Bool" name="Lift_1_Bool" disabled value="true" @(Model.Basic_Information.AddressGroup.Lift_2_Bool ? "checked" : "") />
+                                    <label class="toggle" for="Lift_1_Bool">Internal lift</label>
+                                </div>
+                                <input type="hidden" name="Address_1" value="@Model.Basic_Information.AddressGroup.Address_1">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
                             </div>
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>PV 2</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_2_bool" disabled name="pv_2_bool" @(Model.Basic_Information.AddressGroup.pv_2_bool ? "checked" : "") />
-                                <label class="toggle" for="pv_2_bool">PV 2</label>
-                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_2_bool"> *@
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Lift_1_Distance_Door">
+                                    <strong><b>Distance to front door</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Lift_1_Distance_Door
+
+                                </label>
+                                <input type="hidden" name="Lift_1_Distance_Door" value="@Model.Basic_Information.AddressGroup.Lift_1_Distance_Door">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
+                                </div> *@
+
                             </div>
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>PV 3</b></strong></label>
-                                <input class="toggle" type="checkbox" id="pv_3_bool" disabled name="pv_3_bool" @(Model.Basic_Information.AddressGroup.pv_3_bool ? "checked" : "") />
-                                <label class="toggle" for="pv_3_bool">PV 3</label>
-                                @* <input type="hidden" name="pv_2_bool" value="@Model.Basic_Information.AddressGroup.pv_3_bool"> *@
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Living_1_Levels">
+                                    <strong><b>Type of move</b></strong><br />
+                                    Type of move
+
+                                </label>
+                                <input type="hidden" name="Living_1_Levels" value="@Model.Basic_Information.AddressGroup.Living_1_Levels">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
+                                </div> *@
+
+                            </div>
+
+
+                            <div class="mb-1">
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>Parking ban</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="Parking_1_bool" name="Parking_1_bool" disabled value="true" @(Model.Basic_Information.AddressGroup.Parking_1_bool ? "checked" : "") />
+                                    <label class="toggle" for="Parking_1_bool">Internal lift</label>
+                                </div>
+                                <input type="hidden" name="Address_1" value="@Model.Basic_Information.AddressGroup.Address_1">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
                             </div>
                         </div>
                     </div>
@@ -366,190 +367,122 @@
         </div>
         <div class="col-sm-6" style="margin-top:1px">
             <div class="card">
-
                 <div class="card-header" style="background-color:#901F17;">
-                    <h5 class="text-light">Additional Info</h5>
+                    <h5 class="text-light">
+                        INTERMEDIATE ADDRESS
+                    </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <!-- Left Form Column -->
                         <div class="col-md-6">
-
-                            <input type="hidden" name="Lift_Type_Enum" value="@Model.Additional_Info.Lift_Type_Enum">
-
-
-
-                            @* <form id="dataForm"> *@
+                            @*   <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="Extra_Info_Lift">
-                                    <strong><b>Extra Info Lift</b></strong><br />
-                                    @Model.Additional_Info.Extra_Info_Lift
-                                    <input type="hidden" name="Extra_Info_Lift" value="@Model.Additional_Info.Extra_Info_Lift">
+                                <label class="form-label" for="address_1">
+                                    <strong><b>Start address</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Address_2
+
                                 </label>
+                                <input type="hidden" name="Address_2" value="@Model.Basic_Information.AddressGroup.Address_2">
                                 @*  <div>
-                                @Model.Additional_Info.Extra_Info_Lift
+                                @Model.Basic_Information.AddressGroup.address_a
                                 </div> *@
+
                             </div>
+
                             <div class="mb-1">
-                                <label class="form-label" for="Lift_Location_Enum">
-                                    <strong><b>Lift Location</b></strong><br />
-                                    @Model.Additional_Info.Lift_Location_Enum
-                                    <input type="hidden" name="Lift_Location_Enum" value="@Model.Additional_Info.Lift_Location_Enum">
+                                <label class="form-label" for="Type_2_Living">
+                                    <strong><b>Type of residence</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Type_2_Living
+
                                 </label>
-                                @*   <div>
-                                @Model.Additional_Info.Lift_Location_Enum
+                                <input type="hidden" name="Type_2_Living" value="@Model.Basic_Information.AddressGroup.Type_2_Living">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
                                 </div> *@
+
                             </div>
+
                             <div class="mb-1">
-                                <label class="form-label" for="Lift_Type_Enum"><strong><b>Lift Type Enum</b></b></strong></label>
-                                <select class="form-select" id="Lift_Type_Enum" name="Lift_Type_Enum" disabled>
-                                    <option value="Test">@Model.Additional_Info.Lift_Type_Enum</option>
-                                    <option value="Test">Test2</option>
-                                    <option value="Test">Test3</option>
-                                    <option value="Test">Test4</option>
-                                    <option value="Test">Test</option>
-                                </select>
-                            </div>
+                                <label class="form-label" for="Living_2_Levels">
+                                    <strong><b>Floors</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Living_2_Levels
 
-                            <div class="mb-3">
-                                <label class="form-label" for="Voertuig_Enum"><strong><b>Voertuig</b></strong></label>
-                                <select class="form-select" id="Voertuig_Enum" name="Voertuig_Enum">
-                                    <option value="Test">@Model.Additional_Info.Voertuig_Enum</option>
-                                    <option value="Test">Test2</option>
-                                    <option value="Test">Test3</option>
-                                    <option value="Test">Test4</option>
-                                    <option value="Test">Test</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="Voertuig_Type_Enum"><strong><b>Voertuig Type</b></strong></label>
-                                <select class="form-select" id="Voertuig_Type_Enum" name="Voertuig_Type_Enum">
-                                    <option value="Test">@Model.Additional_Info.Voertuig_Type_Enum</option>
-                                    <option value="Test">Test12</option>
-                                    <option value="Test">Test33</option>
-                                    <option value="Test">Test24</option>
-                                    <option value="Test">Test33</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="Number_Of_Movers">
-                                    <strong><b>Number Of Movers</b></strong><br />
-                                    @Model.Additional_Info.Number_Of_Movers
-                                    <input type="hidden" name="Number_Of_Movers" value="@Model.Additional_Info.Number_Of_Movers">
                                 </label>
+                                <input type="hidden" name="Living_2_Levels" value="@Model.Basic_Information.AddressGroup.Living_2_Levels">
                                 @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
+                                </div> *@
 
-                                @Model.Additional_Info.Number_Of_Movers
-                                </div> *@
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="Number_Of_Movers_Update">
-                                    <strong><b>Number Of Movers Update</b></strong><br />
-                                    <div class="number-input">
-                                        <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
-                                        <input type="number" class="num" name="Number_Of_Movers_Update" value="@Model.Additional_Info.Number_Of_Movers_Update" />
-                                        <button type="button" class="btn-increment" onclick="increment(this)">+</button>
-                                    </div>
-                                </label>
-                                @*  <div>
-                                <div class="number-input"> <button type="button" onclick="decrement()">-</button> <input type="number" id="num" value="0" /> <button type="button" onclick="increment()">+</button> </div>
-                                </div> *@
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="Items_To_Dismantle">
-                                    <strong><b>Items To Dismentale</b></strong><br />
-                                    @Model.Additional_Info.Items_To_Dismantle
+
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Living_2_Layers">
+                                    <strong><b>Number of floors</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Living_2_Layers
 
                                 </label>
-                                <input type="hidden" name="Items_To_Dismantle" value="@Model.Additional_Info.Items_To_Dismantle">
+                                <input type="hidden" name="Living_2_Layers" value="@Model.Basic_Information.AddressGroup.Living_2_Layers">
                                 @* <div>
-                                @Model.Additional_Info.Items_To_Dismantle
+                                @Model.Basic_Information.AddressGroup.address_b
                                 </div> *@
+
                             </div>
-                            @* <div class="mb-1">
-                                <label class="form-label" for="itemsToDismentleUpdate">
-                                    <strong><b>Items To Dismentale Update</b></strong><br />
-                                    <input type="text" id="itemsToDismentleUpdate" class="form-control" name="itemsToDismentleUpdate" value="@Model.Additional_Info.Items_To_Dismantle_Update">
-                                </label>
-                                @*  <div>
-                                <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.Additional_Info.Items_To_Dismantle_Update">
-                                </div> *@
-                            <!--</div>-->
-                            @*  </form> *@
                         </div>
                         <div class="col-md-6">
-                            @*  <form id="dataForm"> *@
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>Dismentaling</b></strong></label>
-                                <input class="toggle" type="checkbox" id="Dismantling_Bool" name="Dismantling_Boo" disabled value="true" @(Model.Additional_Info.Dismantling_Bool ? "checked" : "") />
-                                <label class="toggle" for="Dismantling_Bool">Dismentaling</label>
-                            </div>
-                            <div class="form-group">
-                                <label class="from-label"><strong><b>Dismentaling Update</b></strong></label>
-                                <input class="toggle" type="checkbox" id="Dismantling_Bool_Update" name="Dismantling_Bool_Update" value="true" @(Model.Additional_Info.Dismantling_Bool_Update ? "checked" : "") />
-                                <label class="toggle" for="Dismantling_Bool">Dismentaling Update</label>
-                            </div>
                             <div class="mb-1">
-                                <label class="form-label" for="timeEstimate">
-                                    <strong><b>Time Estimate</b></strong><br />
-                                    @Model.Additional_Info.Time_Estimate
-                                </label>
-                                <input type="hidden" name="Time_Estimate" value="@Model.Additional_Info.Time_Estimate">
-
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>Internal lift</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="Lift_2_Bool" name="Lift_2_Bool" disabled value="true" @(Model.Basic_Information.AddressGroup.Lift_2_Bool ? "checked" : "") />
+                                    <label class="toggle" for="Lift_2_Bool">Internal lift</label>
+                                </div>
+                               @*  <input type="hidden" name="Address_2" value="@Model.Basic_Information.AddressGroup.Address_2"> *@
                                 @*  <div>
-                                @Model.Additional_Info.Time_Estimate
+                                @Model.Basic_Information.AddressGroup.address_a
                                 </div> *@
+
                             </div>
 
                             <div class="mb-1">
-                                <label class="form-label" for="Time_Estimate_Update">
-                                    <strong><b>Time Estimate Update</b></strong><br />
-                                    <input type="text" id="Time_Estimate_Update" class="form-control" name="Time_Estimate_Update" value="@Model.Additional_Info.Time_Estimate_Update">
+                                <label class="form-label" for="Lift_2_Distance_Door">
+                                    <strong><b>Distance to front door</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Lift_2_Distance_Door
+
                                 </label>
-                                @*   <div>
-                                <input type="text" id="timeEstimateUpdate" class="form-control" name="timeEstimateUpdate" value=" @Model.Additional_Info.Time_Estimate_Update">
+                                <input type="hidden" name="Lift_2_Distance_Door" value="@Model.Basic_Information.AddressGroup.Lift_2_Distance_Door">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
                                 </div> *@
+
                             </div>
 
                             <div class="mb-1">
-                                <label class="form-label" for="Additional_General_Info">
-                                    <strong><b>Additional General Info</b></strong><br />
-                                    @Model.Additional_Info.Additional_General_Info
+                                <label class="form-label" for="Living_2_Levels">
+                                    <strong><b>Type of move</b></strong><br />
+                                    Type of move
+
                                 </label>
-                                <input type="hidden" name="Additional_General_Info" value="@Model.Additional_Info.Additional_General_Info">
+                                <input type="hidden" name="Living_2_Levels" value="@Model.Basic_Information.AddressGroup.Living_2_Levels">
                                 @*  <div>
-                                @Model.Additional_Info.Additional_General_Info
+                                @Model.Basic_Information.AddressGroup.address_c
                                 </div> *@
+
                             </div>
+
+
                             <div class="mb-1">
-                                <label class="form-label" for="Additional_General_Info_update">
-                                    <strong><b>Additional General Info Update</b></strong><br />
-                                    <input type="text" id="additionalGeneralInfo" class="form-control" name="Additional_General_Info_update" value="@Model.Additional_Info.Additional_General_Info_update">
-                                </label>
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>Parking ban</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="Parking_2_bool" name="Parking_2_bool" disabled value="true" @(Model.Basic_Information.AddressGroup.Parking_2_bool ? "checked" : "") />
+                                    <label class="toggle" for="Parking_2_bool">Parking ban  </label>
+                                </div>
+                                @* <input type="hidden" name="Address_1" value="@Model.Basic_Information.AddressGroup.Address_1"> *@
                                 @*  <div>
-                                <input type="text" id="additionalGeneralInfo" class="form-control" name="additionalGeneralInfo" value="@Model.Additional_Info.Additional_General_Info_update">
+                                @Model.Basic_Information.AddressGroup.address_a
                                 </div> *@
+
                             </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Additional_General_Info">
-                                    <strong><b>Hour start update</b></strong><br />
-                                    @Model.Additional_Info.Hour_start_update
-                                </label>
-                                <input type="hidden" name="Hour_start_update" value="@Model.Additional_Info.Hour_start_update">
-                                @*  <div>
-                                @Model.Additional_Info.Additional_General_Info
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Hour_stop_update">
-                                    <strong><b>Hour stop update</b></strong><br />
-                                    @Model.Additional_Info.Hour_stop_update
-                                </label>
-                                <input type="hidden" name="Hour_stop_update" value="@Model.Additional_Info.Hour_stop_update">
-                                @*  <div>
-                                <input type="text" id="Hour_stop_update" class="form-control" name="Hour_stop_update" value="@Model.Additional_Info.Hour_stop_update">
-                                </div> *@
-                            </div>
-                            @*  </form> *@
                         </div>
                     </div>
                 </div>
@@ -558,189 +491,120 @@
         <div class="col-sm-6" style="margin-top:1px">
             <div class="card">
                 <div class="card-header" style="background-color:#901F17;">
-                    <h5 class="text-light">Stockage</h5>
+                    <h5 class="text-light">END ADDRESS</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <!-- Left Form Column -->
                         <div class="col-md-6">
-                            @* <form id="dataForm"> *@
+                            @*   <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="Date_In">
-                                    <strong><b>Date In</b></strong><br />
-                                    @Model.stockage.Date_In
-                                </label>
-                                <input type="hidden" name="Date_In" value="@Model.stockage.Date_In">
+                                <label class="form-label" for="Address_3">
+                                    <strong><b>Start address</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Address_3
 
+                                </label>
+                                <input type="hidden" name="Address_3" value="@Model.Basic_Information.AddressGroup.Address_3">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Type_3_Living">
+                                    <strong><b>Type of residence</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Type_3_Living
+
+                                </label>
+                                <input type="hidden" name="Type_3_Living" value="@Model.Basic_Information.AddressGroup.Type_3_Living">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
+                                </div> *@
+
+                            </div>
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Living_3_Levels">
+                                    <strong><b>Floors</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Living_3_Levels
+
+                                </label>
+                                <input type="hidden" name="Living_3_Levels" value="@Model.Basic_Information.AddressGroup.Living_3_Levels">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
+                                </div> *@
+
+                            </div>
+
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Living_3_Layers">
+                                    <strong><b>Number of floors</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Living_3_Layers
+
+                                </label>
+                                <input type="hidden" name="Living_3_Layers" value="@Model.Basic_Information.AddressGroup.Living_3_Layers">
                                 @* <div>
-                                @Model.stockage.Date_In
+                                @Model.Basic_Information.AddressGroup.address_b
                                 </div> *@
+
                             </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="DateInUpdate">
-                                    <strong><b>Date In Update</b></strong><br />
-                                    <input type="date" id="dateInUpdate" class="form-control" name="DateInUpdate" value="@Model.stockage.Date_In_Update">
-
-                                </label>
-                                @*  <div>
-                                <input type="text" id="dateInUpdate" class="form-control" name="dateInUpdate" value="@Model.stockage.Date_In_Update">
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Date_Out">
-                                    <strong><b>Date Out</b></strong><br />
-                                    @Model.stockage.Date_Out
-                                </label>
-                                <input type="hidden" name="Date_Out" value="@Model.stockage.Date_Out">
-                                @*   <div>
-                                @Model.stockage.Date_Out
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="dateOutUpdate">
-                                    <strong><b>Date Out Update</b></strong><br />
-                                    <input type="date" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
-                                </label>
-                                @* <div>
-                                <input type="text" id="dateOutUpdate" class="form-control" name="dateOutUpdate" value="@Model.stockage.Date_Out_Update">
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Cubic_Meters">
-                                    <strong><b>Cubic_Meters</b></strong><br />
-                                    @Model.stockage.Cubic_Meters
-                                </label>
-                                <input type="hidden" name="Cubic_Meters" value="@Model.stockage.Cubic_Meters">
-                                @*  <div>
-                                @Model.stockage.Cubic_Meters
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Cubic_Meters_Update">
-                                    <strong><b>Cubic_Meters_Update</b></strong><br />
-                                    <div class="number-input">
-                                        <button type="button" class="btn-decrement" onclick="decrement(this)">-</button>
-                                        <input type="number" class="form-control" name="Cubic_Meters_Update" value="@Model.stockage.Cubic_Meters_Update" />
-                                        <button type="button" class="btn-increment" onclick="increment(this)">+</button>
-                                    </div>
-                                </label>
-                                @*  <div>
-                                <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Cubic_Meters_Update">
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Options_Enum">
-                                    <strong><b>Options Enum</b></strong><br />
-                                </label>
-
-
-                                <select class="form-select" id="exampleFormControlSelect1" name="Options_Enum">
-                                    <option value="Test">@Model.stockage.Options_Enum</option>
-                                    <option value="Test">Test2</option>
-                                    <option value="Test">Test3</option>
-                                    <option value="Test">Test4</option>
-                                    <option value="Test">Test</option>
-                                </select>
-                            </div>
-
-
-
-                            @* <div>
-                            @Model.stockage.Options_Enum
-                            </div> *@
-
-                            <div class="mb-1">
-
-                                <label class="from-label"><strong><b>Contract</b></strong></label>
-                                <input class="toggle" type="checkbox" id="Contract" name="Contract" disabled value="true" @(Model.stockage.Contract ? "checked" : "") />
-                                <label class="toggle" for="Contract">Contract</label>
-
-                                @*  <div>
-                                @Model.stockage.Contract
-                                </div> *@
-                            </div>
-
-                            @*  </form> *@
                         </div>
                         <div class="col-md-6">
-                            @* <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="Storage">
-                                    <strong><b>Storage</b></strong><br />
-                                    @Model.stockage.Storage
-                                </label>
-                                <input type="hidden" name="Storage" value="@Model.stockage.Storage">
-                                @*   <div>
-                                @Model.stockage.Storage
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Storage_Update">
-                                    <strong><b>Storage Update</b></strong><br />
-                                    <input type="text" class="form-control" name="Storage_Update" value="@Model.stockage.Storage_Update" />
-                                </label>
-                                @*   <div>
-                                <input type="text" id="itemsToDismentle" class="form-control" name="itemsToDismentle" value="@Model.stockage.Storage_Update">
-                                </div> *@
-                            </div>
-
-                            <div class="mb-1">
-                                <label class="form-label" for="Zone">
-                                    <strong><b>Zone</b></strong><br />
-                                    @Model.stockage.Zone
-                                </label>
-                                <input type="hidden" name="Zone" value="@Model.stockage.Zone">
-                                @* <div>
-                                @Model.stockage.Zone
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Zone_Update">
-                                    <strong><b>Zone Update</b></strong><br />
-                                    <input type="text" id="Zone_Update" class="form-control" name="Zone_Update" value="@Model.stockage.Zone_Update">
-                                </label>
-                                @* <div>
-                                <input type="text" id="Zone" class="form-control" name="Zone" value="@Model.stockage.Zone_Update">
-                                </div> *@
-                            </div>
-
-                            <div class="mb-1">
-                                <label class="form-label" for="Exact_Location">
-                                    <strong><b>Exact Location</b></strong><br />
-                                    @Model.stockage.Exact_Location
-                                </label>
-                                <input type="hidden" name="Exact_Location" value="@Model.stockage.Exact_Location">
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>Internal lift</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="Lift_3_Bool" name="Lift_3_Bool" disabled value="true" @(Model.Basic_Information.AddressGroup.Lift_3_Bool ? "checked" : "") />
+                                    <label class="toggle" for="Lift_3_Bool">Internal lift</label>
+                                </div>
+                                @* <input type="hidden" name="Address_1" value="@Model.Basic_Information.AddressGroup.Address_1"> *@
                                 @*  <div>
-                                @Model.stockage.Exact_Location
+                                @Model.Basic_Information.AddressGroup.address_a
                                 </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Exact_Location_Update">
-                                    <strong><b>Zone Update</b></strong><br />
-                                    <input type="text" id="Exact_Location_Update" class="form-control" name="Exact_Location_Update" value="@Model.stockage.Exact_Location_Update">
-                                </label>
-                                @* <div>
-                                <input type="text" id="exactlocation" class="form-control" name="exactlocationUpdate" value="@Model.stockage.Exact_Location_Update">
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Insured_Value">
-                                    <strong><b>Insured Value</b></strong><br />
-                                    @Model.stockage.Insured_Value
-                                </label>
-                                <input type="hidden" name="Insured_Value" value="@Model.stockage.Insured_Value">
-                                @* <div>
-                                @Model.stockage.Insured_Value
-                                </div> *@
-                            </div>
-                            <br />
 
-                            <br />
-                            <br />
-                            @*  </form> *@
+                            </div>
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Lift_3_Distance_Door">
+                                    <strong><b>Distance to front door</b></strong><br />
+                                    @Model.Basic_Information.AddressGroup.Lift_3_Distance_Door
+
+                                </label>
+                                <input type="hidden" name="Lift_3_Distance_Door" value="@Model.Basic_Information.AddressGroup.Lift_3_Distance_Door">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
+                                </div> *@
+
+                            </div>
+
+                            <div class="mb-1">
+                                <label class="form-label" for="Living_3_Levels">
+                                    <strong><b>Type of move</b></strong><br />
+                                    Type of move
+
+                                </label>
+                                <input type="hidden" name="Living_3_Levels" value="@Model.Basic_Information.AddressGroup.Living_3_Levels">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_c
+                                </div> *@
+
+                            </div>
+
+
+                            <div class="mb-1">
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>Parking ban</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="Parking_3_bool" name="Parking_3_bool" disabled value="true" @(Model.Basic_Information.AddressGroup.Parking_3_bool ? "checked" : "") />
+                                    <label class="toggle" for="Parking_3_bool">Parking ban  </label>
+                                </div>
+                                @* <input type="hidden" name="Address_1" value="@Model.Basic_Information.AddressGroup.Address_1"> *@
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
                         </div>
-                        <br />
-                        <br />
-                        <br />
                     </div>
                 </div>
             </div>
@@ -752,7 +616,7 @@
 
             <div class="card">
                 <div class="card-header" style="background-color:#901F17;">
-                    <h5 class="text-light">Moving Dates</h5>
+                    <h5 class="text-light">TO BE MOVED - INVENTORY</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -760,147 +624,337 @@
                         <div class="col-md-6">
                             @*   <form id="dataForm"> *@
                             <div class="mb-1">
-                                <label class="form-label" for="Moving_From_Date">
-                                    <strong><b>From Date</b></strong><br />
-                                    @Model.Moving_Date.moving_from_date
+                                <label class="form-label" for="Content_1">
+                                    <strong><b>Inventor</b></strong><br />
+                                    @Model.Basic_Information.ContentGroup.Content_1
+
                                 </label>
-                                <input type="hidden" name="Moving_From_Date" value="@Model.Moving_Date.moving_from_date">
-                                @* <div>
-                                -  @Model.Moving_Date.moving_from_date
-                                </div> *@
-                            </div>
-                            <div class="mb-1">
-                                <label class="form-label" for="Moving_To_Date">
-                                    <strong><b>To Date</b></strong><br />
-                                    @Model.Moving_Date.moving_to_date
-                                </label>
-                                <input type="hidden" name="Moving_To_Date" value="@Model.Moving_Date.moving_to_date">
+                                <input type="hidden" name="Content_1" value="@Model.Basic_Information.ContentGroup.Content_1">
                                 @*  <div>
-                                @Model.Moving_Date.moving_to_date
+                                @Model.Basic_Information.AddressGroup.address_a
                                 </div> *@
+
                             </div>
-                            <div class="mb-1">
-
-                                <label class="form-label" for="Client_Arrival_Date">
-                                    <strong><b>Client Arrival Date</b></strong><br />
-                                    <input type="date"
-                                           id="Client_Arrival_Date"
-                                           value="@formattedDateTime"
-                                           readonly>
-                                </label>
-                                <br />
-                                <label class="form-label" for="Client_Arrival_Time">
-                                    <strong><b>Client Arrival Time</b></strong><br />
-                                    <input type="time"
-                                           id="Client_Arrival_Time"
-                                           required>
-                                </label>
-
-                                <!-- Hidden input to store the combined value -->
-                                <input type="hidden" name="Client_Arrival_Time_update" id="Client_Arrival_Time_update">
-
-
-                                <br />                           
-                                <br /> <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                            </div>
+                            <br />
+                            
                         </div>
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="form-label" for="Content_2">
+                                    <strong><b>Inventory</b></strong><br />
+                                    @Model.Basic_Information.ContentGroup.Content_2
+
+                                </label>
+                                <input type="hidden" name="Content_2" value="@Model.Basic_Information.ContentGroup.Content_2">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            <br />
+                        </div>   
+                    </div>
+                       
                     </div>
                 </div>
             </div>
+        <div class="col-sm-6">
 
             <div class="card">
                 <div class="card-header" style="background-color:#901F17;">
-                    <h5 class="text-light">Forman Notes</h5>
+                    <h5 class="text-light"> TASKS</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <!-- Left Form Column -->
-                        <div class="col-md-12">
-                            <div class="mb-1" style="width:100%">
-                                <label class="form-label" for="foreman_notes">
-                                    <strong><b>Forman Notes</b></strong>
-
-                                </label>
-                                @* <textarea id="textarea" name="foreman_notes" class="form-control responsive-textarea" placeholder="Enter your message here...">@Model.Notes.foreman_notes</textarea> *@
-                                <div class="mb-3">
-                                    <textarea class="form-control" id="foreman_notes"
-                                              name="foreman_notes" rows="3">@Model.Notes.foreman_notes</textarea>
-                                    <input type="hidden" name="Foreman_name" value="@Model.user_dashboard.Foremanname">
+                        <div class="col-md-6">
+                            @*   <form id="dataForm"> *@
+                            <div class="mb-1">
+                                <div class="form-group">
+                                    <label class="from-label"><strong><b>(Dis)assembly of furniture</b></strong></label>
+                                    <input class="toggle" type="checkbox" id="Furniture_Assembly_Bool" name="Furniture_Assembly_Bool" disabled value="true" @(Model.Basic_Information.Activitiesgroup.Furniture_Assembly_Bool ? "checked" : "") />
+                                    <label class="toggle" for="Furniture_Assembly_Bool">(Dis)assembly of furniture  </label>
                                 </div>
                             </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="form-label" for="Items_To_Assemble">
+                                    <strong><b>Items to disassemble</b></strong><br />
+                                    @Model.Basic_Information.Activitiesgroup.Items_To_Assemble
+
+                                </label>
+                                <input type="hidden" name="Items_To_Assemble" value="@Model.Basic_Information.Activitiesgroup.Items_To_Assemble">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-       
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header" style="background-color:#901F17;">
+                    <h5 class="text-light">MATERIALS</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Form Column -->
+                        <div class="col-md-6">
+                            @*   <form id="dataForm"> *@
+                            <div class="mb-1">
+                                <label class="form-label" for="boxes">
+                                    <strong><b>Moving Boxes</b></strong><br />
+                                    @Model.Basic_Information.MaterialGroup.boxes
+
+                                </label>
+                                <input type="hidden" name="boxes" value="@Model.Basic_Information.MaterialGroup.boxes">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                           
+                            <div class="mb-1">
+                                <label class="form-label" for="wardrobe_boxes">
+                                    <strong><b>Wardrobe boxes</b></strong><br />
+                                    @Model.Basic_Information.MaterialGroup.wardrobe_boxes
+
+                                </label>
+                                <input type="hidden" name="wardrobe_boxes" value="@Model.Basic_Information.MaterialGroup.wardrobe_boxes">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                          
+                            <div class="mb-1">
+                                <label class="form-label" for="folieboxes">
+                                    <strong><b>Blanket pads</b></strong><br />
+                                    @Model.Basic_Information.MaterialGroup.folie
+
+                                </label>
+                                <input type="hidden" name="folieboxes" value="@Model.Basic_Information.MaterialGroup.folie">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="form-label" for="boxes_update">
+                                    <strong><b>Moving Boxes Update</b></strong><br />
+                                    @* @Model.Basic_Information.MaterialGroup.boxes_update *@
+
+                                </label>
+                                <input type="text"  class="form-control" name="boxes_update" value="@Model.Basic_Information.MaterialGroup.boxes_update">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="wardrobe_boxes_update">
+                                    <strong><b>Wardrobe boxes Update</b></strong><br />
+                                    @*  @Model.Basic_Information.MaterialGroup.wardrobe_boxes_update *@
+
+                                </label>
+                                <input type="text"  class="form-control" name="wardrobe_boxes_update" value="@Model.Basic_Information.MaterialGroup.wardrobe_boxes_update">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="folie_update">
+                                    <strong><b>Blanket pads Update</b></strong><br />
+                                    @* @Model.Basic_Information.MaterialGroup.folie_update *@
+
+                                </label>
+                                <input type="text"  class="form-control" name="folie_update" value="@Model.Basic_Information.MaterialGroup.folie_update">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+      
+
 
 
 
 
         <div class="col-sm-6" style="margin-top:1px">
-
-            <div class="card" style="margin: 0;">
-                <div class="card-header" style="background-color:#901F17; margin: 0; border-radius: 0;">
-                    <h5 class="text-light" style="margin: 0;">Products</h5>
+            <div class="card">
+                <div class="card-header" style="background-color:#901F17;">
+                    <h5 class="text-light"> PREFERRED DATE</h5>
                 </div>
-                <div class="card-body" style="margin: 0; padding: 0;">
-                    <div class="row d-flex" style="margin: 0;">
-                        <div class="col-md-12" style="margin: 0; padding: 0;">
-                            <div class="table-responsive" style="margin: 0; padding: 0;">
-                                <div class="row" style="margin: 0;">
-                                    @for (int i = 0; i < Model.Products.Count(); i++)
-                                    {
-                                        <div class="col-md-12" style="margin: 0; padding: 0;">
-                                            <div class="card" style="margin: 0; border-radius: 0; box-shadow:none; border-bottom:1px solid 	#F0F0F0;">
-                                                <div class="card-body" style="margin: 0; padding: 10px;">
-                                                    @Html.HiddenFor(m => m.Products[i].id)
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Form Column -->
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="form-label" for="option1">
+                                    <strong><b>Option1</b></strong><br />
+                                    @Model.Basic_Information.PreferedDatesGroup.option1
 
-                                                    @Html.HiddenFor(m => m.Products[i].name)
-                                                    <p style="margin: 0;"><b>Name</b>: @Model.Products[i].name</p>
+                                </label>
+                                <input type="hidden" name="option1" value="@Model.Basic_Information.PreferedDatesGroup.option1">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
 
-                                                    @Html.HiddenFor(m => m.Products[i].quantity)
-                                                    <p class="card-text" style="margin: 0;"><b>Quantity</b>: @Model.Products[i].quantity</p>
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="option2">
+                                    <strong><b>Option2</b></strong><br />
+                                    @Model.Basic_Information.PreferedDatesGroup.option2
 
-                                                    <div class="number-input" style="display: flex; align-items: center;">
-                                                        <b>Update Quantity:</b>
-                                                        <button type="button" class="btn-decrement" onclick="decrement(this)" style="margin-left: 10px;">-</button>
+                                </label>
+                                <input type="hidden" name="option2" value="@Model.Basic_Information.PreferedDatesGroup.option2">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
 
-                                                        @Html.TextBoxFor(m => m.Products[i].quantity_update, new { @class = "num", @style = "width: 60px; text-align: center; margin: 0 5px;" })
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="option3">
+                                    <strong><b>Option2</b></strong><br />
+                                    @Model.Basic_Information.PreferedDatesGroup.option3
 
-                                                        <button type="button" class="btn-increment" onclick="increment(this)" style="margin-left: 5px;">+</button>
-                                                    </div>
+                                </label>
+                                <input type="hidden" name="option3" value="@Model.Basic_Information.PreferedDatesGroup.option3">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
                             </div>
                             <br />
-                            @* </form> *@
+                            <br />
+                            <br />
+
+
+
+                        </div>
+                        <div class="col-md-6">
+                            
                         </div>
                     </div>
+
                 </div>
             </div>
 
 
+        </div>
+        <div class="col-sm-6" style="margin-top:1px">
+            <div class="card">
+                <div class="card-header" style="background-color:#901F17;">
+                    <h5 class="text-light">Extra_info_group</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Form Column -->
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="form-label" for="extra_info">
+                                    <strong><b>Extra Info</b></strong><br />
+                                    @Model.Basic_Information.Extra_Info_Group.extra_info
 
-    </div>
+                                </label>
+                                <input type="hidden" name="extra_info" value="@Model.Basic_Information.Extra_Info_Group.extra_info">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="estimated_movers">
+                                    <strong><b>Estimation of movers</b></strong><br />
+                                    @Model.Basic_Information.Extra_Info_Group.estimated_movers
+
+                                </label>
+                                <input type="hidden" name="estimated_movers" value=" @Model.Basic_Information.Extra_Info_Group.estimated_movers">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="estimated_movers_update">
+                                    <strong><b>Estimation of movers Update</b></strong><br />
+                                   @*  @Model.Basic_Information.Extra_Info_Group.estimated_movers_update *@
+
+                                </label>
+                                <input type="text"  class="form-control" name="estimated_movers_update" value=" @Model.Basic_Information.Extra_Info_Group.estimated_movers_update">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="type_moving_wagen">
+                                    <strong><b>Type of moving truck</b></strong><br />
+                                    @Model.Basic_Information.Extra_Info_Group.type_moving_wagen
+
+                                </label>
+                                <input type="hidden" name="type_moving_wagen" value=" @Model.Basic_Information.Extra_Info_Group.type_moving_wagen">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="form-label" for="start_time">
+                                 <strong><b>Start time</b></strong><br />
+                                   @*  @Model.Basic_Information.Extra_Info_Group.start_time  *@
+
+                                </label>
+                                <input type="datetime-local" class="form-control" name="start_time" value="@Model.Basic_Information.Extra_Info_Group.start_time">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="end_time">
+                                   <strong><b>End time</b></strong><br />
+                                   @*  @Model.Basic_Information.Extra_Info_Group.estimated_movers *@
+ 
+                                </label>
+                                <input type="datetime-local" class="form-control" name="end_time" value="@formattedEndTime">
+                                @*  <div>
+                                @Model.Basic_Information.AddressGroup.address_a
+                                </div> *@
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
     </div>
     <div id="result-popup" class="popup">
         <div class="popup-content">
@@ -936,15 +990,15 @@
             }
 
             timeField.addEventListener('input', function () {
-                const timeValue = timeField.value || getCurrentTime(); 
+                const timeValue = timeField.value || getCurrentTime();
                 if (dateField.value) {
                     hiddenField.value = `${dateField.value}T${timeValue}`;
                 }
             });
 
-      
+
             if (dateField.value) {
-                const timeValue = timeField.value || getCurrentTime(); 
+                const timeValue = timeField.value || getCurrentTime();
                 hiddenField.value = `${dateField.value}T${timeValue}`;
             }
         });
@@ -1026,9 +1080,9 @@
 
         function increment(button) {
             const inputElement = button.previousElementSibling;
-            let value = parseInt(inputElement.value, 10); 
+            let value = parseInt(inputElement.value, 10);
             if (isNaN(value)) {
-                value = 0; 
+                value = 0;
             }
             value += 1;
             inputElement.value = value;
